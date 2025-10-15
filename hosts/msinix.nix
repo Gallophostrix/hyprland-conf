@@ -6,7 +6,7 @@
 
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./msinix-hardware.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
