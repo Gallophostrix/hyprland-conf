@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
       <home-manager/nixos>
     ];
 
@@ -15,6 +15,11 @@
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "backup";
   home-manager.users.mik = import ./home.nix;
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -41,12 +46,21 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
   # Enable the Wayland WM
   hardware.graphics.enable = true;
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # X11 adapters
+  environment.variables = {
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # Enable the X11 windowing system.
+  # services.xserver.enable = true;
   
   # Wayland launcher
   services.displayManager.sddm = {
@@ -107,6 +121,7 @@
     alacritty
     brave
     brightnessctl
+    vscodium
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
