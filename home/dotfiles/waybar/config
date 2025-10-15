@@ -15,12 +15,11 @@
       "default": "",
       "active": ""
     },
-    "on-click": "hyprctl dispatch workspace {id}",
-    "on-scroll-up": "hyprctl dispatch workspace e+1",
-    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "on-click": "hyprctl dispatch workspace {id}"
   },
 
   "hyprland/window": {
+    "swap-icon-label": false,
     "max-length": 60,
     "separate-outputs": true,
     "rewrite": {
