@@ -31,8 +31,8 @@
   },
 
   "clock": {
-    "format": "<b>󰥔{:%H:%M 󰃭 %d/%m}</b>",
-    "tooltip-format": "{:%Y-%m-%d}",
+    "format": "<b>󰥔 {:%H:%M 󰃭 %d/%m}</b>",
+    "tooltip-format": "{}",
     "interval": 5,
     "timezone": "Europe/Paris",
     "locale": "fr_FR.UTF-8"
