@@ -17,7 +17,8 @@
     },
     "on-click": "hyprctl dispatch workspace {id}",
     "on-scroll-up": "hyprctl dispatch workspace e+1",
-    "on-scroll-down": "hyprctl dispatch workspace e-1"
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "swap-icon-label": true
   },
 
   "hyprland/window": {
@@ -32,7 +33,7 @@
 
   "clock": {
     "format": "{  0:%H:%M}",
-    "tooltip-format": "{0:%A %d %B %Y}\nSemaine {0:%V}",
+    "tooltip-format": "{}",
     "interval": 5,
     "timezone": "Europe/Paris",
     "locale": "fr_FR.UTF-8"
