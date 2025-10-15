@@ -98,6 +98,12 @@
   # Desktop services
   services.dbus.enable = true;
   security.polkit.enable = true;
+  systemd.user.services.polkit-gnome = {
+    description = "Polkit Authentication Agent";
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig.ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  };
+
   services.upower.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -116,11 +122,13 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
   #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
     alacritty
     brave
     brightnessctl
+    polkit_gnome
     vscodium
+    waybar
+    wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
