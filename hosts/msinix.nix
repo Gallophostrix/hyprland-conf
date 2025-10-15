@@ -5,23 +5,11 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-      <home-manager/nixos>
-    ];
-
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.backupFileExtension = "backup";
-  home-manager.users.mik = import ./home.nix;
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
+  imports = [
+    /etc/nixos/hardware-configuration.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
+  # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot";
@@ -53,8 +41,16 @@
     xwayland.enable = true;
   };
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+  };
+
   # X11 adapters
-  environment.variables = {
+  environment.sessionVariables = {
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
     NIXOS_OZONE_WL = "1";
   };
@@ -63,10 +59,7 @@
   # services.xserver.enable = true;
   
   # Wayland launcher
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
+  
   services.displayManager.defaultSession = "hyprland";
 
   # Configure keymap in X11
@@ -85,21 +78,27 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+  #    alsa.enable = true;  # Old programs compatibility issues
+    wireplumber.enable = true;
   };
 
   # Enable bluetooth connections
+  hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
   # Enable brightness
-  boot.kernelParams = [
-    "acpi_backlignt=vendor"
-  ];
+  boot.kernelParams = [ "acpi_backlignt=vendor" ];
 
   # Shell configuration
   programs.fish.enable = true;
+
+  # Desktop services
+  services.dbus.enable = true;
+  security.polkit.enable = true;
+  services.upower.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mik = {
