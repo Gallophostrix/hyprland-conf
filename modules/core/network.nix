@@ -6,6 +6,7 @@ in
   networking = {
     hostName = "${hostname}";
     networkmanager.enable = true;
+    networkmanager.enableVPN = true;
     # wireless.enable = true; # Enables wireless support via wpa_supplicant.
     # proxy = {
     #   default = "http://user:password@proxy:port/";

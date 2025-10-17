@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./boot.nix
+    # ./boot.nix
     ./fonts.nix
     ./hardware.nix
     ./network.nix

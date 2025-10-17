@@ -29,13 +29,15 @@ in
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
-        stateVersion = "23.11"; # Do not change!
+        stateVersion = "25.05"; # Do not change!
         sessionVariables = {
           EDITOR =
             if (editor == "nixvim" || editor == "neovim" || editor == "nvchad") then
               "nvim"
             else if editor == "vscode" then
               "code"
+            else if editor == "vscodium" then
+              "codium"
             else
               "nano";
           BROWSER = "${browser}";
@@ -44,7 +46,7 @@ in
       };
     };
   };
-  # programs.zsh.enable = true; # TODO: REMOVE THIS LINE
+
   users = {
     mutableUsers = true;
     users.${username} = {

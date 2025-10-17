@@ -9,7 +9,7 @@ in
       enable = true;
       extraArgs = "--keep-since 7d --keep 3";
     };
-    flake = "/home/${username}/NixOS";
+    flake = "/home/${username}/nixcfg";
   };
 
   # environment.systemPackages = with pkgs; [

@@ -9,11 +9,11 @@
       media_dir = [
         # A = Audio, P = Pictures, V, = Videos, PV = Pictures and Videos.
         # "A,/mnt/work/Pimsleur/Russian"
-        "/mnt/work/Pimsleur"
-        "/mnt/work/Media/Films"
-        "/mnt/work/Media/Series"
-        "/mnt/work/Media/Videos"
-        "/mnt/work/Media/Music"
+        # "V,/mnt/work/Pimsleur"
+        "V,/mnt/work/Media/Films"
+        "V,/mnt/work/Media/Series"
+        "V,/mnt/work/Media/Videos"
+        "A,/mnt/work/Media/Music"
       ];
       inotify = "yes";
       log_level = "error";
