@@ -84,6 +84,4 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.zoxide.enable = true;
-
-  systemd.user.startServices = "sd-switch";
 }
