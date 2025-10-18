@@ -21,7 +21,7 @@ in
     ./core/syncthing.nix
     ./core/system.nix
     ./core/users.nix
-    # ./core/flatpak.nix
+    ./core/flatpak.nix
     # ./core/virtualisation.nix
     # ./core/dlna.nix
 
@@ -41,12 +41,12 @@ in
     # ./programs/media/discord
     ./programs/media/spicetify
     # ./programs/media/youtube-music
-    # ./programs/media/thunderbird
+    ./programs/media/thunderbird
     # ./programs/media/obs-studio
     ./programs/media/mpv
-    ./programs/misc/tlp
+    # ./programs/misc/tlp
     ./programs/misc/thunar
-    ./programs/misc/lact # GPU fan, clock and power configuration
+    # ./programs/misc/lact # GPU fan, clock and power configuration
   ]
   ++ lib.optional (vars.games == true) ./core/games.nix;
 }

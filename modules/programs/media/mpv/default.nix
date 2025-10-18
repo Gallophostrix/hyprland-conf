@@ -63,7 +63,6 @@
 
             q = "quit";
             Q = "quit-watch-later";
-            "q {encode}" = "quit 4";
             p = "cycle pause";
             SPACE = p;
             f = "cycle fullscreen";
@@ -102,6 +101,9 @@
             # T = "script-binding generate-thumbnails";
           };
           config = {
+            vo = "gpu-next";
+            profile = "gpu-hq";
+            hwdec = "auto-safe";
             osc = "no";
             resume-playback-check-mtime = true;
             # ao = "alsa";

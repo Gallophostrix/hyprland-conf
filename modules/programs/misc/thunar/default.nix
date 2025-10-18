@@ -13,4 +13,9 @@
     enable = true;
     package = pkgs.file-roller;
   };
+
+  services = {
+    udisks2.enable = true;
+    gvfs.enable = true;
+  };
 }

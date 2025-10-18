@@ -1,71 +1,75 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
-let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.stable; # stable, latest, beta, etc.
-in
-{
-  environment.sessionVariables = lib.optionalAttrs config.programs.hyprland.enable {
-    GBM_BACKEND = "nvidia-drm";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    # MOZ_DISABLE_RDD_SANDBOX = 1; # Potential security risk
+{ lib, pkgs, config, ... }:
 
-    __GL_GSYNC_ALLOWED = "1"; # GSync
-    __GL_VRR_ALLOWED = "1"; # VRR
-    __GL_MaxFramesAllowed = "1"; # Reduces input lag
+{
+  # Load the proprietary NVIDIA driver and enable DRM modesetting.
+  # Required for Wayland/wlroots compositors (e.g., Hyprland) and PRIME offload.
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    # Use NVIDIA "open" kernel modules (supported on 20/30/40-series incl. RTX 4060).
+    # Switch to false if you hit a rare compatibility issue.
+    open = true;
+
+    # Choose the driver channel (stable is recommended).
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+    # Required for Wayland/PRIME.
+    modesetting.enable = true;
+
+    # Install nvidia-settings (handy for diagnostics; mostly X11-oriented but still useful).
+    nvidiaSettings = true;
+
+    # Power management for laptops (helps sleep/suspend and powers down the dGPU when idle).
+    powerManagement.enable = true;
+
+    # Hybrid laptop: iGPU handles the desktop, dGPU is used on demand (PRIME offload).
+    prime = {
+      offload.enable = true;           # provides the `nvidia-offload` wrapper
+      intelBusId  = "PCI:0:2:0";       # from `lspci` (your Intel iGPU)
+      nvidiaBusId = "PCI:1:0:0";       # from `lspci` (your NVIDIA dGPU)
+    };
   };
 
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ]; # or "nvidiaLegacy470", etc.
-  boot.kernelParams = lib.optionals (lib.elem "nvidia" config.services.xserver.videoDrivers) [
+  # Kernel parameters:
+  # - nvidia-drm.modeset=1: enable DRM KMS for NVIDIA (Wayland/PRIME requirement)
+  # - NVreg_PreserveVideoMemoryAllocations=1: improves resume from suspend on some laptops
+  boot.kernelParams = [
     "nvidia-drm.modeset=1"
-    "nvidia_drm.fbdev=1"
-
-    # "nvidia.NVreg_RegistryDwords=RmEnableAggressiveVblank=1" # Experimental: reduce latency
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
-  hardware = {
-    nvidia = {
-      open = false;
-      # nvidiaPersistenced = true;
-      nvidiaSettings = false;
-      powerManagement.enable = true; # Fixes sleep/suspend
 
-      modesetting.enable = true; # Modesetting is required.
+  # Generic graphics stack (32-bit for Steam/Proton).
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
 
-      package = nvidiaDriverChannel;
-    };
-    graphics = {
-      enable = true;
-      # package = nvidiaDriverChannel;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        vaapiVdpau
-        libvdpau-va-gl
-      ];
-    };
-  };
-  nixpkgs.config = {
-    nvidia.acceptLicense = true;
-    cudaSupport = true;
-    allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        "cudatoolkit"
-        "nvidia-persistenced"
-        "nvidia-settings"
-        "nvidia-x11"
-      ];
-  };
-  nix.settings = {
-    substituters = [ "https://cuda-maintainers.cachix.org" ];
-    trusted-public-keys = [
-      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+    # VAAPI on NVIDIA via NVDEC/NVENC. Optional; keep if you use VAAPI.
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      # Generally not needed on NVIDIA:
+      # vaapiVdpau
+      # libvdpau-va-gl
     ];
   };
+
+  # Don't force global NVIDIA-specific environment variables.
+  # They can break Intel VA-API or cause unintended behavior for Wayland apps.
+  # If you encounter cursor glitches: uncomment the next line.
+  # environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
+
+  # Allow only the minimal set of unfree NVIDIA bits.
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "nvidia-x11"
+    "nvidia-settings"
+    "nvidia-persistenced"
+  ];
+
+  # CUDA is only needed if you actually do GPU compute/AI/HPC. Otherwise, keep it off.
+  # nixpkgs.config.cudaSupport = true
+  # nix.settings = {
+  #   substituters = [ "https://cuda-maintainers.cachix.org" ];
+  #   trusted-public-keys = [
+  #     "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+  #   ];
+  # };
 }

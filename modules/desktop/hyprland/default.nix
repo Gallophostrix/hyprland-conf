@@ -122,7 +122,7 @@ in
             settings = {
               "$mainMod" = "SUPER";
               "$term" = "${getExe pkgs.${terminal}}";
-              "$editor" = "code --disable-gpu";
+              "$editor" = "codium --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations";
               "$fileManager" = "$term --class \"tuiFileManager\" -e ${tuiFileManager}";
               "$browser" = browser;
 
@@ -143,16 +143,15 @@ in
                 "QT_QPA_PLATFORMTHEME,qt6ct"
                 "QT_AUTO_SCREEN_SCALE_FACTOR,1"
                 "WLR_RENDERER_ALLOW_SOFTWARE,1"
-                "NIXPKGS_ALLOW_UNFREE,1"
               ];
               exec-once =
                 let
                   wallpaper = pkgs.callPackage ./scripts/wallpaper.nix { inherit defaultWallpaper; };
                 in
                 [
-                  #"[workspace 1 silent] ${terminal}"
-                  #"[workspace 5 silent] ${browser}"
-                  #"[workspace 6 silent] spotify"
+                  "[workspace 1 silent] ${terminal}"
+                  "[workspace 2 silent] ${browser}"
+                  "[workspace 3 silent] spotify"
                   #"[workspace special silent] ${browser} --private-window"
                   #"[workspace special silent] ${terminal}"
 
@@ -161,13 +160,12 @@ in
                   "swaync"
                   "nm-applet --indicator"
                   "wl-clipboard-history -t"
-                  "${getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch cliphist store" # clipboard store text data
+                  "${getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch cliphist store --no-newline" # clipboard store text data
                   "${getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store" # clipboard store image data
                   "rm '$XDG_CACHE_HOME/cliphist/db'" # Clear clipboard
                   "${./scripts/batterynotify.sh}" # battery notification
                   # "${./scripts/autowaybar.sh}" # uncomment packages at the top
-                  "polkit-agent-helper-1"
-                  "pamixer --set-volume 50"
+                  # "pamixer --set-volume 50"
                 ];
               input = {
                 kb_layout = "${kbdLayout},ru";
@@ -424,9 +422,9 @@ in
                   # Applications/Programs
                   "$mainMod, Return, exec, $term"
                   "$mainMod, T, exec, $term"
-                  "$mainMod, E, exec, $fileManager"
+                  "$mainMod, F, exec, $fileManager"
                   "$mainMod, C, exec, $editor"
-                  "$mainMod, F, exec, $browser"
+                  "$mainMod, B, exec, $browser"
                   "$mainMod SHIFT, S, exec, spotify"
                   "$mainMod SHIFT, Y, exec, youtube-music"
                   "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
@@ -562,7 +560,7 @@ in
                 # Easily plug in any monitor
                 ",preferred,auto,1"
 
-                # My Monitors (Fine to leave these since i used the serial numbers)
+                # My Monitors
                 "desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1"
                 "desc:BNQ BenQ EL2870U PCK00489SL0,preferred,0x0,2"
                 "desc:BNQ BenQ xl2420t 99D06760SL0,preferred,1920x-420,1,transform,1" # 5 for fipped

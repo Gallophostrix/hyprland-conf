@@ -13,7 +13,7 @@
   games = true; # Whether to enable the gaming module
 
   # Hardware Configuration
-  videoDriver = "nvidia"; # CRITICAL: Choose your GPU driver (nvidia, amdgpu, intel)
+  videoDriver = "msi-setup"; # CRITICAL: Choose your GPU driver (nvidia, amdgpu, intel, or self-configured)
   hostname = "MSInix"; # Your system hostname
 
   # Localization

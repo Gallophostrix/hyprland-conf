@@ -4,14 +4,12 @@
   ...
 }:
 {
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "vscode" ];
   home-manager.sharedModules = [
     (_: {
-      programs.vscode = {
+      programs.vscodium = {
         enable = true;
         mutableExtensionsDir = true;
-        # package = pkgs.vscodium;
-        package = pkgs.vscode;
+        package = pkgs.vscodium;
         profiles.default = {
           extensions = with pkgs.vscode-extensions; [
             bbenoist.nix

@@ -37,8 +37,8 @@ yad \
   --timeout-indicator=bottom \
   "SUPER Return" "Launch terminal" "$_terminal" \
   "SUPER T" "Launch terminal" "$_terminal" \
-  "SUPER E" "Launch file manager" "$_terminal_FM" \
-  "SUPER F" "Launch browser" "$_browser" \
+  "SUPER F" "Launch file manager" "$_terminal_FM" \
+  "SUPER B" "Launch browser" "$_browser" \
   "SUPER SHIFT S" "Launch spotify" "spotify" \
   "CTRL ALT Delete" "Open system monitor" "$_terminal -e 'btop'" \
   "SUPER A" "Launch application menu" "scripts/launcher drun" \
@@ -63,7 +63,7 @@ yad \
   "XF86MonBrightnessDown" "Decrease brightness" "brightnessctl set 2%-" \
   "XF86MonBrightnessUp" "Increase brightness" "brightnessctl set +2%" \
   "XF86AudioLowerVolume" "Lower volume" "pamixer -d 2" \
-  "XF86AudioRaiseVolume" "Increase volume" "pamixer -i 2%" \
+  "XF86AudioRaiseVolume" "Increase volume" "pamixer -i 2" \
   "XF86AudioMicMute" "Mute microphone" "pamixer --default-source -t" \
   "XF86AudioMute" "Mute audio" "pamixer -t" \
   "XF86AudioPlay" "Play/Pause media" "playerctl play-pause" \

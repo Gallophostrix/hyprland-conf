@@ -19,6 +19,37 @@ in
     };
     preferences = {
       "privacy.donottrackheader.enabled" = true;
+      # "mailnews.start_page.enabled" = false;
+      # "mail.chat.enabled" = false;
+      "mail.phishing.detection.enabled" = true;
+      "mail.inline_attachments" = true;
+
+      "mailnews.default_sort_order" = 2;
+
+      "mail.spellcheck.inline" = true;
+
+      "mail.biff.show_alert" = true;
+      "mail.biff.use_system_alert" = true;
+    };
+  };
+
+  home.packages = with pkgs; [
+    protonmail-bridge
+  ];
+  systemd.user.services.protonmail-bridge = {
+    Unit = {
+      Description = "ProtonMail Bridge (background service)";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge --no-window";
+      Restart = "on-failure";
+
+      StandardOutput = "journal";
+      StandardError = "journal";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
     };
   };
 }

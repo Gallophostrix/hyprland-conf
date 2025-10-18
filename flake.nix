@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-stable.url =  "github:nixos/nixpkgs/nixos-25.05";
 
-    # nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
+    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,11 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    # spicetify-nix = {
-    #   url = "github:Gerg-L/spicetify-nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # nur.url = "github:nix-community/NUR";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nur.url = "github:nix-community/NUR";
 
     thunderbird-catppuccin = {
       url = "github:catppuccin/thunderbird";
@@ -34,24 +34,49 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }: {
-    nixosConfigurations.MSInix = nixpkgs.lib.nixosSystem {
-      modules = [
-        ./hosts/msinix.nix
-        
-	home-manager.nixosModules.home-manager {
-          # Flakes/CLI
-          nix.settings.experimental-features = [
-	    "nix-command"
-	    "flakes"
-	  ];
+# flake.nix (outputs section)
+outputs =
+  inputs@{
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  }:
+  let
+    inherit (nixpkgs.lib) genAttrs;
 
-          # Home Mananager integration onto NixOS
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.mik = import ./home/mik.nix;
-        }
-      ];
+    systems = [ "x86_64-linux" "aarch64-linux" ];
+    forAllSystems = genAttrs systems;
+    pkgsFor = system: import nixpkgs { inherit system; };
+
+    # Helper to create NixOS hosts
+    mkHost = host: system:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          # Use ONE of these depending on your structure:
+          ./hosts/${host}/configuration.nix  # (folder-based)
+
+          # Optional: enable Hyprland flake module
+          # hyprland.nixosModules.default
+        ];
+
+        specialArgs = {
+          overlays = import ./overlays { inherit inputs host; };
+          inherit self inputs host;
+        };
+      };
+  in
+  {
+    # Dev environment templates
+    templates = import ./dev-shells;
+
+    # Formatter per system
+    formatter = forAllSystems (system: (pkgsFor system).nixfmt-tree);
+
+    # NixOS host definitions
+    nixosConfigurations = {
+      MSInix = mkHost "MSInix" "x86_64-linux";
     };
   };
 }

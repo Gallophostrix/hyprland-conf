@@ -1,179 +1,55 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
+{ lib, ... }:
+let
+  vars = import ./variables.nix;
+in
 {
   imports = [
     ./hardware-configuration.nix
     ./host-packages.nix
-  ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
+    # Core Modules (Don't change unless you know what you're doing)
+    ../../modules/scripts
+    ../../modules/core/boot.nix
+    ../../modules/core/bash.nix
+    ../../modules/core/fish.nix
+    ../../modules/core/fonts.nix
+    ../../modules/core/hardware.nix
+    ../../modules/core/network.nix
+    ../../modules/core/nh.nix
+    ../../modules/core/packages.nix
+    ../../modules/core/printing.nix
+    ../../modules/core/sddm.nix
+    ../../modules/core/security.nix
+    ../../modules/core/services.nix
+    ../../modules/core/syncthing.nix
+    ../../modules/core/system.nix
+    ../../modules/core/users.nix
+    # ../../modules/core/flatpak.nix
+    # ../../modules/core/virtualisation.nix
+    # ../../modules/core/dlna.nix
 
-  networking.hostName = "MSInix"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
-  # Set your time zone.
-  time.timeZone = "Europe/Paris";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "fr_FR.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "fr";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  };
-
-  # Enable the Wayland WM
-  hardware.graphics.enable = true;
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-    ];
-  };
-
-  # X11 adapters
-  environment.sessionVariables = {
-    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-    NIXOS_OZONE_WL = "1";
-  };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  
-  # Wayland launcher
-  
-  services.displayManager.defaultSession = "hyprland";
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable ACPI
-  services.acpid.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  #    alsa.enable = true;  # Old programs compatibility issues
-    wireplumber.enable = true;
-  };
-
-  # Enable bluetooth connections
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  # Enable brightness
-  boot.kernelParams = [ "acpi_backlignt=vendor" ];
-
-  # Shell configuration
-  programs.fish.enable = true;
-
-  # Desktop services
-  services.dbus.enable = true;
-  security.polkit.enable = true;
-  systemd.user.services.polkit-gnome = {
-    description = "Polkit Authentication Agent";
-    wantedBy = [ "graphical-session.target" ];
-    serviceConfig.ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-  };
-
-  services.upower.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.mik = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
-    ];
-    shell = pkgs.fish;
-  };
-
-  # programs.firefox.enable = true;
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-  #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    alacritty
-    brave
-    brightnessctl
-    polkit_gnome
-    vscodium
-    waybar
-    wget
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
-
+    # Optional
+    ../../modules/hardware/drives # Automatically mount extra external/internal drives
+    ../../modules/hardware/video/${vars.videoDriver}.nix # Enable gpu drivers defined in variables.nix
+    ../../modules/desktop/${vars.desktop} # Set window manager defined in variables.nix
+    ../../modules/programs/browser/${vars.browser} # Set browser defined in variables.nix
+    ../../modules/programs/terminal/${vars.terminal} # Set terminal defined in variables.nix
+    ../../modules/programs/editor/${vars.editor} # Set editor defined in variables.nix
+    ../../modules/programs/cli/${vars.tuiFileManager} # Set file-manager defined in variables.nix
+    # ../../modules/programs/cli/tmux
+    ../../modules/programs/cli/direnv
+    # ../../modules/programs/cli/lazygit
+    ../../modules/programs/cli/cava
+    # ../../modules/programs/cli/btop
+    # ../../modules/programs/media/discord
+    ../../modules/programs/media/spicetify
+    # ../../modules/programs/media/youtube-music
+    ../../modules/programs/media/thunderbird
+    # ../../modules/programs/media/obs-studio
+    ../../modules/programs/media/mpv
+    ../../modules/programs/misc/tlp
+    ../../modules/programs/misc/thunar
+    ../../modules/programs/misc/lact # GPU fan, clock and power configuration
+  ]
+  ++ lib.optional (vars.games == true) ../../modules/core/games.nix;
 }
-
