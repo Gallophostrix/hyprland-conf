@@ -3,44 +3,67 @@ pkgs.writeShellScriptBin "rebuild" ''
   #!/usr/bin/env bash
   set -euo pipefail
 
-  RED='\033[0;31m'; GREEN='\033[0;32m'; NC='\033[0m'
+  # --- Colors & helpers ---
+  RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
+  info()  { printf "\n%s%s%s\n" "$GREEN" "$1" "$NC"; }
+  warn()  { printf "%s%s%s\n" "$YELLOW" "$1" "$NC"; }
+  error() { printf "%sError: %s%s\n" "$RED" "$1" "$NC" >&2; }
 
-  if [[ ${EUID} -eq 0 ]]; then
-    echo "This script should not be executed as root! Exiting..."
+  # --- No root ---
+  if [ "$(id -u)" -eq 0 ]; then
+    error "Do not run this script as root."
     exit 1
   fi
 
-  # Locate flake
+  # --- Pick flake directory ---
   if [ -f "$HOME/NixOS/flake.nix" ]; then
     flake="$HOME/NixOS"
   elif [ -f "/etc/nixos/flake.nix" ]; then
     flake="/etc/nixos"
+  elif [ -f "$HOME/nixcfg/flake.nix" ]; then
+    flake="$HOME/nixcfg"
   else
-    echo "Error: flake not found. ensure flake.nix exists in either $HOME/NixOS or /etc/nixos"
+    error "flake.nix not found (looked in ~/NixOS, /etc/nixos, ~/nixcfg)."
     exit 1
   fi
 
-  echo -e "${GREEN}Flake: ${flake}${NC}"
-  echo -e "${GREEN}Host: ${host}${NC}"
+  info "Flake: $flake"
+  info "Host: ${host}"
 
-  currentUser="${SUDO_USER:-$USER}"
-
-  # Safely replace username line (keep trailing semicolon)
-  sudo sed -i -E \
-    "s/username = \"[^\"]*\";/username = \"${currentUser}\";/" \
-    "$flake/hosts/${host}/variables.nix"
-
-  # Refresh hardware-configuration.nix in the flake
-  if [ -f "/etc/nixos/hardware-configuration.nix" ]; then
-    sudo tee "$flake/hosts/${host}/hardware-configuration.nix" >/dev/null < /etc/nixos/hardware-configuration.nix
+  # --- Resolve invoking user (works with/without sudo) ---
+  if printenv SUDO_USER >/dev/null 2>&1; then
+    currentUser="$(printenv SUDO_USER)"
   else
-    sudo nixos-generate-config --show-hardware-config > "$flake/hosts/${host}/hardware-configuration.nix"
+    currentUser="$USER"
   fi
 
-  sudo git -C "$flake" add "hosts/${host}/hardware-configuration.nix"
+  # --- Sync username in variables.nix, if present ---
+  vars_file="$flake/hosts/${host}/variables.nix"
+  if [ -f "$vars_file" ]; then
+    sudo sed -i -E "s/username = \".*\"/username = \"$currentUser\"/" "$vars_file"
+  else
+    warn "No variables.nix for host ${host}; skipping username sync."
+  fi
 
-  # Rebuild & switch
+  # --- Refresh hardware-configuration.nix ---
+  hw_out="$flake/hosts/${host}/hardware-configuration.nix"
+  if [ -f "/etc/nixos/hardware-configuration.nix" ]; then
+    sudo tee "$hw_out" >/dev/null < /etc/nixos/hardware-configuration.nix
+  else
+    sudo nixos-generate-config --show-hardware-config | sudo tee "$hw_out" >/dev/null
+  fi
+
+  # --- Git add if flake is a git repo ---
+  if command -v git >/dev/null 2>&1 && git -C "$flake" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    sudo git -C "$flake" add "hosts/${host}/hardware-configuration.nix"
+  fi
+
+  # --- Switch ---
   sudo nixos-rebuild switch --flake "$flake#${host}"
 
-  echo -e "${GREEN}Done.${NC}"
+  # --- Pause ---
+  printf "%sPress any key to continue%s" "$GREEN" "$NC"
+  # shellcheck disable=SC2162
+  read -rsn1 _ || true
+  printf "\n"
 ''

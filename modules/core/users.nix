@@ -26,6 +26,12 @@ in
       programs.home-manager.enable = true;
       xdg.enable = true;
 
+      gtk = {
+        enable = true;
+        gtk3.extraConfig = { "gtk-font-name" = "Noto Sans 16"; };
+        gtk4.extraConfig = { "gtk-font-name" = "Noto Sans 16"; };
+      };
+
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
@@ -42,6 +48,7 @@ in
               "nano";
           BROWSER = "${browser}";
           TERMINAL = "${terminal}";
+          
         };
       };
     };

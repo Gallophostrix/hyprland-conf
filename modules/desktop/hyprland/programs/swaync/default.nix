@@ -327,14 +327,14 @@
           .time {
             color: @subtext0;
             /* color: alpha(@theme_text_color, 0.9); */
-            font-size: 12px;
+            font-size: 14px;
             text-shadow: none;
             margin: 0px 0px 0px 0px;
             padding: 2px 0px;
           }
 
           .body {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: @subtext1;
             /* color: alpha(@text, 0.9); */
@@ -456,7 +456,7 @@
 
           .widget-title > label {
             margin: 18px 10px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 500;
           }
 
@@ -487,7 +487,7 @@
             border-top: none;
           }
           .widget-label > label {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 400;
           }
 
@@ -512,7 +512,7 @@
             min-width: 185px;
             min-height: 50px;
             margin-right: 20px;
-            font-size: 14px;
+            font-size: 15px;
             padding: 5px;
           }
           .widget-menubar > box > box > button:nth-child(2) {
@@ -662,7 +662,7 @@
             /* border: 1px solid @surface1; */
             border-top: none;
             border-bottom: none;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 600;
             border-radius: 0px;
             margin: 0px;

@@ -6,7 +6,7 @@
 {
   home-manager.sharedModules = [
     (_: {
-      programs.vscodium = {
+      programs.vscode = {
         enable = true;
         mutableExtensionsDir = true;
         package = pkgs.vscodium;

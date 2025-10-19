@@ -38,14 +38,25 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
-      # wireplumber = {
-      #   enable = true;
-      #   configPackages = [
-      #     (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/11-bluetooth-policy.conf" ''
-      #       bluetooth.autoswitch-to-headset-profile = false
-      #     '')
-      #   ];
-      # };
+      wireplumber = {
+        enable = true;
+        extraConfig = {
+          "51-bluetooth-policy.conf" = {
+            "monitor.bluez.rules" = [
+              {
+                matches = [ { "device.name" = "~bluez_card.*"; } ];
+                actions = {
+                  "update-props" = {
+                    "bluez5.enable-msbc" = true;
+                    "bluez5.enable-hw-volume" = true;
+                    "bluez5.auto-switch-to-headset-profile" = false;
+                  };
+                };
+              }
+            ];
+          };
+        };
+      };
       extraConfig.pipewire."92-low-latency" = {
         "context.properties" = {
           "default.clock.rate" = 48000;

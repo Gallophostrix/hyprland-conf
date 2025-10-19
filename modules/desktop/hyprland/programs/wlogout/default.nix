@@ -47,7 +47,7 @@
         style = ''
           window {
             font-family: monospace;
-            font-size: 14pt;
+            font-size: 13pt;
             color: #cdd6f4; /* text */
             background-color: rgba(30, 30, 46, 0.5);
           }

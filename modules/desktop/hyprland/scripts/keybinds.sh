@@ -35,9 +35,9 @@ yad \
   --column=Description: \
   --column=Command: \
   --timeout-indicator=bottom \
-  "SUPER Return" "Launch terminal" "$_terminal" \
+  "SUPER ENTER" "Launch terminal" "$_terminal" \
   "SUPER T" "Launch terminal" "$_terminal" \
-  "SUPER F" "Launch file manager" "$_terminal_FM" \
+  "SUPER D" "Launch file manager" "$_terminal_FM" \
   "SUPER B" "Launch browser" "$_browser" \
   "SUPER SHIFT S" "Launch spotify" "spotify" \
   "CTRL ALT Delete" "Open system monitor" "$_terminal -e 'btop'" \
@@ -72,15 +72,15 @@ yad \
   "SUPER Delete" "Exit Hyprland session" "exit" \
   "SUPER W" "Toggle floating window" "togglefloating" \
   "SUPER SHIFT G" "Toggle window group" "togglegroup" \
-  "ALT Return" "Toggle fullscreen" "fullscreen" \
-  "SUPER ALT L" "Lock screen" "hyprlock" \
+  "SUPER F" "Toggle fullscreen" "fullscreen" \
+  "SUPER L" "Lock screen" "hyprlock" \
   "SUPER Backspace" "Power menu" "wlogout -b 4" \
   "CTRL Escape" "Toggle Waybar" "pkill waybar || waybar" \
   "SUPER SHIFT N" "Open notification panel" "swaync-client -t -sw" \
-  "SUPER SHIFT Q" "Open notification panel" "swaync-client -t -sw" \
+  "SUPER <" "Open notification panel" "swaync-client -t -sw" \
   "SUPER Q" "Close active window" "scripts/dontkillsteam.sh" \
   "ALT F4" "Close active window" "scripts/dontkillsteam.sh" \
-  "SUPER Z" "Launch emoji picker" "scripts/launcher emoji" \
+  "SUPER E" "Launch emoji picker" "scripts/launcher emoji" \
   "SUPER ALT K" "Change keyboard layout" "scripts/keyboardswitch.sh" \
   "SUPER U" "Rebuild system" "$_terminal -e rebuild" \
   "SUPER ALT G" "Enable game mode" "scripts/gamemode.sh" \
@@ -89,7 +89,7 @@ yad \
   "SUPER SHIFT R" "Screen record (select area)" "scripts/screen-record.sh a" \
   "SUPER CTRL R" "Screen record (select monitor)" "scripts/screen-record.sh m" \
   "SUPER P" "Screenshot (select area)" "scripts/screenshot.sh s" \
-  "SUPER CTRL P" "Screenshot (frozen screen)" "scripts/screenshot.sh sf" \
+  "CTRL P" "Screenshot (frozen screen)" "scripts/screenshot.sh sf" \
   "SUPER Print" "Screenshot (current monitor)" "scripts/screenshot.sh m" \
   "SUPER ALT P" "Screenshot (all monitors)" "scripts/screenshot.sh p" \
   "SUPER SHIFT CTRL ←" "Move window left" "movewindow l" \

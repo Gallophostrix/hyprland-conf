@@ -7,19 +7,15 @@
   ];
 
   systemd.user.services.protonmail-bridge = {
-    Unit = {
-      Description = "ProtonMail Bridge (background service)";
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
+    description = "ProtonMail Bridge (background service)";
+    after = [ "graphical-session.target" ];
+    wantedBy = [ "default.target" ];
+
+    serviceConfig = {
       ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge --no-window";
       Restart = "on-failure";
-
       StandardOutput = "journal";
       StandardError = "journal";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
     };
   };
 }

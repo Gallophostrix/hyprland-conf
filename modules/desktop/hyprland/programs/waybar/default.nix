@@ -547,7 +547,7 @@ in
           }
 
           #custom-icon {
-            font-size: 15px;
+            font-size: 13px;
             color: #cba6f7;
           }
 

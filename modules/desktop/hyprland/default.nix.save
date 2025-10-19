@@ -282,7 +282,7 @@ in
                 vfr = true; # always keep on
                 vrr = 2; # enable variable refresh rate (0=off, 1=on, 2=fullscreen only, 3 = fullscreen games/media)
               };
-              xwayland.force_zero_scaling = true;
+              xwayland.force_zero_scaling = false;
               gesture = [
                 "3, horizontal, workspace"
               ];
@@ -463,15 +463,15 @@ in
                   "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
                   "$mainMod, less, exec, swaync-client -t -sw" # swayNC panel
                   "$mainMod CTRL, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
-                  "$mainMod, V, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
+                  "$mainMod, C, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
                   "$mainMod, M, exec, ${./scripts/rofimusic.sh}" # online music
 
                   # Screenshot/Screencapture
-                  "$mainMod SHIFT, R, exec, ${./scripts/screen-record.sh} a" # Screen Record (area select)
-                  "$mainMod CTRL, R, exec, ${./scripts/screen-record.sh} m" # Screen Record (monitor select)
+                  "$mainMod SHIFT, PrintScreen, exec, ${./scripts/screen-record.sh} a" # Screen Record (area select)
+                  "$mainMod CTRL, PrintScreen, exec, ${./scripts/screen-record.sh} m" # Screen Record (monitor select)
                   "$mainMod, P, exec, ${./scripts/screenshot.sh} s" # drag to snip an area / click on a window to print it
-                  "$CONTROL, P, exec, ${./scripts/screenshot.sh} sf" # frozen screen, drag to snip an area / click on a window to print it
-                  "$mainMod, Print, exec, ${./scripts/screenshot.sh} m" # print focused monitor
+                  "$CONTROL, PrintScreen, exec, ${./scripts/screenshot.sh} sf" # frozen screen, drag to snip an area / click on a window to print it
+                  "$mainMod, PrintScreen, exec, ${./scripts/screenshot.sh} m" # print focused monitor
                   "$mainMod ALT, P, exec, ${./scripts/screenshot.sh} p" # print all monitor outputs
 
                   # Functional keybinds
@@ -495,9 +495,9 @@ in
                   # move to the first empty workspace instantly with mainMod + CTRL + [↓]
                   "$mainMod CTRL, down, workspace, empty"
 
-                  # Switch workspaces relative to the active workspace with mainMod + CTRL + [←→]
-                  "$mainMod CTRL, right, exec, workspace, r+1"
-                  "$mainMod CTRL, left,  exec, workspace, r-1"
+                # Switch workspaces relative to the active workspace with mainMod + CTRL + [←→]
+                "$mainMod CTRL, right, exec, dispatch, workspace, r+1"
+                "$mainMod CTRL, left,  exec, dispatch, workspace, r-1"
 
                   # Move focus with mainMod + arrow keys
                   "$mainMod, left, movefocus, l"
@@ -528,8 +528,8 @@ in
                   "$mainMod, mouse_up, workspace, e-1"
 
                   # Move active window to a relative workspace with mainMod + CTRL + ALT + [←→]
-                  "$mainMod CTRL, right, movetoworkspace, r+1"
-                  "$mainMod CTRL, left, movetoworkspace, r-1"
+                  "$mainMod CTRL ALT, right, movetoworkspace, r+1"
+                  "$mainMod CTRL ALT, left, movetoworkspace, r-1"
 
                   # Move active window around current workspace with mainMod + SHIFT + CTRL [←→↑↓]
                   "$mainMod SHIFT $CONTROL, left, movewindow, l"

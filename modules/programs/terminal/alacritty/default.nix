@@ -101,11 +101,11 @@
 
             window = {
               decorations = "full";
-              dynamic_padding = false;
+              dynamic_padding = true;
               startup_mode = "Maximized";
 
-              padding.x = 0;
-              padding.y = 0;
+              padding.x = 10;
+              padding.y = 10;
               dimensions.columns = 100;
               dimensions.lines = 30;
               class.general = "Alacritty";
@@ -113,7 +113,7 @@
             };
 
             terminal.shell = {
-              program = "${getExe pkgs.zsh}";
+              program = "${getExe pkgs.fish}";
             };
 
             keyboard.bindings = [

@@ -45,7 +45,9 @@
 
         set -g fish_autosuggestion yes
         set -g fish_history_size 100000
-        set -g fish_history "$XDG_DATA_HOME/fish/history"
+        if not set -q fish_history
+	   set -U fish_history fish
+        end
         set -g fish_prompt_subst yes
         set -g fish_always_to_end yes
         set -g fish_append_history yes
@@ -65,10 +67,65 @@
         set -gx FZF_DEFAULT_OPTS "--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
 
         function UUID; uuidgen | tr -d \n; end
-        alias lf 'set tmp (mktemp); command lf -last-dir-path="$tmp" $argv; if test -f "$tmp"; rm -f "$tmp"; set dir (cat $tmp); if test -d $dir; cd $dir; end'
-        alias fnew 'if test -d $argv[2]; echo "Directory $argv[2] already exists!"; return 1; end; nix flake new $argv[2] --template ~/N/dev-shells#$argv[1]; cd $argv[2]; direnv allow'
-        alias finit 'nix flake init --template ~/N/dev-shells#$argv[1]; direnv allow'
-        alias cdown 'set N $argv[1]; while test $N -gt 0; echo (figlet -c $N | lolcat); sleep 1; set N (math $N - 1); end'
+        functions -e lf 2>/dev/null
+        function lf --description 'lf + cd to last dir' --wraps lf
+          set -l tmp (mktemp)
+          command lf -last-dir-path="$tmp" $argv
+
+          set -l dir ""
+          if test -f "$tmp"
+            set dir (string trim (cat "$tmp"))
+            rm -f "$tmp"
+          end
+
+          if test -n "$dir"; and test -d "$dir"
+            cd "$dir"
+          end
+        end
+        
+        functions -e cdown 2>/dev/null
+        function cdown --description 'Countdown with figlet+lolcat'
+          set -l N (math "int($argv[1] 2>/dev/null)")
+          if test -z "$N"; or test "$N" -le 0
+            echo "Usage: cdown <seconds>"
+            return 1
+          end
+          while test $N -gt 0
+            echo (figlet -c $N | lolcat)
+            sleep 1
+            set N (math $N - 1)
+          end
+        end
+        
+        functions -e fnew 2>/dev/null
+        function fnew --description 'Create flake from template and cd into it'
+          if test (count $argv) -lt 2
+            echo "Usage: fnew <template> <dir>"
+            return 1
+          end
+          set -l template $argv[1]
+          set -l dir      $argv[2]
+
+          if test -d "$dir"
+            echo "Directory $dir already exists!"
+            return 1
+          end
+
+          nix flake new "$dir" --template ~/N/dev-shells#"$template"
+          cd "$dir"
+          direnv allow
+        end
+
+        functions -e finit 2>/dev/null
+        function finit --description 'Init flake from template in current dir'
+          if test (count $argv) -lt 1
+            echo "Usage: finit <template>"
+            return 1
+          end
+          nix flake init --template ~/N/dev-shells#"$argv[1]"
+          direnv allow
+        end
+        
         alias tml "tmux list-sessions"
         alias tma "tmux attach"
         alias tms "tmux attach -t (tmux ls -F '#{session_name}: #{session_path} (#{session_windows} windows)' | fzf | cut -d: -f1)"
@@ -77,7 +134,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    eza trash-cli microfetch figlet lolcat fzf tmux lf direnv zoxide
+    eza trash-cli microfetch figlet lolcat fzf tmux lf direnv zoxide bat
   ];
 
   # Auto hooks

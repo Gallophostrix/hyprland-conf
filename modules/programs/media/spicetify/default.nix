@@ -31,18 +31,19 @@
             shuffle # shuffle+ (special characters are sanitized out of ext names)
             keyboardShortcut # vimium-like navigation
             copyLyrics # copy lyrics with selection
+            simpleBeautifulLyrics
             # autoVolume
             # showQueueDuration
             # fullAppDisplay
             # hidePodcasts
           ];
-          # enabledCustomApps = with spicePkgs.apps; [
+          enabledCustomApps = with spicePkgs.apps; [
           #   reddit
           #   lyricsPlus
-          #   marketplace
+            marketplace
           #   localFiles
           #   ncsVisualizer
-          # ];
+          ];
         };
       }
     )
