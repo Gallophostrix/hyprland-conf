@@ -44,7 +44,8 @@ in
     # ../../modules/programs/media/discord
     ../../modules/programs/media/spicetify
     # ../../modules/programs/media/youtube-music
-    ../../modules/programs/media/thunderbird
+    # ../../modules/programs/media/thunderbird
+    # ../../modules/programs/media/proton-mail  # Not working
     # ../../modules/programs/media/obs-studio
     ../../modules/programs/media/mpv
     ../../modules/programs/misc/tlp

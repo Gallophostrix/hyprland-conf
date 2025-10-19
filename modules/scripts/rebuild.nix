@@ -16,14 +16,14 @@ pkgs.writeShellScriptBin "rebuild" ''
   fi
 
   # --- Pick flake directory ---
-  if [ -f "$HOME/NixOS/flake.nix" ]; then
+  if [ -f "$HOME/nixcfg/flake.nix" ]; then
+    flake="$HOME/nixcfg"
+  elif [ -f "$HOME/NixOS/flake.nix" ]; then
     flake="$HOME/NixOS"
   elif [ -f "/etc/nixos/flake.nix" ]; then
     flake="/etc/nixos"
-  elif [ -f "$HOME/nixcfg/flake.nix" ]; then
-    flake="$HOME/nixcfg"
   else
-    error "flake.nix not found (looked in ~/NixOS, /etc/nixos, ~/nixcfg)."
+    error "flake.nix not found (looked in ~/nixcfg, ~/NixOS, /etc/nixos)."
     exit 1
   fi
 
