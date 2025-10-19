@@ -2,12 +2,10 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   home-manager.sharedModules = [
     (
-      { config, ... }:
-      let
+      {config, ...}: let
         ytMusicConfig = {
           window-size = {
             width = 1920;
@@ -46,7 +44,7 @@
             notifications.enabled = false; # Currently not working when config.json is symlink
             video-toggle.mode = "custom";
             precise-volume = {
-              globalShortcuts = { };
+              globalShortcuts = {};
               enabled = true;
             };
             discord.listenAlong = true;
@@ -144,8 +142,7 @@
             };
           };
         };
-      in
-      {
+      in {
         home.packages = with pkgs; [
           youtube-music
           curl

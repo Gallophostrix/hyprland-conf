@@ -4,11 +4,9 @@
   host,
   config,
   ...
-}:
-let
+}: let
   inherit (import ../../hosts/${host}/variables.nix) terminal;
-in
-let
+in let
   # Define your custom args once
   scriptArgs = {
     inherit
@@ -30,7 +28,6 @@ let
     (import ./underwatt.nix scriptArgs)
     # Add new scripts here as you create them
   ];
-in
-{
+in {
   environment.systemPackages = scripts;
 }

@@ -2,11 +2,9 @@
   pkgs,
   host,
   ...
-}:
-let
+}: let
   inherit (import ../../../../../hosts/${host}/variables.nix) browser;
-in
-{
+in {
   home-manager.sharedModules = [
     (_: {
       services.dunst = {

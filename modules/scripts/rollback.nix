@@ -1,4 +1,4 @@
-{ host, pkgs, ... }:
+{pkgs, ...}:
 pkgs.writeShellScriptBin "rebuild" ''
   #!/usr/bin/env bash
   set -euo pipefail

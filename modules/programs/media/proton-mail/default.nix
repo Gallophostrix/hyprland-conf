@@ -1,6 +1,9 @@
-{ config, pkgs, lib, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     protonmail-desktop
     glib.bin
@@ -12,8 +15,8 @@
       comment = "Secure email by Proton";
       exec = "proton-mail %U";
       terminal = false;
-      categories = [ "Network" "Email" ];
-      mimeTypes = [ "x-scheme-handler/mailto" ];
+      categories = ["Network" "Email"];
+      mimeTypes = ["x-scheme-handler/mailto"];
       startupWMClass = "Proton Mail";
     })
   ];
@@ -33,15 +36,14 @@
     ];
   };
 
-
   # Autostart
   # systemd.user.services.proton-mail = {
-    # description = "Proton Mail Desktop";
-    # after = [ "graphical-session.target" ];
-    # wantedBy = [ "default.target" ];
-    # serviceConfig = {
-      # ExecStart = "${pkgs.protonmail-desktop}/bin/proton-mail";
-      # Restart = "on-failure";
-    # };
+  # description = "Proton Mail Desktop";
+  # after = [ "graphical-session.target" ];
+  # wantedBy = [ "default.target" ];
+  # serviceConfig = {
+  # ExecStart = "${pkgs.protonmail-desktop}/bin/proton-mail";
+  # Restart = "on-failure";
+  # };
   # };
 }

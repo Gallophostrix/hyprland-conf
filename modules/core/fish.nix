@@ -1,34 +1,33 @@
-{ config, lib, pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
 
     # Aliases
     shellAliases = {
-      l    = "eza -lh --icons=auto";
-      ls   = "eza -1 --icons=auto";
-      ll   = "eza -lha --icons=auto --sort=name --group-directories-first";
-      ld   = "eza -lhD --icons=auto";
+      l = "eza -lh --icons=auto";
+      ls = "eza -1 --icons=auto";
+      ll = "eza -lha --icons=auto --sort=name --group-directories-first";
+      ld = "eza -lhD --icons=auto";
       tree = "eza --icons=auto --tree";
-      vc   = "codium --disable-gpu";
-      nf   = "microfetch";
-      cp   = "cp -iv";
-      mv   = "mv -iv";
-      rm   = "rm -vI";
-      bc   = "bc -ql";
-      mkd  = "mkdir -pv";
-      tp   = "trash-put";
-      tpr  = "trash-restore";
+      vc = "codium --disable-gpu";
+      nf = "microfetch";
+      cp = "cp -iv";
+      mv = "mv -iv";
+      rm = "rm -vI";
+      bc = "bc -ql";
+      mkd = "mkdir -pv";
+      tp = "trash-put";
+      tpr = "trash-restore";
       grep = "grep --color=always";
-      "list-gens"   = "nixos-rebuild list-generations";
-      "update-input"= "nix flake update";
-      sysup         = "nix flake update --flake ~/nixcfg && rebuild";
-      games   = "cd /mnt/games/";
-      work    = "cd /mnt/work/";
-      media   = "cd /mnt/work/media/";
-      projects= "cd /mnt/work/Projects/";
-      proj    = "cd /mnt/work/Projects/";
-      dev     = "cd /mnt/work/Projects/";
+      "list-gens" = "nixos-rebuild list-generations";
+      "update-input" = "nix flake update";
+      sysup = "nix flake update --flake ~/nixcfg && rebuild";
+      games = "cd /mnt/games/";
+      work = "cd /mnt/work/";
+      media = "cd /mnt/work/media/";
+      projects = "cd /mnt/work/Projects/";
+      proj = "cd /mnt/work/Projects/";
+      dev = "cd /mnt/work/Projects/";
     };
 
     interactiveShellInit = ''
@@ -46,7 +45,7 @@
         set -g fish_autosuggestion yes
         set -g fish_history_size 100000
         if not set -q fish_history
-	   set -U fish_history fish
+         set -U fish_history fish
         end
         set -g fish_prompt_subst yes
         set -g fish_always_to_end yes
@@ -82,7 +81,7 @@
             cd "$dir"
           end
         end
-        
+
         functions -e cdown 2>/dev/null
         function cdown --description 'Countdown with figlet+lolcat'
           set -l N (math "int($argv[1] 2>/dev/null)")
@@ -96,7 +95,7 @@
             set N (math $N - 1)
           end
         end
-        
+
         functions -e fnew 2>/dev/null
         function fnew --description 'Create flake from template and cd into it'
           if test (count $argv) -lt 2
@@ -125,16 +124,77 @@
           nix flake init --template ~/N/dev-shells#"$argv[1]"
           direnv allow
         end
-        
+
         alias tml "tmux list-sessions"
         alias tma "tmux attach"
         alias tms "tmux attach -t (tmux ls -F '#{session_name}: #{session_path} (#{session_windows} windows)' | fzf | cut -d: -f1)"
+
+        # --- Universal vars (colors, pager, prompt), set-once/idempotent ---
+        function __ensure_uvar --argument-names name value
+          if not set -q $name
+            set -U $name $value
+          end
+        end
+
+        __ensure_uvar __fish_initialized 3400
+        __ensure_uvar fish_color_autosuggestion 969896
+        __ensure_uvar fish_color_cancel '--reverse'
+        __ensure_uvar fish_color_command b294bb
+        __ensure_uvar fish_color_comment f0c674
+        __ensure_uvar fish_color_cwd green
+        __ensure_uvar fish_color_cwd_root red
+        __ensure_uvar fish_color_end b294bb
+        __ensure_uvar fish_color_error cc6666
+        __ensure_uvar fish_color_escape 00a6b2
+        __ensure_uvar fish_color_history_current '--bold'
+        __ensure_uvar fish_color_host '--bold'
+        __ensure_uvar fish_color_host_remote '--bold\x1eyellow'
+        __ensure_uvar fish_color_keyword b294bb
+        __ensure_uvar fish_color_match '--background=brblue'
+        __ensure_uvar fish_color_normal normal
+        __ensure_uvar fish_color_operator 00a6b2
+        __ensure_uvar fish_color_option 81a2be
+        __ensure_uvar fish_color_param 81a2be
+        __ensure_uvar fish_color_quote b5bd68
+        __ensure_uvar fish_color_redirection 8abeb7
+        __ensure_uvar fish_color_search_match 'bryellow\x1e--background=brblack'
+        __ensure_uvar fish_color_selection 'white\x1e--bold\x1e--background=brblack'
+        __ensure_uvar fish_color_status red
+        __ensure_uvar fish_color_user '--bold\x1egreen'
+        __ensure_uvar fish_color_valid_path '--underline'
+        __ensure_uvar fish_key_bindings fish_default_key_bindings
+        __ensure_uvar fish_pager_color_background ""
+        __ensure_uvar fish_pager_color_completion normal
+        __ensure_uvar fish_pager_color_description B3A06D
+        __ensure_uvar fish_pager_color_prefix 'normal\x1e--bold\x1e--underline'
+        __ensure_uvar fish_pager_color_progress 'brwhite\x1e--background=cyan'
+        __ensure_uvar fish_pager_color_secondary_background ""
+        __ensure_uvar fish_pager_color_secondary_completion ""
+        __ensure_uvar fish_pager_color_secondary_description ""
+        __ensure_uvar fish_pager_color_secondary_prefix ""
+        __ensure_uvar fish_pager_color_selected_background '--background=brblack'
+        __ensure_uvar fish_pager_color_selected_completion ""
+        __ensure_uvar fish_pager_color_selected_description ""
+        __ensure_uvar fish_pager_color_selected_prefix ""
+        __ensure_uvar fish_prompt_transient_enable 1
+
+
       end
     '';
   };
 
   environment.systemPackages = with pkgs; [
-    eza trash-cli microfetch figlet lolcat fzf tmux lf direnv zoxide bat
+    eza
+    trash-cli
+    microfetch
+    figlet
+    lolcat
+    fzf
+    tmux
+    lf
+    direnv
+    zoxide
+    bat
   ];
 
   # Auto hooks

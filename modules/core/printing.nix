@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ...  }:
-{
+{pkgs, ...}: {
   services = {
     printing = {
       enable = true;

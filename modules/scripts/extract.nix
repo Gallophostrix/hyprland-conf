@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.writeShellScriptBin "ex" ''
   #!/usr/bin/env bash
   set -euo pipefail

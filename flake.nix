@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixpkgs-stable.url =  "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
 
@@ -34,20 +34,18 @@
     };
   };
 
-# flake.nix (outputs section)
-outputs =
-  inputs@{
+  # flake.nix (outputs section)
+  outputs = inputs @ {
     self,
     nixpkgs,
     home-manager,
     ...
-  }:
-  let
+  }: let
     inherit (nixpkgs.lib) genAttrs;
 
-    systems = [ "x86_64-linux" "aarch64-linux" ];
+    systems = ["x86_64-linux" "aarch64-linux"];
     forAllSystems = genAttrs systems;
-    pkgsFor = system: import nixpkgs { inherit system; };
+    pkgsFor = system: import nixpkgs {inherit system;};
 
     # Helper to create NixOS hosts
     mkHost = host: system:
@@ -55,19 +53,18 @@ outputs =
         inherit system;
         modules = [
           # Use ONE of these depending on your structure:
-          ./hosts/${host}/configuration.nix  # (folder-based)
+          ./hosts/${host}/configuration.nix # (folder-based)
 
           # Optional: enable Hyprland flake module
           # hyprland.nixosModules.default
         ];
 
         specialArgs = {
-          overlays = import ./overlays { inherit inputs host; };
+          overlays = import ./overlays {inherit inputs host;};
           inherit self inputs host;
         };
       };
-  in
-  {
+  in {
     # Dev environment templates
     templates = import ./dev-shells;
 

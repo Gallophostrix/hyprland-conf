@@ -1,8 +1,7 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home-manager.sharedModules = [
     (_: {
-      home.packages = [ pkgs.brave ];
+      home.packages = [pkgs.brave];
     })
   ];
 }

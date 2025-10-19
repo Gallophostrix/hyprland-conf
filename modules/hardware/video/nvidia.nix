@@ -1,9 +1,12 @@
-{ lib, pkgs, config, ... }:
-
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   # Load the proprietary NVIDIA driver and enable DRM modesetting.
   # Required for Wayland/wlroots compositors (e.g., Hyprland) and PRIME offload.
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
     # Use NVIDIA "open" kernel modules (supported on 20/30/40-series incl. RTX 4060).
@@ -24,9 +27,9 @@
 
     # Hybrid laptop: iGPU handles the desktop, dGPU is used on demand (PRIME offload).
     prime = {
-      offload.enable = true;           # provides the `nvidia-offload` wrapper
-      intelBusId  = "PCI:0:2:0";       # from `lspci` (your Intel iGPU)
-      nvidiaBusId = "PCI:1:0:0";       # from `lspci` (your NVIDIA dGPU)
+      offload.enable = true; # provides the `nvidia-offload` wrapper
+      intelBusId = "PCI:0:2:0"; # from `lspci` (your Intel iGPU)
+      nvidiaBusId = "PCI:1:0:0"; # from `lspci` (your NVIDIA dGPU)
     };
   };
 
@@ -58,11 +61,12 @@
   # environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
 
   # Allow only the minimal set of unfree NVIDIA bits.
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11"
-    "nvidia-settings"
-    "nvidia-persistenced"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
+    ];
 
   # CUDA is only needed if you actually do GPU compute/AI/HPC. Otherwise, keep it off.
   # nixpkgs.config.cudaSupport = true

@@ -1,23 +1,26 @@
-{ lib, pkgs, config, ... }:
-
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   # Use NVIDIA driver (required to make the dGPU available for offloading).
   # The Intel iGPU (i915) is present anyway; Wayland compositors use it without X.org drivers.
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
-    open = true;  # Open kernel modules (fine for RTX 4060)
+    open = true; # Open kernel modules (fine for RTX 4060)
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-    modesetting.enable = true;   # Required for Wayland/PRIME
-    nvidiaSettings   = true;     # Handy diagnostics tool
-    powerManagement.enable = true;  # Powers down dGPU when idle; better suspend/resume
+    modesetting.enable = true; # Required for Wayland/PRIME
+    nvidiaSettings = true; # Handy diagnostics tool
+    powerManagement.enable = true; # Powers down dGPU when idle; better suspend/resume
 
     # Hybrid laptop: iGPU for desktop, dGPU on demand via `nvidia-offload <cmd>`
     prime = {
       offload.enable = true;
-      intelBusId  = "PCI:0:2:0";  # from your lspci (Intel Arc iGPU)
-      nvidiaBusId = "PCI:1:0:0";  # from your lspci (RTX 4060 dGPU)
+      intelBusId = "PCI:0:2:0"; # from your lspci (Intel Arc iGPU)
+      nvidiaBusId = "PCI:1:0:0"; # from your lspci (RTX 4060 dGPU)
     };
   };
 
@@ -32,8 +35,8 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      intel-media-driver   # Intel Xe/Arc (iHD) VA-API driver (use this on Meteor Lake)
-      nvidia-vaapi-driver  # VA-API on NVIDIA via NVDEC/NVENC (optional but useful)
+      intel-media-driver # Intel Xe/Arc (iHD) VA-API driver (use this on Meteor Lake)
+      nvidia-vaapi-driver # VA-API on NVIDIA via NVDEC/NVENC (optional but useful)
       # Avoid legacy shims unless you know you need them:
       # vaapiVdpau
       # libvdpau-va-gl
@@ -44,11 +47,12 @@
   # environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
 
   # Keep unfree to the minimal NVIDIA bits you actually use.
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "nvidia-x11"
-    "nvidia-settings"
-    "nvidia-persistenced"
-  ];
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "nvidia-persistenced"
+    ];
 
   # CPU thermal management on Intel (recommended for laptops).
   services.thermald.enable = true;

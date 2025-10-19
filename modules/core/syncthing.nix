@@ -1,8 +1,6 @@
-{ host, ... }:
-let
+{host, ...}: let
   inherit (import ../../hosts/${host}/variables.nix) username;
-in
-{
+in {
   services.syncthing = {
     enable = true;
     user = "${username}";

@@ -1,11 +1,15 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    # Apps
     bitwarden-desktop
-    obsidian
     github-desktop
+    obsidian
     # protonmail-bridge  # premium account required
     wireguard-tools
+    # Tools
+    alejandra
+    nixd
   ];
 
   # systemd.user.services.protonmail-bridge = {

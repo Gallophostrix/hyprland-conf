@@ -3,18 +3,17 @@
   inputs,
   host,
   ...
-}:
-let
-  inherit (import ../../hosts/${host}/variables.nix)
+}: let
+  inherit
+    (import ../../hosts/${host}/variables.nix)
     username
     editor
     terminal
     browser
     shell
     ;
-in
-{
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+in {
+  imports = [inputs.home-manager.nixosModules.home-manager];
   programs.dconf.enable = true; # Enable dconf for home-manager
   home-manager = {
     useGlobalPkgs = true;
@@ -28,8 +27,8 @@ in
 
       gtk = {
         enable = true;
-        gtk3.extraConfig = { "gtk-font-name" = "Noto Sans 16"; };
-        gtk4.extraConfig = { "gtk-font-name" = "Noto Sans 16"; };
+        gtk3.extraConfig = {"gtk-font-name" = "Noto Sans 16";};
+        gtk4.extraConfig = {"gtk-font-name" = "Noto Sans 16";};
       };
 
       home = {
@@ -38,17 +37,15 @@ in
         stateVersion = "25.05"; # Do not change!
         sessionVariables = {
           EDITOR =
-            if (editor == "nixvim" || editor == "neovim" || editor == "nvchad") then
-              "nvim"
-            else if editor == "vscode" then
-              "code"
-            else if editor == "vscodium" then
-              "codium"
-            else
-              "nano";
+            if (editor == "nixvim" || editor == "neovim" || editor == "nvchad")
+            then "nvim"
+            else if editor == "vscode"
+            then "code"
+            else if editor == "vscodium"
+            then "codium"
+            else "nano";
           BROWSER = "${browser}";
           TERMINAL = "${terminal}";
-          
         };
       };
     };
@@ -77,5 +74,5 @@ in
       ignoreShellProgramCheck = true;
     };
   };
-  nix.settings.allowed-users = [ "${username}" ];
+  nix.settings.allowed-users = ["${username}"];
 }

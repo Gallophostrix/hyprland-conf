@@ -1,6 +1,4 @@
-{ ... }:
-{
-
+{...}: {
   services.minidlna = {
     enable = true;
     openFirewall = true;
@@ -20,6 +18,6 @@
     };
   };
   users.users.minidlna = {
-    extraGroups = [ "users" ]; # so minidlna can access the files.
+    extraGroups = ["users"]; # so minidlna can access the files.
   };
 }

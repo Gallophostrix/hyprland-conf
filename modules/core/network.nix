@@ -1,8 +1,10 @@
-{ host, pkgs, ... }:
-let
-  inherit (import ../../hosts/${host}/variables.nix) hostname;
-in
 {
+  host,
+  pkgs,
+  ...
+}: let
+  inherit (import ../../hosts/${host}/variables.nix) hostname;
+in {
   networking = {
     hostName = "${hostname}";
     networkmanager.enable = true;
@@ -29,5 +31,5 @@ in
     };
   };
 
-  environment.systemPackages = with pkgs; [ networkmanagerapplet ];
+  environment.systemPackages = with pkgs; [networkmanagerapplet];
 }
