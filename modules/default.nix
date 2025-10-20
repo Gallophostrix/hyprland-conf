@@ -9,6 +9,7 @@ in {
     [
       # Core Modules (Don't change unless you know what you're doing)
       ./scripts
+      .core/boot/default.nix
       # ./core/boot.nix
       ./core/bash.nix
       ./core/fish.nix

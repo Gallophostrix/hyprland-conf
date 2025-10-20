@@ -8,7 +8,8 @@ in {
 
       # Core Modules (Don't change unless you know what you're doing)
       ../../modules/scripts
-      ../../modules/core/boot.nix
+      ../../modules/core/boot/default.nix
+      # ../../modules/core/boot.nix
       ../../modules/core/bash.nix
       ../../modules/core/fish.nix
       ../../modules/core/fonts.nix

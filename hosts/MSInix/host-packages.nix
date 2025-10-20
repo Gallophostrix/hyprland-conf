@@ -4,6 +4,7 @@
     bitwarden-desktop
     github-desktop
     obsidian
+    spotify
     # protonmail-bridge  # premium account required
     wireguard-tools
     # Tools

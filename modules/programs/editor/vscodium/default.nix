@@ -43,6 +43,8 @@
           userSettings = {
             # --- General ---
             "workbench.startupEditor" = "none";
+            "update.mode" = "none";
+            "settingsSync.enabled" = false;
 
             "telemetry.telemetryLevel" = "off";
             "security.workspace.trust.untrustedFiles" = "open";
@@ -65,7 +67,7 @@
             "workbench.editor.limit.enabled" = true;
             "workbench.editor.limit.value" = 10;
             "workbench.editor.limit.perEditorGroup" = true;
-            "explorer.openEditors.visible" = 0;
+            "explorer.openEditors.visible" = 1;
 
             "path-intellisense.autoSlashAfterDirectory" = true;
             "path-intellisense.extensionOnImport" = true;
@@ -78,7 +80,7 @@
             "editor.fontSize" = 14;
             "editor.wordWrap" = "on";
 
-            "editor.semanticHighlighting" = "configuredByTheme";
+            "editor.semanticHighlighting.enabled" = true;
             "editor.inlineSuggest.enabled" = true;
             "editor.stickyScroll.enabled" = true;
             "editor.renderControlCharacters" = false;
@@ -93,11 +95,11 @@
 
             "editor.scrollbar.verticalScrollbarSize" = 2;
             "editor.scrollbar.horizontalScrollbarSize" = 2;
-            "editor.scrollbar.vertical" = "hidden";
-            "editor.scrollbar.horizontal" = "hidden";
+            "editor.scrollbar.vertical" = "auto";
+            "editor.scrollbar.horizontal" = "auto";
 
             "workbench.colorTheme" = "Catppuccin Mocha";
-            "workbench.iconTheme" = "catppuccin-vsc-icons";
+            "workbench.iconTheme" = "catppuccin-mocha";
             "catppuccin.accentColor" = "mauve";
             # "vsicons.dontShowNewVersionMessage" = false;
             "editor.fontLigatures" = true;
@@ -105,8 +107,8 @@
             "git.enableSmartCommit" = true;
             "git.autofetch" = true;
             "git.confirmSync" = false;
-            "gitlens.hovers.annotations.changes" = false;
-            "gitlens.hovers.avatars" = false;
+            # "gitlens.hovers.annotations.changes" = false;
+            # "gitlens.hovers.avatars" = false;
 
             "[javascript]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
             "[typescript]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
@@ -148,7 +150,6 @@
             "markdown.preview.doubleClickToSwitchToEditor" = false;
 
             "[toml]" = {"editor.defaultFormatter" = "tamasfe.even-better-toml";};
-            "evenBetterToml.formatter.ruler" = 100;
             "evenBetterToml.formatter.alignEntries" = true;
           };
         };
