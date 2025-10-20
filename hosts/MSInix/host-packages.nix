@@ -6,10 +6,10 @@
     obsidian
     spotify
     # protonmail-bridge  # premium account required
-    wireguard-tools
     # Tools
     alejandra
     nixd
+    wireguard-tools
   ];
 
   # systemd.user.services.protonmail-bridge = {

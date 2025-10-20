@@ -44,7 +44,9 @@
             # --- General ---
             "workbench.startupEditor" = "none";
             "update.mode" = "none";
-            "settingsSync.enabled" = false;
+            "extensions.autoCheckUpdates" = false;
+            "extensions.autoUpdate" = false;
+            "window.restoreWindows" = "none";
 
             "telemetry.telemetryLevel" = "off";
             "security.workspace.trust.untrustedFiles" = "open";
@@ -54,8 +56,8 @@
             "explorer.confirmDragAndDrop" = false;
 
             "editor.codeActionsOnSave" = {
-              "source.organizeImports" = true;
-              "source.fixAll.ruff" = true;
+              "source.sortImports" = "explicit";
+              "source.fixAll.ruff" = "explicit";
             };
             "editor.formatOnSave" = true;
             "editor.formatOnType" = false;
