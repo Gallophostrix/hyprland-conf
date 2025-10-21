@@ -27,7 +27,7 @@
             shuffle # shuffle+ (special characters are sanitized out of ext names)
             keyboardShortcut # vimium-like navigation
             copyLyrics # copy lyrics with selection
-            simpleBeautifulLyrics
+            beautiful-lyrics
             # autoVolume
             # showQueueDuration
             # fullAppDisplay

@@ -130,15 +130,18 @@
         alias tms "tmux attach -t (tmux ls -F '#{session_name}: #{session_path} (#{session_windows} windows)' | fzf | cut -d: -f1)"
 
         # --- Universal vars (colors, pager, prompt), set-once/idempotent ---
-        function __ensure_uvar --argument-names name value
+        function __ensure_uvar
+          set -l name $argv[1]
+          set -e argv[1]
           if not set -q $name
-            set -U $name $value
+            # Stocke toutes les valeurs restantes comme liste
+            set -U $name $argv
           end
         end
 
         __ensure_uvar __fish_initialized 3400
         __ensure_uvar fish_color_autosuggestion 969896
-        __ensure_uvar fish_color_cancel '--reverse'
+        __ensure_uvar fish_color_cancel --reverse
         __ensure_uvar fish_color_command b294bb
         __ensure_uvar fish_color_comment f0c674
         __ensure_uvar fish_color_cwd green
@@ -146,33 +149,33 @@
         __ensure_uvar fish_color_end b294bb
         __ensure_uvar fish_color_error cc6666
         __ensure_uvar fish_color_escape 00a6b2
-        __ensure_uvar fish_color_history_current '--bold'
-        __ensure_uvar fish_color_host '--bold'
-        __ensure_uvar fish_color_host_remote '--bold\x1eyellow'
+        __ensure_uvar fish_color_history_current --bold
+        __ensure_uvar fish_color_host --bold
+        __ensure_uvar fish_color_host_remote --bold yellow
         __ensure_uvar fish_color_keyword b294bb
-        __ensure_uvar fish_color_match '--background=brblue'
+        __ensure_uvar fish_color_match --background=brblue
         __ensure_uvar fish_color_normal normal
         __ensure_uvar fish_color_operator 00a6b2
         __ensure_uvar fish_color_option 81a2be
         __ensure_uvar fish_color_param 81a2be
         __ensure_uvar fish_color_quote b5bd68
         __ensure_uvar fish_color_redirection 8abeb7
-        __ensure_uvar fish_color_search_match 'bryellow\x1e--background=brblack'
-        __ensure_uvar fish_color_selection 'white\x1e--bold\x1e--background=brblack'
+        __ensure_uvar fish_color_search_match bryellow --background=brblack
+        __ensure_uvar fish_color_selection white --bold --background=brblack
         __ensure_uvar fish_color_status red
-        __ensure_uvar fish_color_user '--bold\x1egreen'
-        __ensure_uvar fish_color_valid_path '--underline'
+        __ensure_uvar fish_color_user --bold green
+        __ensure_uvar fish_color_valid_path --underline
         __ensure_uvar fish_key_bindings fish_default_key_bindings
         __ensure_uvar fish_pager_color_background ""
         __ensure_uvar fish_pager_color_completion normal
         __ensure_uvar fish_pager_color_description B3A06D
-        __ensure_uvar fish_pager_color_prefix 'normal\x1e--bold\x1e--underline'
-        __ensure_uvar fish_pager_color_progress 'brwhite\x1e--background=cyan'
+        __ensure_uvar fish_pager_color_prefix normal --bold --underline
+        __ensure_uvar fish_pager_color_progress brwhite --background=cyan
         __ensure_uvar fish_pager_color_secondary_background ""
         __ensure_uvar fish_pager_color_secondary_completion ""
         __ensure_uvar fish_pager_color_secondary_description ""
         __ensure_uvar fish_pager_color_secondary_prefix ""
-        __ensure_uvar fish_pager_color_selected_background '--background=brblack'
+        __ensure_uvar fish_pager_color_selected_background --background=brblack
         __ensure_uvar fish_pager_color_selected_completion ""
         __ensure_uvar fish_pager_color_selected_description ""
         __ensure_uvar fish_pager_color_selected_prefix ""
