@@ -10,7 +10,8 @@
   defaultWallpaper = "kurzgesagt.webp"; # to change wallpaper: SUPER + SHIFT + W
   hyprlockWallpaper = "evening-sky.webp"; # See modules/themes/wallpapers for options
   shell = "fish";
-  games = true; # Whether to enable the gaming module
+  games = false; # Whether to enable the gaming module
+  data = true; # Whether to import a data partition
 
   # Hardware Configuration
   videoDriver = "msi-setup"; # CRITICAL: Choose your GPU driver (nvidia, amdgpu, intel, or self-configured)

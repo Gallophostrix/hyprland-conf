@@ -10,6 +10,6 @@ in {
   ];
 
   security.pki.certificates =
-    lib.optional (builtins.pathExists "/etc/CA/rootCA.pem")
-    (builtins.readFile "/etc/CA/rootCA.pem");
+    lib.optional (builtins.pathExists "/etc/ssl/private/piCA.crt")
+    (builtins.readFile "/etc/ssl/private/piCA.crt");
 }
