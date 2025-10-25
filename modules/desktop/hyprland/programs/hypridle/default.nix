@@ -31,11 +31,13 @@
               on-resume = "hyprctl dispatch dpms on";
             }
             */
-            # Suspending PC
+            /*
+            # Suspending PC (not working on MSI)
             {
               timeout = 600; # 10 Minutes
               on-timeout = "systemctl suspend";
             }
+            */
           ];
         };
       };

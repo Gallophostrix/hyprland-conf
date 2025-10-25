@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   # Services to start
   services = {
     libinput.enable = true; # Input Handling
@@ -29,6 +29,14 @@
     blueman.enable = true; # Bluetooth Support
     tumbler.enable = true; # Image/video preview
     gnome.gnome-keyring.enable = true;
+
+    fprintd = {
+      enable = true;
+      tod = {
+        enable = true;
+        driver = pkgs.libfprint-2-tod1-goodix;
+      };
+    };
 
     pulseaudio.enable = false;
     pipewire = {
