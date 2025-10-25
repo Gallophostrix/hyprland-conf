@@ -1,8 +1,10 @@
-{ host, pkgs, ... }:
-let
-  inherit (import ../../../../../hosts/${host}/variables.nix) clock24h;
-in
 {
+  host,
+  pkgs,
+  ...
+}: let
+  inherit (import ../../../../../hosts/${host}/variables.nix) clock24h;
+in {
   home-manager.sharedModules = [
     (_: {
       programs.waybar = {
@@ -198,8 +200,15 @@ in
             };
 
             "clock" = {
-              format = if clock24h == true then "{:%a %d %b %R}" else "{:%a %d %b %I:%M %p}";
-              format-alt = if clock24h == true then "{:%a %d %b %I:%M %p}" else "{:%a %d %b %R}";
+              locale = "fr_FR.UTF-8";
+              format =
+                if clock24h == true
+                then "{:%a %d %b %R}"
+                else "{:%a %d %b %I:%M %p}";
+              format-alt =
+                if clock24h == true
+                then "{:%a %d %b %I:%M %p}"
+                else "{:%a %d %b %R}";
               # format = "{:%a %d %b %R}";
               # format = "{:%R 󰃭 %d·%m·%y}"; # Inverted
               # format-alt = "{:%I:%M %p}";

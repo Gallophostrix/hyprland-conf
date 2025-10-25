@@ -8,10 +8,11 @@ pkgs.writeShellScriptBin "rebuild" ''
   set -euo pipefail
 
   # --- Colors & helpers ---
-  RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
-  info()  { printf "\n%s%s%s\n" "$GREEN" "$1" "$NC"; }
-  warn()  { printf "%s%s%s\n" "$YELLOW" "$1" "$NC"; }
-  error() { printf "%sError: %s%s\n" "$RED" "$1" "$NC" >&2; }
+  RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m\033[K'
+  info()  { printf "\n%b%s%b\n" "$GREEN" "$1" "$NC"; }
+  warn()  { printf "%b%s%b\n" "$YELLOW" "$1" "$NC"; }
+  error() { printf "%bError: %s%b\n" "$RED" "$1" "$NC" >&2; }
+
 
   # --- No root ---
   if [ "$(id -u)" -eq 0 ]; then
@@ -49,25 +50,12 @@ pkgs.writeShellScriptBin "rebuild" ''
     warn "No variables.nix for host ${host}; skipping username sync."
   fi
 
-  # --- Refresh hardware-configuration.nix ---
-  hw_out="$flake/hosts/${host}/hardware-configuration.nix"
-  if [ -f "/etc/nixos/hardware-configuration.nix" ]; then
-    sudo tee "$hw_out" >/dev/null < /etc/nixos/hardware-configuration.nix
-  else
-    sudo nixos-generate-config --show-hardware-config | sudo tee "$hw_out" >/dev/null
-  fi
-
-  # --- Git add if flake is a git repo ---
-  if command -v git >/dev/null 2>&1 && git -C "$flake" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    sudo git -C "$flake" add "hosts/${host}/hardware-configuration.nix"
-  fi
-
   # --- Switch ---
   sudo nixos-rebuild switch --flake "$flake#${host}"
 
   # --- Pause ---
-  printf "%sPress any key to continue%s" "$GREEN" "$NC"
+  printf '%b%s%b' "$GREEN" "Press any key to continue" "$NC"
   # shellcheck disable=SC2162
   read -rsn1 _ || true
-  printf "\n"
+  printf '\n'
 ''

@@ -22,7 +22,7 @@ in {
     ./programs/hypridle
     ./programs/hyprlock
     ./programs/swaync
-    # ./programs/dunst
+    ./programs/dunst
   ];
 
   nix.settings = {
@@ -350,11 +350,11 @@ in {
               "$mainMod, up, movefocus, u"
               "$mainMod, down, movefocus, d"
 
-              # Move active window around current workspace with mainMod + SHIFT + CTRL [←→↑↓]
-              "$mainMod SHIFT CTRL, left, movewindow, l"
-              "$mainMod SHIFT CTRL, right, movewindow, r"
-              "$mainMod SHIFT CTRL, up, movewindow, u"
-              "$mainMod SHIFT CTRL, down, movewindow, d"
+              # Move active window around current workspace with mainMod + CTRL [←→↑↓]
+              "$mainMod CTRL, left, movewindow, l"
+              "$mainMod CTRL, right, movewindow, r"
+              "$mainMod CTRL, up, movewindow, u"
+              "$mainMod CTRL, down, movewindow, d"
 
               # NumPad workspaces
               "$mainMod,       code:87, workspace, 1"
@@ -388,15 +388,8 @@ in {
               "$mainMod SHIFT, code:90, movetoworkspace, 10"
               "$mainMod CTRL,  code:90, movetoworkspacesilent, 10"
 
-              # Move to the first empty workspace instantly with mainMod + CTRL + [↓]
-              "$mainMod CTRL, down, workspace, empty"
-
-              # Switch workspaces relative to the active workspace with mainMod + CTRL + [←→]
-              "$mainMod CTRL, right, exec, workspace, r+1"
-              "$mainMod CTRL, left,  exec, workspace, r-1"
-              # Move active window to a relative workspace with mainMod + CTRL + [←→]
-              "$mainMod CTRL, right, movetoworkspace, r+1"
-              "$mainMod CTRL, left, movetoworkspace, r-1"
+              # Move to the first empty workspace instantly with mainMod + ALT + [↓]
+              "$mainMod ALT, down, workspace, empty"
 
               # Move active window around current workspace with mainMod + SHIFT + CTRL [HLJK]
               # "$mainMod SHIFT CTRL, H, movewindow, l"
@@ -434,7 +427,7 @@ in {
               "$mainMod, D, exec, $fileManager"
               "$mainMod, C, exec, $editor"
               "$mainMod, B, exec, $browser"
-              "$mainMod SHIFT, S, exec, spotify"
+              "$mainMod, M, exec, spotify"
               "$mainMod SHIFT, Y, exec, youtube-music"
               "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
               "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
@@ -451,7 +444,7 @@ in {
               "$mainMod, less, exec, swaync-client -t -sw" # swayNC panel
               "$mainMod CTRL, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
               "$mainMod, V, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
-              "$mainMod, M, exec, ${./scripts/rofimusic.sh}" # online music
+              "$mainMod SHIFT, M, exec, ${./scripts/rofimusic.sh}" # online music
 
               # Screenshot/Screencapture
               "$mainMod SHIFT, R, exec, ${./scripts/screen-record.sh} a" # Screen Record (area select)
