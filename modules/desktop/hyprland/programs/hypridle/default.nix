@@ -12,6 +12,14 @@
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };
           listener = [
+            # Reducing screen brightness
+            {
+              timeout = 240; # 4 Minutes
+              on-timeout = "brightnessctl -s set 10";
+              on-resume = "brightnessctl -r ";
+            }
+
+            # Locking session
             {
               timeout = 300; # 5 Minutes
               on-timeout = "loginctl lock-session";
@@ -23,12 +31,11 @@
               on-resume = "hyprctl dispatch dpms on";
             }
             */
-            /*
+            # Suspending PC
             {
-              timeout = 600; # 10m
+              timeout = 600; # 10 Minutes
               on-timeout = "systemctl suspend";
             }
-            */
           ];
         };
       };
