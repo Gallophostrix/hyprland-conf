@@ -8,15 +8,15 @@
             ignore_dbus_inhibit = false;
             lock_cmd = "pidof hyprlock || hyprlock";
             unlock_cmd = "pkill --signal SIGUSR1 hyprlock";
-            before_sleep_cmd = "loginctl lock-session";
-            after_sleep_cmd = "hyprctl dispatch dpms on";
+            # before_sleep_cmd = "loginctl lock-session";
+            # after_sleep_cmd = "hyprctl dispatch dpms on";
           };
           listener = [
             # Reducing screen brightness
             {
               timeout = 240; # 4 Minutes
-              on-timeout = "brightnessctl -s set 10";
-              on-resume = "brightnessctl -r ";
+              on-timeout = "brightnessctl -d intel_backlight -s set 10";
+              on-resume = "brightnessctl -d intel_backlight -r";
             }
 
             # Locking session
