@@ -52,5 +52,12 @@ in {
       mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
+
+    extraModprobeConfig = ''
+      options iwlwifi power_save=0
+      options iwlwifi uapsd_disable=1
+      options iwlwifi enable_ini=0
+      options iwlwifi disable_rtpm=1
+    '';
   };
 }
