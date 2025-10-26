@@ -19,6 +19,7 @@ in {
     ./programs/waybar
     ./programs/wlogout
     ./programs/rofi
+    ./programs/hyprcursor
     ./programs/hypridle
     ./programs/hyprlock
     ./programs/hyprsunset
@@ -157,6 +158,10 @@ in {
               "WLR_RENDERER_ALLOW_SOFTWARE,1"
               "LIBVA_DRIVER_NAME,iHD"
               "__GLX_VENDOR_LIBRARY_NAME,mesa"
+              "HYPRCURSOR_THEME,Bibata-Modern-Classic"
+              "HYPRCURSOR_SIZE,26"
+              "XCURSOR_THEME,Bibata-Modern-Classic"
+              "XCURSOR_SIZE,26"
             ];
 
             # ---- XWayland ----
@@ -186,10 +191,6 @@ in {
 
               sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
               force_no_accel = false;
-            };
-
-            cursor = {
-              enable_hyprcursor = true;
             };
 
             # ---- General configs ----
