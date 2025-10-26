@@ -21,8 +21,9 @@ in {
     ./programs/rofi
     ./programs/hypridle
     ./programs/hyprlock
+    ./programs/hyprsunset
     ./programs/swaync
-    ./programs/dunst
+    # ./programs/dunst
   ];
 
   nix.settings = {
@@ -92,7 +93,8 @@ in {
           wf-recorder
           grimblast
           slurp
-          swappy
+          imv
+          # swappy ### à modifier
           libnotify
           brightnessctl
           networkmanagerapplet
@@ -102,6 +104,7 @@ in {
           waybar
           wtype
           wl-clipboard
+          zathura
           xdotool
           yad
           # socat # for and autowaybar.sh
@@ -477,7 +480,7 @@ in {
               # Visuals
 
               # Night Mode (lower value means warmer temp)
-              "$mainMod, F9, exec, ${getExe pkgs.hyprsunset} --temperature 3500" # good values: 3500, 3000, 2500
+              "$mainMod, F9, exec, hyprsunset --temperature 3500" # good values: 3500, 3000, 2500
               "$mainMod, F10, exec, pkill hyprsunset"
             ];
             bindm = [
