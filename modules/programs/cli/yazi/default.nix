@@ -1,6 +1,8 @@
-{...}: {
+{inputs, ...}: {
   home-manager.sharedModules = [
     (_: {
+      xdg.configFile."yazi/flavors/catppuccin-mocha.yazi".source = "${inputs.yazi-flavors}/catppuccin-mocha.yazi";
+
       programs.yazi = {
         enable = true;
         enableBashIntegration = true;
@@ -134,12 +136,11 @@
           ];
         };
         theme = {
+          flavor.dark = "catppuccin-mocha";
+          flavor.light = "catppuccin-mocha";
+
           mgr = {
             border_symbol = " ";
-          };
-          status = {
-            separator_open = "";
-            separator_close = "";
           };
         };
       };
