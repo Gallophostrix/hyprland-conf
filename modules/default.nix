@@ -9,8 +9,7 @@ in {
     [
       # Core Modules (Don't change unless you know what you're doing)
       ./scripts
-      .core/boot/default.nix
-      # ./core/boot.nix
+      ./core/boot/default.nix
       ./core/bash.nix
       ./core/fish.nix
       ./core/fonts.nix
@@ -44,12 +43,13 @@ in {
       # ./programs/cli/btop
       # ./programs/media/discord
       ./programs/media/spicetify
+      ./programs/media/imv
       # ./programs/media/youtube-music
       # ./programs/media/thunderbird
       # ./programs/media/proton-mail  # Not working
       # ./programs/media/obs-studio
       ./programs/media/mpv
-      # ./programs/misc/tlp
+      ./programs/misc/tlp
       ./programs/misc/thunar
       # ./programs/misc/lact # GPU fan, clock and power configuration
     ]
