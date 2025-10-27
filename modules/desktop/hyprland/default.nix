@@ -94,7 +94,6 @@ in {
           wf-recorder
           grimblast
           slurp
-          imv
           # swappy ### à modifier
           libnotify
           brightnessctl
@@ -105,7 +104,6 @@ in {
           waybar
           wtype
           wl-clipboard
-          zathura
           xdotool
           yad
           # socat # for and autowaybar.sh

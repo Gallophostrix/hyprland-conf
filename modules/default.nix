@@ -44,11 +44,12 @@ in {
       # ./programs/media/discord
       ./programs/media/spicetify
       ./programs/media/imv
+      ./programs/media/mpv
+      ./programs/media/zathura
       # ./programs/media/youtube-music
       # ./programs/media/thunderbird
       # ./programs/media/proton-mail  # Not working
       # ./programs/media/obs-studio
-      ./programs/media/mpv
       ./programs/misc/tlp
       ./programs/misc/thunar
       # ./programs/misc/lact # GPU fan, clock and power configuration
