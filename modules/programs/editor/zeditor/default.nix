@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   home-manager.sharedModules = [
     (_: {
       programs.zed-editor = {
@@ -7,11 +10,11 @@
 
         extensions = [
           "nix"
-          "python"
-          "rust-analyzer"
           "yaml"
           "toml"
-          "markdown"
+          "markdownlint"
+          "catppuccin"
+          "catppuccin-icons"
         ];
 
         installRemoteServer = true;
@@ -19,9 +22,6 @@
         extraPackages = with pkgs; [
           nil
           alejandra
-          rust-analyzer
-          python312Packages.python-lsp-server
-          nodejs
         ];
 
         userSettings = {
@@ -34,13 +34,21 @@
             light = "Catppuccin Latte";
             dark = "Catppuccin Mocha";
           };
+          icon_theme = {
+            mode = "system";
+            light = "Catppuccin Latte";
+            dark = "Catppuccin Mocha";
+          };
 
-          telemetry = false;
-          hour_format = "hour24";
-          auto_update = false;
+          telemetry = {
+            diagnostics = true;
+            metrics = true;
+          };
+          auto_update = true;
           show_whitespaces = "none";
-          ui_font_size = 15;
-          buffer_font_size = 15;
+          ui_font_size = 14;
+          buffer_font_size = 13;
+          buffer_font_family = "JetBrainsMono Nerd Font";
 
           terminal = {
             dock = "bottom";
@@ -51,36 +59,33 @@
           };
 
           lsp = {
-            nixd.binary.path_lookup = true;
-            "rust-analyzer".binary.path_lookup = true; # clé avec tiret → guillemets
-            "python-lsp-server".binary.path_lookup = true; # idem
+            nil = {
+              settings = {
+                nix = {
+                  flake = {
+                    autoArchive = true;
+                  };
+                };
+                formatting = {
+                  command = ["alejandra"];
+                };
+              };
+            };
+            "rust-analyzer" = {};
+            "python-lsp-server" = {};
           };
 
-          assistant = {
+          hour_format = "hour24";
+
+          agent = {
             enabled = true;
-            version = "2";
             default_model = {
               provider = "zed.dev";
               model = "claude-3-5-sonnet-latest";
             };
           };
         };
-
       };
-
-      # Génère ~/.config/zed/keymap.json (format Zed)
-      xdg.configFile."zed/keymap.json".text = builtins.toJSON [
-        {
-          bindings = {
-          };
-        }
-        {
-          context = "Editor";
-          bindings = {
-            "ctrl-/" = "editor::ToggleComments";
-          };
-        }
-      ];
 
       programs.ssh.enable = true;
     })

@@ -9,6 +9,7 @@ let
     browser
     terminal
     tuiFileManager
+    editor
     kbdLayout
     kbdVariant
     defaultWallpaper
@@ -143,7 +144,7 @@ in
             settings = {
               "$mainMod" = "SUPER";
               "$term" = "${getExe pkgs.${terminal}}";
-              "$editor" = "codium --ozone-platform-hint=auto --enable-features=WaylandWindowDecorations";
+              "$editor" = "${editor}";
               "$fileManager" = "$term --class \"tuiFileManager\" -e ${tuiFileManager}";
               "$browser" = browser;
               "$CONTROL" = "CTRL";
