@@ -13,8 +13,8 @@ fi
 # }
 get_nix_value() {
     awk '
-    /settings = {/ {inside_settings=1; next} 
-    inside_settings && /}/ {inside_settings=0} 
+    /settings = {/ {inside_settings=1; next}
+    inside_settings && /}/ {inside_settings=0}
     inside_settings && $0 ~ key {print gensub(/.*"([^"]+)".*/, "\\1", "g", $0)}
     ' key="$1" "$HOME/nixcfg/flake.nix"
 }

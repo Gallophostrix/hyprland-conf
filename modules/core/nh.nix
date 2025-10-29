@@ -1,6 +1,8 @@
-{host, ...}: let
+{ host, ... }:
+let
   inherit (import ../../hosts/${host}/variables.nix) username;
-in {
+in
+{
   programs.nh = {
     enable = true;
     clean = {

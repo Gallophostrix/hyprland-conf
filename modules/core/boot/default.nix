@@ -1,6 +1,8 @@
-{pkgs, ...}: let
-  themePath = import ./themes/xenlism.nix {inherit pkgs;};
-in {
+{ pkgs, ... }:
+let
+  themePath = import ./themes/xenlism.nix { inherit pkgs; };
+in
+{
   boot = {
     # Filesystems support
     supportedFilesystems = [

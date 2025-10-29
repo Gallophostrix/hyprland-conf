@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   home-manager.sharedModules = [
     (_: {
       programs.starship = {
@@ -14,13 +15,13 @@
             # style = "bold italic bright-blue";
           };
           /*
-             username = {
-            style_user = "green bold";
-            style_root = "red bold";
-            format = "[$user]($style)";
-            disabled = false;
-            show_always = true;
-          };
+               username = {
+              style_user = "green bold";
+              style_root = "red bold";
+              format = "[$user]($style)";
+              disabled = false;
+              show_always = true;
+            };
           */
           character = {
             success_symbol = "[❯](#FF6AC1)";

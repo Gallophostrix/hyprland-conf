@@ -42,4 +42,3 @@ d)  # decrease the backlight by 5%
 *)  # print error
     print_error ;;
 esac
-

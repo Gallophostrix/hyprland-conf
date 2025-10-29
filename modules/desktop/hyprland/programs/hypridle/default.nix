@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   home-manager.sharedModules = [
     (_: {
       services.hypridle = {
@@ -25,18 +26,18 @@
               on-timeout = "loginctl lock-session";
             }
             /*
-            {
-              timeout = 360; # 6 Minutes
-              on-timeout = "hyprctl dispatch dpms off";
-              on-resume = "hyprctl dispatch dpms on";
-            }
+              {
+                timeout = 360; # 6 Minutes
+                on-timeout = "hyprctl dispatch dpms off";
+                on-resume = "hyprctl dispatch dpms on";
+              }
             */
             /*
-            # Suspending PC (not working on MSI)
-            {
-              timeout = 600; # 10 Minutes
-              on-timeout = "systemctl suspend";
-            }
+              # Suspending PC (not working on MSI)
+              {
+                timeout = 600; # 10 Minutes
+                on-timeout = "systemctl suspend";
+              }
             */
           ];
         };

@@ -2,8 +2,10 @@
   pkgs,
   lib,
   ...
-}: {
-  nixpkgs.config.allowUnfreePredicate = pkg:
+}:
+{
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "steam"
       "steam-original"
@@ -30,7 +32,7 @@
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       gamescopeSession.enable = true;
-      extraCompatPackages = [pkgs.proton-ge-bin];
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
     };
     gamescope = {
       enable = true;

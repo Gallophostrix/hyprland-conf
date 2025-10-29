@@ -3,7 +3,7 @@
   username = "mik"; # Your username
   desktop = "hyprland";
   terminal = "alacritty";
-  editor = "vscodium";
+  editor = "zeditor";
   browser = "brave";
   tuiFileManager = "yazi";
   sddmTheme = "black_hole"; # Options: astronaut, black_hole, purple_leaves, jake_the_do>

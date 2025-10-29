@@ -2,10 +2,12 @@
   self,
   pkgs,
   ...
-}: {
+}:
+{
   home-manager.sharedModules = [
     (
-      {...}: {
+      { ... }:
+      {
         programs.bash = {
           enable = true;
           enableCompletion = true;

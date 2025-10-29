@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # TODO: review
   programs = {
     fuse.userAllowOther = true;

@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home-manager.sharedModules = [
     (_: {
       programs.vscode = {
@@ -112,12 +113,24 @@
             # "gitlens.hovers.annotations.changes" = false;
             # "gitlens.hovers.avatars" = false;
 
-            "[javascript]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
-            "[typescript]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
-            "[json]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
-            "[html]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
-            "[css]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
-            "[markdown]" = {"editor.defaultFormatter" = "esbenp.prettier-vscode";};
+            "[javascript]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+            "[typescript]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+            "[json]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+            "[html]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+            "[css]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
+            "[markdown]" = {
+              "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            };
 
             # --- Language config ---
             "[python]" = {
@@ -142,7 +155,7 @@
             "nix.serverSettings" = {
               "nixd" = {
                 "formatting" = {
-                  "command" = ["alejandra"];
+                  "command" = [ "alejandra" ];
                 };
               };
             };
@@ -151,7 +164,9 @@
             "markdown.extension.list.indentationSize" = "inherit";
             "markdown.preview.doubleClickToSwitchToEditor" = false;
 
-            "[toml]" = {"editor.defaultFormatter" = "tamasfe.even-better-toml";};
+            "[toml]" = {
+              "editor.defaultFormatter" = "tamasfe.even-better-toml";
+            };
             "evenBetterToml.formatter.alignEntries" = true;
           };
         };

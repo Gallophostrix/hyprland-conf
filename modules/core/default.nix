@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./boot/default.nix
     # ./boot.nix

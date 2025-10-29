@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   # Only enable either docker or podman -- Not both
   virtualisation = {
     spiceUSBRedirection.enable = true;
@@ -20,7 +21,7 @@
         swtpm.enable = true;
         ovmf = {
           enable = true;
-          packages = [pkgs.OVMFFull.fd];
+          packages = [ pkgs.OVMFFull.fd ];
         };
       };
       hooks.qemu = {

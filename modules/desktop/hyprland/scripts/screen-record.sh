@@ -1,49 +1,30 @@
 #!/usr/bin/env bash
+set -Eeuo pipefail
 
 XDG_VIDEOS_DIR="${XDG_VIDEOS_DIR:-$HOME/Videos}"
 DIR="${XDG_VIDEOS_DIR}/screen-record"
+mkdir -p "$DIR"
 
-# Create output dir if it doesn't exist.
-mkdir -p $DIR
+need() { command -v "$1" >/dev/null 2>&1 || { echo "$1 not found"; exit 1; }; }
+need wf-recorder
+need slurp
+command -v notify-send >/dev/null || true
 
-command -v wf-recorder >/dev/null 2>&1 || {
-  echo "wf-recorder not found"
-  exit 1
-}
-command -v slurp >/dev/null 2>&1 || {
-  echo "slurp not found"
-  exit 1
-}
-command -v notify-send >/dev/null 2>&1 || {
-  echo "notify-send not found"
-  exit 1
-}
+ts="$(date +'%Y%m%d_%H%M%S')"
+OUT="$DIR/record_${ts}.mp4"
 
-print_error() {
-  cat <<EOF
-Usage: $(basename "$0") <action>
-Valid actions:
-  a  : Select area
-  m  : Select monitor
-EOF
-  exit 1
-}
-
-# Generate a timestamp
-timestamp=$(date +"%Y%m%d_%Hh%Mm%Ss")
-
+# Toggle stop
 if pidof wf-recorder >/dev/null; then
   pkill wf-recorder
-  notify-send -e -t 2500 -u low "Recording Finished" \
-    "Saved to $DIR/recording_${timestamp}.mp4"
+  notify-send -e -t 2000 -u low "Recording Finished" "Saved to $OUT" || true
   exit 0
 fi
 
-case "$1" in
-a) REGION=$(slurp) ;;
-m) REGION=$(slurp -o) ;;
-*) print_error ;;
+case "${1:-}" in
+  a) region="$(slurp)"   ;;
+  m) region="$(slurp -o)";;
+  *) echo "Usage: $(basename "$0") a|m (area|monitor)"; exit 1 ;;
 esac
 
-# Start recording with wf-recorder and save to a file with the timestamp
-wf-recorder --audio -g "$REGION && $(notify-send -e -t 2500 -u low "Recording Started")" -f "$DIR/recording_${timestamp}.mp4"
+notify-send -e -t 1500 -u low "Recording Started" || true
+wf-recorder --audio -g "$region" -f "$OUT"

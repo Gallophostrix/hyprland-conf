@@ -3,10 +3,11 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   # Use NVIDIA driver (required to make the dGPU available for offloading).
   # The Intel iGPU (i915) is present anyway; Wayland compositors use it without X.org drivers.
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     open = true; # Open kernel modules (fine for RTX 4060)
@@ -47,7 +48,8 @@
   # environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
 
   # Keep unfree to the minimal NVIDIA bits you actually use.
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "nvidia-x11"
       "nvidia-settings"

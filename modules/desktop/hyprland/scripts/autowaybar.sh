@@ -6,10 +6,10 @@ UID=$(id -u)
 check_workspace_empty() {
     # Get active workspace ID
     active_workspace=$(hyprctl activeworkspace -j | jq '.id')
-    
+
     # Get all clients (windows) in the active workspace
     clients=$(hyprctl clients -j | jq "[.[] | select(.workspace.id == $active_workspace)]")
-    
+
     # Return 0 if empty, 1 if windows present
     [ "$(echo "$clients" | jq 'length')" -eq 0 ]
 }

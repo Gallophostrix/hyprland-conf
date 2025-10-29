@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # Services to start
   services = {
     libinput.enable = true; # Input Handling
@@ -16,7 +17,7 @@
 
     openssh = {
       enable = true;
-      ports = [22];
+      ports = [ 22 ];
       settings = {
         PasswordAuthentication = true;
         KbdInteractiveAuthentication = true;
@@ -51,7 +52,7 @@
           "51-bluetooth-policy.conf" = {
             "monitor.bluez.rules" = [
               {
-                matches = [{"device.name" = "~bluez_card.*";}];
+                matches = [ { "device.name" = "~bluez_card.*"; } ];
                 actions = {
                   "update-props" = {
                     "bluez5.enable-msbc" = true;

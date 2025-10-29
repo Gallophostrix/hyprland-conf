@@ -40,45 +40,52 @@
   };
 
   # flake.nix (outputs section)
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  }: let
-    inherit (nixpkgs.lib) genAttrs;
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    let
+      inherit (nixpkgs.lib) genAttrs;
 
-    systems = ["x86_64-linux" "aarch64-linux"];
-    forAllSystems = genAttrs systems;
-    pkgsFor = system: import nixpkgs {inherit system;};
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      forAllSystems = genAttrs systems;
+      pkgsFor = system: import nixpkgs { inherit system; };
 
-    # Helper to create NixOS hosts
-    mkHost = host: system:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          # Use ONE of these depending on your structure:
-          ./hosts/${host}/configuration.nix # (folder-based)
+      # Helper to create NixOS hosts
+      mkHost =
+        host: system:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            # Use ONE of these depending on your structure:
+            ./hosts/${host}/configuration.nix # (folder-based)
 
-          # Optional: enable Hyprland flake module
-          # hyprland.nixosModules.default
-        ];
+            # Optional: enable Hyprland flake module
+            # hyprland.nixosModules.default
+          ];
 
-        specialArgs = {
-          overlays = import ./overlays {inherit inputs host;};
-          inherit self inputs host;
+          specialArgs = {
+            overlays = import ./overlays { inherit inputs host; };
+            inherit self inputs host;
+          };
         };
+    in
+    {
+      # Dev environment templates
+      templates = import ./dev-shells;
+
+      # Formatter per system
+      formatter = forAllSystems (system: (pkgsFor system).nixfmt-tree);
+
+      # NixOS host definitions
+      nixosConfigurations = {
+        MSInix = mkHost "MSInix" "x86_64-linux";
       };
-  in {
-    # Dev environment templates
-    templates = import ./dev-shells;
-
-    # Formatter per system
-    formatter = forAllSystems (system: (pkgsFor system).nixfmt-tree);
-
-    # NixOS host definitions
-    nixosConfigurations = {
-      MSInix = mkHost "MSInix" "x86_64-linux";
     };
-  };
 }
