@@ -80,8 +80,8 @@
           agent = {
             enabled = true;
             default_model = {
-              provider = "zed.dev";
-              model = "claude-3-5-sonnet-latest";
+              provider = "OpenAI";
+              model = "gpt-5";
             };
           };
         };
