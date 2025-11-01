@@ -1,36 +1,31 @@
 {
   pkgs,
   lib,
-  host,
   config,
+  hostVars,
   ...
-}:
-let
-  inherit (import ../../hosts/${host}/variables.nix) terminal;
-in
-let
-  # Define your custom args once
+}: let
+  terminal = hostVars.terminal;
+  hostName = hostVars.host;
+
+  # Common args passed to each script builder
   scriptArgs = {
-    inherit
-      host
-      pkgs
-      lib
-      config
-      terminal
-      ;
+    inherit pkgs lib config terminal;
+    host = hostName;
   };
 
+  importScript = path: import path scriptArgs;
+
   scripts = [
-    (import ./rebuild.nix scriptArgs)
-    (import ./rollback.nix scriptArgs)
-    (import ./launcher.nix scriptArgs)
-    (import ./tmux-sessionizer.nix scriptArgs)
-    (import ./extract.nix scriptArgs)
-    (import ./driverinfo.nix scriptArgs)
-    (import ./underwatt.nix scriptArgs)
-    # Add new scripts here as you create them
+    (importScript ./rebuild.nix)
+    (importScript ./rollback.nix)
+    (importScript ./launcher.nix)
+    (importScript ./tmux-sessionizer.nix)
+    (importScript ./extract.nix)
+    (importScript ./driverinfo.nix)
+    (importScript ./underwatt.nix)
+    # add more here
   ];
-in
-{
+in {
   environment.systemPackages = scripts;
 }

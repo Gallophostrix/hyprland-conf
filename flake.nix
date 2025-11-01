@@ -17,21 +17,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nur.url = "github:nix-community/NUR";
 
-    thunderbird-catppuccin = {
-      url = "github:catppuccin/thunderbird";
-      flake = false;
-    };
+    # thunderbird-catppuccin = {
+    #   url = "github:catppuccin/thunderbird";
+    #   flake = false;
+    # };
 
     yazi-flavors = {
       url = "github:yazi-rs/flavors";
@@ -40,52 +36,82 @@
   };
 
   # flake.nix (outputs section)
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }:
-    let
-      inherit (nixpkgs.lib) genAttrs;
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    nix-index-database,
+    nix-flatpak,
+    nur,
+    ...
+  }: let
+    inherit (nixpkgs.lib) genAttrs;
 
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-      forAllSystems = genAttrs systems;
-      pkgsFor = system: import nixpkgs { inherit system; };
+    systems = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    forAllSystems = genAttrs systems;
+    pkgsFor = system: import nixpkgs {inherit system;};
 
-      # Helper to create NixOS hosts
-      mkHost =
-        host: system:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            # Use ONE of these depending on your structure:
-            ./hosts/${host}/configuration.nix # (folder-based)
-
-            # Optional: enable Hyprland flake module
-            # hyprland.nixosModules.default
-          ];
-
-          specialArgs = {
-            overlays = import ./overlays { inherit inputs host; };
-            inherit self inputs host;
-          };
-        };
+    # Helper to create NixOS hosts
+    mkHost = host: system: let
+      hostVars = import ./hosts/${host}/variables.nix;
+      overlays =
+        if builtins.pathExists ./overlays
+        then import ./overlays {inherit inputs host;}
+        else [];
     in
-    {
-      # Dev environment templates
-      templates = import ./dev-shells;
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit self inputs host hostVars overlays;
+        };
+        modules = [
+          # Host system configuration (system-only)
+          ./hosts/${host}/configuration.nix
 
-      # Formatter per system
-      formatter = forAllSystems (system: (pkgsFor system).nixfmt-tree);
+          # Home Manager as a NixOS module
+          home-manager.nixosModules.home-manager
 
-      # NixOS host definitions
-      nixosConfigurations = {
-        MSInix = mkHost "MSInix" "x86_64-linux";
+          # Nix Index Database module
+          nix-index-database.nixosModules.nix-index
+
+          # Optional Flatpak module (can be used/ignored per host)
+          # nix-flatpak.nixosModules.nix-flatpak
+
+          # Apply overlays to nixpkgs (if any)
+          ({...}: {
+            nixpkgs.overlays = overlays;
+          })
+
+          # Glue to bind HM user and pass special args to HM
+          {
+            # Share pkgs between NixOS and HM
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            # Pass inputs/hostVars to HM modules too
+            home-manager.extraSpecialArgs = {
+              inherit self inputs host hostVars overlays;
+            };
+
+            # Bind your Home-Manager root config (aggregates your HM modules)
+            # Adjust the path if you store it elsewhere.
+            home-manager.users.${hostVars.username} = import ./home-config.nix;
+          }
+        ];
       };
+  in {
+    # Dev environment templates
+    templates = import ./dev-shells;
+
+    # Formatter per system
+    formatter = forAllSystems (system: (pkgsFor system).alejandra);
+
+    # NixOS host definitions
+    nixosConfigurations = {
+      MSInix = mkHost "MSInix" "x86_64-linux";
     };
+  };
 }

@@ -1,14 +1,11 @@
 {
   host,
   lib,
+  hostVars,
   ...
-}:
-let
-  vars = import ../../../hosts/${host}/variables.nix;
-in
-{
+}: {
   imports = [
-    ./${vars.browser}/default.nix
+    ./${hostVars.browser}/default.nix
   ];
 
   security.pki.certificates = lib.optional (builtins.pathExists "/etc/ssl/private/piCA.crt") (

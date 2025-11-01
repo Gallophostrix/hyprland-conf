@@ -1,0 +1,29 @@
+{
+  pkgs,
+  lib,
+  host,
+  hostVars,
+  ...
+}: let
+  sddm-astronaut = pkgs.sddm-astronaut.override {
+    embeddedTheme = "${hostVars.sddmTheme}";
+  };
+in {
+  environment.systemPackages = with pkgs; [
+    sddm-astronaut # Sddm Theme (Overlayed)
+    kdePackages.qtsvg # Sddm Dependency
+    kdePackages.qtmultimedia # Sddm Dependency
+    kdePackages.qtvirtualkeyboard # Sddm Dependency
+  ];
+
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+      enableHidpi = true;
+      package = lib.mkForce pkgs.kdePackages.sddm;
+      settings.Theme.CursorTheme = "Bibata-Modern-Classic";
+      theme = "sddm-astronaut-theme";
+    };
+  };
+}

@@ -6,7 +6,7 @@
   editor = "zeditor";
   browser = "brave";
   tuiFileManager = "yazi";
-  sddmTheme = "black_hole"; # Options: astronaut, black_hole, purple_leaves, jake_the_do>
+  sddmTheme = "pixel_sakura";
   defaultWallpaper = "kurzgesagt.webp"; # to change wallpaper: SUPER + SHIFT + W
   hyprlockWallpaper = "evening-sky.webp"; # See modules/themes/wallpapers for options
   shell = "fish";
