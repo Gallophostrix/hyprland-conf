@@ -15,6 +15,7 @@
           "markdownlint"
           "catppuccin"
           "catppuccin-icons"
+          "sql"
         ];
 
         installRemoteServer = true;
