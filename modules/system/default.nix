@@ -8,6 +8,7 @@
     ./devtools.nix
     # ./flatpak.nix
     ./fonts.nix
+    ./interface.nix
     ./sddm.nix
     ./security.nix
     ./system.nix

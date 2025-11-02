@@ -461,10 +461,10 @@ in {
         #"[workspace special silent] ${browser} --private-window"
         #"[workspace special silent] ${terminal}"
 
-        "sleep 1; hyprctl dispatch workspace 3"
+        "sleep 1; hyprctl dispatch workspace 2"
 
         "${lib.getExe wallpaper}"
-        "waybar"
+        "pkill -x waybar 2>/dev/null; sleep 0.2; waybar"
         "swaync"
         "nm-applet --indicator"
         "wl-clipboard-history -t"
@@ -473,7 +473,6 @@ in {
         "rm '$XDG_CACHE_HOME/cliphist/db'" # Clear clipboard
         "${./scripts/batterynotify.sh}" # battery notification
         # "${./scripts/autowaybar.sh}" # uncomment packages at the top
-        # "pamixer --set-volume 50"
       ];
 
       monitor = [

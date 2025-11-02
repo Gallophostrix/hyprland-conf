@@ -85,4 +85,13 @@
       };
     };
   };
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks."*" = {
+      hashKnownHosts = true;
+      serverAliveInterval = 60;
+      serverAliveCountMax = 3;
+    };
+  };
 }
