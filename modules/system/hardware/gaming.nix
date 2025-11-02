@@ -12,11 +12,15 @@
 
     # Graphical server for video games
     gamescope = {
-      enable = true;
+      enable = false;
       capSysNice = true;
       args = [
         "--rt"
         "--expose-wayland"
+        "-W"
+        "2560"
+        "-H"
+        "1600"
       ];
     };
   };

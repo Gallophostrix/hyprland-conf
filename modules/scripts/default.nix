@@ -3,10 +3,11 @@
   lib,
   config,
   hostVars,
+  host,
   ...
 }: let
   terminal = hostVars.terminal;
-  hostName = hostVars.host;
+  hostName = host;
 
   # Common args passed to each script builder
   scriptArgs = {

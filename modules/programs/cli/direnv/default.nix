@@ -1,10 +1,9 @@
 {...}: {
-  environment.variables."DIRENV_WARN_TIMEOUT" = "60s";
   programs.direnv = {
     enable = true;
     enableBashIntegration = true;
     enableZshIntegration = false;
-    enableFishIntegration = true;
+    # enableFishIntegration = true;
     enableNushellIntegration = false;
   };
 

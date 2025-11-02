@@ -1,21 +1,29 @@
-{ pkgs, ... }:
+# Check
 {
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin # Archive management
-      thunar-volman # Volume management (automount removable devices)
-      thunar-media-tags-plugin # Tagging & renaming feature for media files
-    ];
-  };
-  # Archive manager
-  programs.file-roller = {
-    enable = true;
-    package = pkgs.file-roller;
-  };
+  pkgs,
+  lib,
+  ...
+}: {
+  # Install Thunar and its plugins at user level
+  home.packages = with pkgs; [
+    xfce.thunar
+    xfce.thunar-archive-plugin
+    xfce.thunar-volman
+    xfce.thunar-media-tags-plugin
 
-  services = {
-    udisks2.enable = true;
-    gvfs.enable = true;
+    # Archive backends and GUI
+    file-roller # or xarchiver / engrampa
+    p7zip
+    zip
+  ];
+
+  # Optionnel : associer file-roller aux archives (MIME)
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.defaultApplications = {
+    "application/zip" = ["org.gnome.FileRoller.desktop"];
+    "application/x-7z-compressed" = ["org.gnome.FileRoller.desktop"];
+    "application/x-tar" = ["org.gnome.FileRoller.desktop"];
+    "application/x-bzip2" = ["org.gnome.FileRoller.desktop"];
+    "application/x-xz" = ["org.gnome.FileRoller.desktop"];
   };
 }

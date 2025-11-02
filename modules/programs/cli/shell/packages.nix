@@ -17,7 +17,7 @@
     jq # json formatting
     # ffmpeg # Terminal Video / Audio Editing
     tldr # better man
-    unrar # .rar handling
+    unrar-wrapper # .rar handling
     unzip # .zip handling
 
     cmatrix # matrix effect

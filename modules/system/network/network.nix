@@ -23,7 +23,4 @@
       ];
     };
   };
-
-  # check
-  environment.systemPackages = with pkgs; [networkmanagerapplet];
 }

@@ -2,7 +2,6 @@
   home.packages = with pkgs; [
     steam-run
     gamescope
-    proton-ge-bin
     wineWowPackages.staging
     protontricks
     protonup-qt

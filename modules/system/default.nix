@@ -2,11 +2,11 @@
   imports = [
     ./boot
     ./hardware
-    ./network/networking.nix
+    ./network/network.nix
     ./network/ssh.nix
     ./network/wireguard.nix
     ./devtools.nix
-    ./flatpak.nix
+    # ./flatpak.nix
     ./fonts.nix
     ./sddm.nix
     ./security.nix

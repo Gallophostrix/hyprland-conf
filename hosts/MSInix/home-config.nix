@@ -15,7 +15,7 @@ in {
     [
       ../../modules/system/hardware/video/gpu-offload.nix
 
-      ../../modules/programs/browser
+      ../../modules/programs/browser/${browser}
 
       ../../modules/programs/cli/cava
       ../../modules/programs/cli/direnv
@@ -34,9 +34,9 @@ in {
 
       ../../modules/programs/misc/thunar
 
-      ../../modules/programs/desktop-apps
+      ../../modules/programs/desktop-apps.nix
 
-      ../../modules/interface
+      ../../modules/interface/desktop/hyprland
     ]
     ++ lib.optional (hostVars.games or false)
     ../../modules/programs/media/gaming.nix;

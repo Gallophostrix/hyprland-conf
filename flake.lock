@@ -111,11 +111,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1760524057,
-        "narHash": "sha256-EVAqOteLBFmd7pKkb0+FIUyzTF61VKi7YmvP1tw4nEw=",
+        "lastModified": 1761907660,
+        "narHash": "sha256-kJ8lIZsiPOmbkJypG+B5sReDXSD1KGu2VEPNqhRa/ew=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "544961dfcce86422ba200ed9a0b00dd4b1486ec5",
+        "rev": "2fb006b87f04c4d3bdf08cfdbc7fab9c13d94a15",
         "type": "github"
       },
       "original": {
@@ -131,39 +131,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1760787870,
-        "narHash": "sha256-dplrSrGr5zZhVa4HkJivFsp78njjB6Oh7OB46rRbJBg=",
+        "lastModified": 1762091104,
+        "narHash": "sha256-ghGaBz8TtoIgAhMr2K+AZfJXix5UlWHcROcQ16DBFaA=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "a6d24e41011323f7e84293a93a420cc8e2581e3b",
+        "rev": "768c17be0fed8b3a0278f5c226fad48bbc8ce674",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "NUR",
-        "type": "github"
-      }
-    },
-    "plasma-manager": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1759321049,
-        "narHash": "sha256-8XkU4gIrLT2DJZWQyvsP5woXGZF5eE/7AnKfwQkiwYU=",
-        "owner": "nix-community",
-        "repo": "plasma-manager",
-        "rev": "205dcfd4a30d4a5d1b4f28defee69daa7c7252cd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "plasma-manager",
         "type": "github"
       }
     },
@@ -175,9 +152,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
-        "plasma-manager": "plasma-manager",
         "spicetify-nix": "spicetify-nix",
-        "thunderbird-catppuccin": "thunderbird-catppuccin",
         "yazi-flavors": "yazi-flavors"
       }
     },
@@ -214,22 +189,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "thunderbird-catppuccin": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1730465032,
-        "narHash": "sha256-07gT37m1+OhRTbUk51l0Nhx+I+tl1il5ayx2ow23APY=",
-        "owner": "catppuccin",
-        "repo": "thunderbird",
-        "rev": "0289f3bd9566f9666682f66a3355155c0d0563fc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "thunderbird",
         "type": "github"
       }
     },

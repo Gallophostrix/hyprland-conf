@@ -19,16 +19,17 @@
     # Hybrid laptop: iGPU for desktop, dGPU on demand via `nvidia-offload <cmd>`
     prime = {
       offload.enable = true;
+      offload.enableOffloadCmd = true;
       intelBusId = "PCI:0:2:0"; # from your lspci (Intel Arc iGPU)
       nvidiaBusId = "PCI:1:0:0"; # from your lspci (RTX 4060 dGPU)
     };
   };
 
   # Wayland + PRIME necessities; preserve VRAM across suspend helps on many laptops.
-  boot.kernelParams = [
-    "nvidia-drm.modeset=1"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-  ];
+  # boot.kernelParams = [
+  #   "nvidia-drm.modeset=1"
+  #   "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+  # ];
 
   # Graphics stack (32-bit for Steam/Proton). Provide both Intel & NVIDIA VA-API bits.
   hardware.graphics = {

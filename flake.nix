@@ -81,8 +81,11 @@
           # nix-flatpak.nixosModules.nix-flatpak
 
           # Apply overlays to nixpkgs (if any)
-          ({...}: {
-            nixpkgs.overlays = overlays;
+          ({lib, ...}: {
+            nixpkgs.overlays =
+              (lib.optionals (builtins.isList overlays) overlays)
+              ++ (lib.optionals (overlays ? additions) [overlays.additions])
+              ++ (lib.optionals (overlays ? modifications) [overlays.modifications]);
           })
 
           # Glue to bind HM user and pass special args to HM
@@ -98,7 +101,7 @@
 
             # Bind your Home-Manager root config (aggregates your HM modules)
             # Adjust the path if you store it elsewhere.
-            home-manager.users.${hostVars.username} = import ./home-config.nix;
+            home-manager.users.${hostVars.username} = import ./hosts/${host}/home-config.nix;
           }
         ];
       };

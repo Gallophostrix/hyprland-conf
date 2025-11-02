@@ -9,7 +9,7 @@
     logitech.wireless.enableGraphical = false;
     graphics = {
       enable = true;
-      enable32bit = true;
+      enable32Bit = true;
     };
     enableRedistributableFirmware = true;
     keyboard.qmk.enable = true;
@@ -28,9 +28,7 @@
       openFirewall = true;
     };
     ipp-usb.enable = true;
-  };
 
-  services = {
     libinput.enable = true; # Input Handling
     fstrim.enable = true; # SSD Optimizer
     gvfs.enable = true; # For Mounting USB & More

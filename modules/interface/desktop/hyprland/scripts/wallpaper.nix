@@ -1,4 +1,8 @@
-{ pkgs, defaultWallpaper, ... }:
+{
+  pkgs,
+  defaultWallpaper,
+  ...
+}:
 pkgs.writeShellScriptBin "wallpaper" ''
 
   # Restore
