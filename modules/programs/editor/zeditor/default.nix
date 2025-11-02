@@ -85,6 +85,4 @@
       };
     };
   };
-
-  programs.ssh.enable = true;
 }
