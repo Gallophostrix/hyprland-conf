@@ -6,7 +6,7 @@
     ./network/ssh.nix
     ./network/wireguard.nix
     ./devtools.nix
-    # ./flatpak.nix
+    ./flatpak.nix
     ./fonts.nix
     ./interface.nix
     ./sddm.nix

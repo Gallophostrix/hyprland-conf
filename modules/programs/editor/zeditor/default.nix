@@ -14,6 +14,7 @@
       "catppuccin"
       "catppuccin-icons"
       "sql"
+      "dockerfile"
     ];
 
     installRemoteServer = true;
@@ -28,13 +29,14 @@
       base_keymap = "VSCode";
       load_direnv = "shell_hook";
 
+      ### System change !!! ###
       theme = {
-        mode = "system";
+        mode = "dark";
         light = "Catppuccin Latte";
         dark = "Catppuccin Mocha";
       };
       icon_theme = {
-        mode = "system";
+        mode = "dark";
         light = "Catppuccin Latte";
         dark = "Catppuccin Mocha";
       };

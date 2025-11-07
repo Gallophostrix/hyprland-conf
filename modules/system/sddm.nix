@@ -23,6 +23,7 @@ in {
       wayland.enable = true;
       enableHidpi = true;
       package = lib.mkForce pkgs.kdePackages.sddm;
+      extraPackages = with pkgs.qt6; [qtwayland qtmultimedia];
       settings.Theme.CursorTheme = "Bibata-Modern-Classic";
       theme = "sddm-astronaut-theme";
     };
