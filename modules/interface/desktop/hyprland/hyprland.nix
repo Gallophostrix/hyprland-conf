@@ -73,7 +73,7 @@ in {
       input = {
         kb_layout = "${kbdLayout},ru";
         kb_variant = "${kbdVariant},";
-        repeat_delay = 275; # or 212
+        repeat_delay = 212; # or 212
         repeat_rate = 35;
         numlock_by_default = true;
 
@@ -146,6 +146,7 @@ in {
           "linear, 0, 0, 1, 1"
           "md3_standard, 0.2, 0, 0, 1"
           "md3_decel, 0.05, 0.7, 0.1, 1"
+          "md3_decel_smooth, 0.2, 0.4, 0.1, 1"
           "md3_accel, 0.3, 0, 0.8, 0.15"
           "overshot, 0.05, 0.9, 0.1, 1.1"
           "crazyshot, 0.1, 1.5, 0.76, 0.92"
@@ -154,16 +155,19 @@ in {
           "easeInOutCirc, 0.85, 0, 0.15, 1"
           "easeOutCirc, 0, 0.55, 0.45, 1"
           "easeOutExpo, 0.16, 1, 0.3, 1"
+          "resize_smooth, 0.25, 0.1, 0.1, 1.0"
         ];
         animation = [
-          "windows, 1, 4, md3_decel, popin 60%"
+          "windowsIn, 1, 4, md3_decel_smooth, popin 60%"
+          "windowsOut, 1, 4, md3_decel, slide"
           "border, 1, 10, default"
-          "fade, 1, 3, md3_decel"
+          "fade, 1, 3, md3_decel_smooth"
+          # "windowsMove, 1, 5, resize_smooth"
           # "workspaces, 1, 3.5, md3_decel, slide"
-          "workspaces, 1, 3.5, easeOutExpo, slide"
-          # "workspaces, 1, 7, fluent_decel, slidefade 15%"
+          # "workspaces, 1, 3.5, easeOutExpo, slide"
+          "workspaces, 1, 7, fluent_decel, slidefade 15%"
           # "specialWorkspace, 1, 3, md3_decel, slidefadevert 15%"
-          "specialWorkspace, 1, 3, md3_decel, slidevert"
+          "specialWorkspace, 1, 3, md3_decel_smooth, slidevert"
         ];
       };
 
@@ -200,10 +204,10 @@ in {
       binde = [
         # Resize windows
 
-        "$mainMod SHIFT, right, resizeactive, 30 0"
-        "$mainMod SHIFT, left, resizeactive, -30 0"
-        "$mainMod SHIFT, up, resizeactive, 0 -30"
-        "$mainMod SHIFT, down, resizeactive, 0 30"
+        "$mainMod SHIFT, right, resizeactive, 10 0"
+        "$mainMod SHIFT, left, resizeactive, -10 0"
+        "$mainMod SHIFT, up, resizeactive, 0 -10"
+        "$mainMod SHIFT, down, resizeactive, 0 10"
 
         # Resize windows with hjkl keys
 
@@ -446,13 +450,12 @@ in {
       # ---- Lauchers ----
 
       exec-once = let
-        wallpaper = pkgs.callPackage ./scripts/wallpaper.nix {inherit defaultWallpaper;};
+        wallpaper = pkgs.callPackage ./scripts/wwallpaper.nix {inherit defaultWallpaper;};
       in [
         # --- WS1 ---
-        "[workspace 1 silent] ${browser}"
 
         # --- WS2 ---
-        "[workspace 2 silent] ${terminal}"
+        "[workspace 2 silent] ${browser}"
 
         # --- WS3
         "[workspace 3 silent] spotify"
@@ -461,7 +464,7 @@ in {
         #"[workspace special silent] ${browser} --private-window"
         #"[workspace special silent] ${terminal}"
 
-        "sleep 1; hyprctl dispatch workspace 2"
+        "sleep 1; hyprctl dispatch workspace 1"
 
         "${lib.getExe wallpaper}"
         "pkill -x waybar 2>/dev/null; sleep 0.2; waybar"
