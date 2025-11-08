@@ -450,7 +450,7 @@ in {
       # ---- Lauchers ----
 
       exec-once = let
-        wallpaper = pkgs.callPackage ./scripts/wwallpaper.nix {inherit defaultWallpaper;};
+        wallpaper = pkgs.callPackage ./scripts/wallpaper.nix {inherit defaultWallpaper;};
       in [
         # --- WS1 ---
 
