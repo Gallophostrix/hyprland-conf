@@ -14,6 +14,7 @@
     kbdLayout
     kbdVariant
     defaultWallpaper
+    defaultTheme
     ;
 
   inherit
@@ -21,6 +22,8 @@
     getExe
     getExe'
     ;
+
+  themeCurrent = "${config.home.homeDirectory}/.config/theme-current";
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -87,14 +90,17 @@ in {
         force_no_accel = false;
       };
 
+      # ---- Theme ----
+      source = "${themeCurrent}/interface/hyprland/colors.conf";
+
       # ---- General configs ----
 
       general = {
         gaps_in = 4;
         gaps_out = 9;
-        border_size = 2;
-        "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+        # border_size = 2;
+        # "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        # "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
         resize_on_border = true;
         layout = "dwindle"; # dwindle or master
         # allow_tearing = true; # Allow tearing for games (use immediate window rules for specific games or all titles)
@@ -104,12 +110,12 @@ in {
         "3, horizontal, workspace"
       ];
 
-      group = {
-        "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        "col.border_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-        "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-      };
+      # group = {
+      #   "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+      #   "col.border_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+      #   "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+      #   "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+      # };
 
       layerrule = [
         "blur, rofi"
@@ -337,8 +343,8 @@ in {
         "$mainMod, A, exec, launcher drun" # launch desktop applications
         "$mainMod, SPACE, exec, launcher drun" # launch desktop applications
         "$mainMod SHIFT, W, exec, launcher wallpaper" # launch wallpaper switcher
+        "$mainMod SHIFT, T, exec, launcher theme-switcher" # launch theme switcher ### Issues
         "$mainMod, E, exec, launcher emoji" # launch emoji picker
-        "$mainMod SHIFT, T, exec, launcher tmux" # launch tmux sessions
         "$mainMod, G, exec, launcher games" # game launcher
         # "$mainMod, tab, exec, launcher window" # switch between desktop applications
         # "$mainMod, R, exec, launcher file" # brrwse system files
@@ -451,6 +457,7 @@ in {
 
       exec-once = let
         wallpaper = pkgs.callPackage ./scripts/wallpaper.nix {inherit defaultWallpaper;};
+        theme = pkgs.callPackage ./scripts/theme.nix {inherit defaultTheme;};
       in [
         # --- WS1 ---
 
@@ -467,6 +474,7 @@ in {
         "sleep 1; hyprctl dispatch workspace 1"
 
         "${lib.getExe wallpaper}"
+        "${lib.getExe theme}"
         "pkill -x waybar 2>/dev/null; sleep 0.2; waybar"
         "swaync"
         "nm-applet --indicator"
