@@ -14,7 +14,7 @@
     ./programs/hypridle
     ./programs/hyprsunset
     ./programs/hyprcursor
-    ../../themes/Catppuccin # Catppuccin GTK and QT themes
+    ../../interface.nix
   ];
   systemd.user.services.hyprpolkitagent = {
     Unit = {

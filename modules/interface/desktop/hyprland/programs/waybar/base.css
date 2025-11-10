@@ -104,7 +104,7 @@ tooltip label {
 }
 
 #idle_inhibitor {
-    color: @base;
+    color: @text;
 }
 
 #bluetooth,

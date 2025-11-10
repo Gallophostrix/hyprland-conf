@@ -119,6 +119,7 @@ in
         gtk_name="$(jq -r '.gtkThemeName // empty' "$manifest" 2>/dev/null || true)"
         kv_name="$(jq -r '.kvantumThemeName // empty' "$manifest" 2>/dev/null || true)"
         cursor_name="$(jq -r '.cursorName // empty' "$manifest" 2>/dev/null || true)"
+        icon_name="$(jq -r '.iconThemeName // empty' "$manifest" 2>/dev/null || true)"
         default_wallpaper="$(jq -r '.defaultWallpaper // empty' "$manifest" 2>/dev/null || true)"
       fi
 
@@ -144,6 +145,11 @@ in
           hyprctl setcursor "$cursor_name" 24 2>/dev/null || true
         fi
         gsettings set org.gnome.desktop.interface cursor-theme "$cursor_name" 2>/dev/null || true
+      fi
+
+      # --- Apply icon theme ---
+      if [[ -n "$icon_name" ]]; then
+        gsettings set org.gnome.desktop.interface icon-theme "$icon_name" 2>/dev/null || true
       fi
 
       # --- Apply wallpaper ---
