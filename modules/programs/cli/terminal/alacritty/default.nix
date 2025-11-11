@@ -10,9 +10,9 @@
     enable = true;
     settings = {
       # ---- Theme ----
-      general.import = [
-        "${config.home.homeDirectory}/.config/theme-current/programs/cli/alacritty/colors.toml"
-      ];
+      # general.import = [
+      #   "${config.home.homeDirectory}/.config/theme-current/programs/cli/alacritty/colors.toml"
+      # ];
 
       font.size = 12.0;
 

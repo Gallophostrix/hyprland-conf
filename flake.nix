@@ -22,7 +22,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur.url = "github:nix-community/NUR";
+    # nur.url = "github:nix-community/NUR";
+
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # thunderbird-catppuccin = {
     #   url = "github:catppuccin/thunderbird";
@@ -42,7 +47,8 @@
     home-manager,
     nix-index-database,
     nix-flatpak,
-    nur,
+    stylix,
+    # nur,
     ...
   }: let
     inherit (nixpkgs.lib) genAttrs;
@@ -77,9 +83,6 @@
           # Nix Index Database module
           nix-index-database.nixosModules.nix-index
 
-          # Optional Flatpak module (can be used/ignored per host)
-          # nix-flatpak.nixosModules.nix-flatpak
-
           # Apply overlays to nixpkgs (if any)
           ({lib, ...}: {
             nixpkgs.overlays =
@@ -100,7 +103,6 @@
             };
 
             # Bind your Home-Manager root config (aggregates your HM modules)
-            # Adjust the path if you store it elsewhere.
             home-manager.users.${hostVars.username} = import ./hosts/${host}/home-config.nix;
           }
         ];

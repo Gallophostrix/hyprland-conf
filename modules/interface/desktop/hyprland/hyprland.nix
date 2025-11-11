@@ -22,8 +22,6 @@
     getExe
     getExe'
     ;
-
-  themeCurrent = "${config.home.homeDirectory}/.config/theme-current";
 in {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -89,9 +87,6 @@ in {
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
         force_no_accel = false;
       };
-
-      # ---- Theme ----
-      source = "${themeCurrent}/interface/hyprland/colors.conf";
 
       # ---- General configs ----
 

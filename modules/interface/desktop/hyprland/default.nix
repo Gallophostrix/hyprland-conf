@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -14,7 +15,6 @@
     ./programs/hypridle
     ./programs/hyprsunset
     ./programs/hyprcursor
-    ../../interface.nix
   ];
   systemd.user.services.hyprpolkitagent = {
     Unit = {

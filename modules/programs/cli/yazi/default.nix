@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  xdg.configFile."yazi/flavors/catppuccin-mocha.yazi".source = "${inputs.yazi-flavors}/catppuccin-mocha.yazi";
+  # xdg.configFile."yazi/flavors/catppuccin-mocha.yazi".source = "${inputs.yazi-flavors}/catppuccin-mocha.yazi";
 
   programs.yazi = {
     enable = true;
@@ -133,9 +133,6 @@
         ];
       };
       theme = {
-        flavor.dark = "catppuccin-mocha";
-        flavor.light = "catppuccin-mocha";
-
         mgr = {
           border_symbol = " ";
         };
