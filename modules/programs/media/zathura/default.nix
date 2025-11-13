@@ -5,8 +5,8 @@
       # --- Zathura (document) ---
       recolor = true;
       recolor-keephue = true;
-      recolor-lightcolor = "#1e1e2e"; # Mocha theme
-      recolor-darkcolor = "#cdd6f4"; # Mocha theme
+      # recolor-lightcolor = "#1e1e2e"; # Mocha theme
+      # recolor-darkcolor = "#cdd6f4"; # Mocha theme
       window-title-basename = true;
       guioptions = "none";
       font = "JetBrainsMono Nerd Font 15";
@@ -17,7 +17,6 @@
       page-v-padding = 1;
       page-h-padding = 1;
 
-      # Status bar (valeurs zathura)
       statusbar-h-padding = 8;
       statusbar-v-padding = 2;
       statusbar-basename = true;

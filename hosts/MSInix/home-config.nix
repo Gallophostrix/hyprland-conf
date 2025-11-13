@@ -39,7 +39,7 @@ in {
       ../../modules/programs/desktop-apps.nix
 
       ../../modules/interface/interface.nix
-      ../../modules/interface/stylix.nix
+      ../../modules/interface/theme.nix
       ../../modules/interface/desktop/hyprland
     ]
     ++ lib.optional (hostVars.games or false)

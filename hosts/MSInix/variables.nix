@@ -8,8 +8,7 @@
   tuiFileManager = "yazi";
   sddmTheme = "pixel_sakura";
   defaultWallpaper = "kurzgesagt.webp"; # to change wallpaper: SUPER + SHIFT + W
-  defaultTheme = "catppuccin-mocha-mauve";
-  hyprlockWallpaper = "evening-sky.webp"; # See modules/themes/wallpapers for options
+  hyprlockWallpaper = "evening-sky.webp"; # See modules/interface/wallpapers for options
   shell = "fish";
   games = false; # Whether to enable the gaming module
   data = true; # Whether to import a data partition

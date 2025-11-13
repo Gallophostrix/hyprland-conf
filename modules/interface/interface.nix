@@ -14,11 +14,11 @@
     bibata-cursors
   ];
 
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk";
-    style.name = "kvantum";
-  };
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "gtk";
+  #   style.name = "kvantum";
+  # };
   gtk = {
     enable = true;
     gtk2.force = true;

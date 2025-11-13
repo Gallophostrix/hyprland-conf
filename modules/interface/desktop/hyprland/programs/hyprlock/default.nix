@@ -17,18 +17,18 @@ in {
 
       background = [
         {
-          monitor = "";
-          color = "rgb(36, 39, 58)";
-          path = builtins.toString ../../../../themes/wallpapers/${hyprlockWallpaper};
+          # monitor = "";
+          # color = "rgb(36, 39, 58)";
+          path = builtins.toString ../../../../wallpapers/${hyprlockWallpaper};
 
           new_optimizations = true;
-          blur_size = 3;
-          blur_passes = 2;
-          noise = 0.0117;
-          contrast = 1.000;
-          brightness = 1.0000;
-          vibrancy = 0.2100;
-          vibrancy_darkness = 0.0;
+          # blur_size = 3;
+          # blur_passes = 2;
+          # noise = 0.0117;
+          # contrast = 1.000;
+          # brightness = 1.0000;
+          # vibrancy = 0.2100;
+          # vibrancy_darkness = 0.0;
         }
       ];
 

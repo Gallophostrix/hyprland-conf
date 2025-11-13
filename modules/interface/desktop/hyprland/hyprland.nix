@@ -14,7 +14,6 @@
     kbdLayout
     kbdVariant
     defaultWallpaper
-    defaultTheme
     ;
 
   inherit
@@ -338,7 +337,6 @@ in {
         "$mainMod, A, exec, launcher drun" # launch desktop applications
         "$mainMod, SPACE, exec, launcher drun" # launch desktop applications
         "$mainMod SHIFT, W, exec, launcher wallpaper" # launch wallpaper switcher
-        "$mainMod SHIFT, T, exec, launcher theme-switcher" # launch theme switcher ### Issues
         "$mainMod, E, exec, launcher emoji" # launch emoji picker
         "$mainMod, G, exec, launcher games" # game launcher
         # "$mainMod, tab, exec, launcher window" # switch between desktop applications
@@ -452,7 +450,6 @@ in {
 
       exec-once = let
         wallpaper = pkgs.callPackage ./scripts/wallpaper.nix {inherit defaultWallpaper;};
-        theme = pkgs.callPackage ./scripts/theme.nix {inherit defaultTheme;};
       in [
         # --- WS1 ---
 
@@ -469,7 +466,6 @@ in {
         "sleep 1; hyprctl dispatch workspace 1"
 
         "${lib.getExe wallpaper}"
-        "${lib.getExe theme}"
         "pkill -x waybar 2>/dev/null; sleep 0.2; waybar"
         "swaync"
         "nm-applet --indicator"

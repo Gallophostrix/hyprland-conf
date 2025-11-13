@@ -5,7 +5,7 @@
   config,
   ...
 }: let
-  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   # import the flake's module for your system
   imports = [inputs.spicetify-nix.homeManagerModules.default];
@@ -15,8 +15,8 @@ in {
     spotifyPackage = pkgs.spotify;
     windowManagerPatch = false;
 
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "mocha";
+    # theme = spicePkgs.themes.catppuccin;
+    # colorScheme = "mocha";
     enabledExtensions = with spicePkgs.extensions; [
       adblock
       shuffle # shuffle+ (special characters are sanitized out of ext names)

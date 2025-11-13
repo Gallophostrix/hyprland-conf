@@ -14,7 +14,7 @@
       #   "${config.home.homeDirectory}/.config/theme-current/programs/cli/alacritty/colors.toml"
       # ];
 
-      font.size = 12.0;
+      # font.size = 12.0;
 
       window = {
         decorations = "full";
@@ -37,11 +37,6 @@
         {
           chars = "cd $(${getExe pkgs.fd} . /mnt/work /mnt/work/dev/ /run /run/current-system ~/.local/ ~/ --max-depth 2 | fzf)\r";
           key = "F";
-          mods = "Control";
-        }
-        {
-          chars = "tmux-sessionizer\r";
-          key = "T";
           mods = "Control";
         }
         {

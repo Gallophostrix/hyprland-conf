@@ -35,8 +35,8 @@
       };
       auto_update = true;
       show_whitespaces = "none";
-      ui_font_size = 14;
-      buffer_font_size = 13;
+      ui_font_size = lib.mkForce 14;
+      buffer_font_size = lib.mkForce 13;
       buffer_font_family = "JetBrainsMono Nerd Font";
 
       terminal = {

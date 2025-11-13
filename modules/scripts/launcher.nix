@@ -4,7 +4,7 @@
   terminal,
   ...
 }: let
-  wallpaperDir = "${../interface/themes/wallpapers}";
+  wallpaperDir = "${../interface/wallpapers}";
   wallpaperThumbs =
     pkgs.runCommand "wallpaper-thumbnails"
     {

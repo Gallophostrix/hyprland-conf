@@ -5,7 +5,9 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak?ref=latest";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,7 +24,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nur.url = "github:nix-community/NUR";
+    nur.url = "github:nix-community/NUR";
 
     stylix = {
       url = "github:nix-community/stylix";
@@ -46,9 +48,6 @@
     nixpkgs,
     home-manager,
     nix-index-database,
-    nix-flatpak,
-    stylix,
-    # nur,
     ...
   }: let
     inherit (nixpkgs.lib) genAttrs;
@@ -79,9 +78,6 @@
 
           # Home Manager as a NixOS module
           home-manager.nixosModules.home-manager
-
-          # Nix Index Database module
-          nix-index-database.nixosModules.nix-index
 
           # Apply overlays to nixpkgs (if any)
           ({lib, ...}: {
