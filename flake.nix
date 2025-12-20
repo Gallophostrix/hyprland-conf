@@ -36,6 +36,11 @@
     #   flake = false;
     # };
 
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     yazi-flavors = {
       url = "github:yazi-rs/flavors";
       flake = false;
