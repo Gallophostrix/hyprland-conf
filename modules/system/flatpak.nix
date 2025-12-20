@@ -24,4 +24,9 @@
       update.onActivation = true;
     };
   };
+
+  systemd.services.flatpak-managed-install = {
+    wants = ["network-online.target"];
+    after = ["network-online.target"];
+  };
 }
