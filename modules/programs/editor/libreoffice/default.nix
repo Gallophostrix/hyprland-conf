@@ -7,7 +7,7 @@
     hyphen
     mythes
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
   xdg.configFile."libreoffice/4/user/registrymodifications.xcu" = {

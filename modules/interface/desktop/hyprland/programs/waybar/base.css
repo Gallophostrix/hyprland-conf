@@ -1,3 +1,26 @@
+/* --- Semantic aliases based on Stylix base16 --- */
+@define-color base       @base00;
+@define-color tooltip       @base02;
+@define-color tooltip-label       @base05;
+@define-color text @base07;
+@define-color surface @base00;
+@define-color overlay @base05;
+
+@define-color light     @base0C;
+@define-color network   @base07;
+@define-color battery   @base0B;
+@define-color battery_critical @base08;
+@define-color clock     @base0A;
+@define-color temp      @base09;
+@define-color cpu       @base0B;
+@define-color ram       @base0A;
+@define-color disk      @base0C;
+
+@define-color workspace @base03;
+@define-color alert     @base08;
+@define-color cava      @base07;
+@define-color audio     @base0D;
+
 * {
     font-family: "monospace";
     font-size: 14px;
@@ -19,12 +42,12 @@ window#waybar.hidden {
 }
 
 tooltip {
-    background: #1e1e2e;
+    background: @tooltip;
     border-radius: 8px;
 }
 
 tooltip label {
-    color: #cad3f5;
+    color: @tooltip-label;
     margin-right: 5px;
     margin-left: 5px;
 }
@@ -39,7 +62,7 @@ tooltip label {
 }
 .modules-center {
     background: @base;
-    border: 0.5px solid @overlay0;
+    border: 0.5px solid @overlay;
     padding-right: 5px;
     padding-left: 5px;
     border-radius: 10px;
@@ -109,7 +132,7 @@ tooltip label {
 
 #bluetooth,
 #backlight {
-    color: @network;
+    color: @light;
 }
 
 #battery {
@@ -118,7 +141,7 @@ tooltip label {
 
 @keyframes blink {
     to {
-        color: @surface0;
+        color: @surface;
     }
 }
 
@@ -201,8 +224,8 @@ tooltip label {
 
 #workspaces button:hover {
     border-radius: 10px;
-    color: @overlay0;
-    background-color: @surface0;
+    color: @workspace;
+    background-color: @overlay;
     padding-left: 2px;
     padding-right: 2px;
     animation: gradient_f 20s ease-in infinite;
@@ -210,12 +233,12 @@ tooltip label {
 }
 
 #workspaces button.persistent {
-    color: @surface1;
+    color: @workspace;
     border-radius: 10px;
 }
 
 #workspaces button.active {
-    color: @workspace;
+    color: @overlay;
     border-radius: 10px;
     padding-left: 8px;
     padding-right: 8px;
@@ -302,7 +325,7 @@ tooltip label {
 }
 #network.disconnected,
 #network.disabled {
-    background-color: @surface0;
+    background-color: @surface;
     color: @text;
 }
 #pulseaudio-slider slider {

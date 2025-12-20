@@ -10,6 +10,6 @@ pkgs.writeShellScriptBin "wallpaper" ''
 
   # If there is no wallpaper then set the default
   if ! swww query | grep -q "image:" &> /dev/null; then
-    swww img "${../../../themes/wallpapers/${defaultWallpaper}}"
+    swww img "${../../../wallpapers/${defaultWallpaper}}"
   fi
 ''

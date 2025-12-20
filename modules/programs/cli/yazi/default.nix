@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  xdg.configFile."yazi/flavors/catppuccin-mocha.yazi".source = "${inputs.yazi-flavors}/catppuccin-mocha.yazi";
+  # xdg.configFile."yazi/flavors/catppuccin-mocha.yazi".source = "${inputs.yazi-flavors}/catppuccin-mocha.yazi";
 
   programs.yazi = {
     enable = true;
@@ -67,6 +67,13 @@
             for = "unix";
           }
         ];
+        office = [
+          {
+            run = "com.collabora.Office \"$0\"";
+            block = true;
+            for = "unix";
+          }
+        ];
       };
       open = {
         prepend_rules = [
@@ -106,6 +113,22 @@
             name = "*.txt";
             use = ["editor" "nano"];
           }
+          {
+            name = "*.docx";
+            use = "office";
+          }
+          {
+            name = "*.doc";
+            use = "office";
+          }
+          {
+            name = "*.xlsx";
+            use = "office";
+          }
+          {
+            name = "*.xls";
+            use = "office";
+          }
         ];
       };
       keymap = {
@@ -133,9 +156,6 @@
         ];
       };
       theme = {
-        flavor.dark = "catppuccin-mocha";
-        flavor.light = "catppuccin-mocha";
-
         mgr = {
           border_symbol = " ";
         };

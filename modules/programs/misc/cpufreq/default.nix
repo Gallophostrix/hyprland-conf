@@ -3,7 +3,8 @@
     enable = true;
     settings = {
       charger = {
-        governor = "performance";
+        governor = "schedutil";
+        scaling_max_freq = 4500000;
         turbo = "auto";
       };
       battery = {

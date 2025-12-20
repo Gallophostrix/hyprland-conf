@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -14,7 +15,6 @@
     ./programs/hypridle
     ./programs/hyprsunset
     ./programs/hyprcursor
-    ../../interface.nix
   ];
   systemd.user.services.hyprpolkitagent = {
     Unit = {
@@ -45,6 +45,7 @@
   };
 
   home.packages = with pkgs; [
+    aubio
     hyprpicker
     cliphist
     wf-recorder
@@ -52,6 +53,7 @@
     slurp
     libnotify
     brightnessctl
+    ddcutil
     networkmanagerapplet
     pamixer
     pavucontrol

@@ -1,0 +1,112 @@
+" ---------- Colors ----------
+set default-bg                "#1e1e2e"
+set default-fg                "#cdd6f4"
+set statusbar-bg              "#1e1e2e"
+set statusbar-fg              "#cdd6f4"
+set inputbar-bg               "#1e1e2e"
+set inputbar-fg               "#cdd6f4"
+set completion-bg             "#1e1e2e"
+set completion-fg             "#cdd6f4"
+set completion-group-bg       "#181825"
+set completion-group-fg       "#89b4fa"
+set completion-highlight-bg   "#89b4fa"
+set completion-highlight-fg   "#1e1e2e"
+set notification-bg           "#1e1e2e"
+set notification-fg           "#cdd6f4"
+set notification-warning-bg   "#fab387"
+set notification-warning-fg   "#1e1e2e"
+set notification-error-bg     "#f38ba8"
+set notification-error-fg     "#1e1e2e"
+
+" ---------- Keybinds ----------
+" Movements (Vim)
+map j scroll down
+map k scroll up
+map h scroll left
+map l scroll right
+
+" Zoom
+map + zoom in
+map - zoom out
+
+" Page navigation
+map <C-j> navigate next
+map <C-k> navigate previous
+
+" Recolor
+map i recolor
+
+" Quit
+map q quit
+
+" Search
+map s feedkeys /
+map n search forward
+map N search backward
+map <Esc> nohl_search
+
+" Pages-per-row toggle → `p`
+map p toggle_page_mode
+
+" Fullscreen
+map f toggle_fullscreen
+
+" Index
+map t toggle_index
+
+" Rotation
+map r rotate rotate-cw
+map R rotate rotate-ccw
+
+" Window size
+map a adjust_window best-fit
+map w adjust_window width
+
+" Reload
+map <C-r> reload
+
+" UI switch
+map S toggle_statusbar
+map : focus_inputbar
+
+" Go to
+map g feedkeys :goto\
+
+" Open a file
+map o file_chooser
+
+set adjust-open	"width"
+set completion-bg	"rgb(30, 32, 48)"
+set completion-fg	"rgb(138, 173, 244)"
+set completion-highlight-bg	"rgb(138, 173, 244)"
+set completion-highlight-fg	"rgb(183, 189, 248)"
+set default-bg	"rgba(36, 39, 58, 1.000000)"
+set default-fg	"rgb(30, 32, 48)"
+set font	"JetBrainsMono Nerd Font 15"
+set guioptions	"none"
+set highlight-active-color	"rgba(138, 173, 244, 0.500000)"
+set highlight-color	"rgba(238, 212, 159, 0.500000)"
+set inputbar-bg	"rgb(36, 39, 58)"
+set inputbar-fg	"rgb(183, 189, 248)"
+set notification-bg	"rgb(36, 39, 58)"
+set notification-error-bg	"rgb(36, 39, 58)"
+set notification-error-fg	"rgb(237, 135, 150)"
+set notification-fg	"rgb(183, 189, 248)"
+set notification-warning-bg	"rgb(36, 39, 58)"
+set notification-warning-fg	"rgb(237, 135, 150)"
+set page-h-padding	"1"
+set page-v-padding	"1"
+set recolor	"true"
+set recolor-darkcolor	"rgb(244, 219, 214)"
+set recolor-keephue	"true"
+set recolor-lightcolor	"rgb(36, 39, 58)"
+set sandbox	"none"
+set scroll-page-aware	"true"
+set statusbar-basename	"true"
+set statusbar-bg	"rgb(54, 58, 79)"
+set statusbar-fg	"rgb(91, 96, 120)"
+set statusbar-h-padding	"8"
+set statusbar-home-tilde	"true"
+set statusbar-v-padding	"2"
+set window-title-basename	"true"
+set zoom-center	"true"

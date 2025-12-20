@@ -21,8 +21,6 @@
     (importScript ./rebuild.nix)
     (importScript ./rollback.nix)
     (importScript ./launcher.nix)
-    (importScript ./theme/theme-switcher.nix)
-    (importScript ./tmux-sessionizer.nix)
     (importScript ./extract.nix)
     (importScript ./driverinfo.nix)
     (importScript ./underwatt.nix)

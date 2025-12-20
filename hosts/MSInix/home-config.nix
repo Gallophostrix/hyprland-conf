@@ -3,6 +3,7 @@
   pkgs,
   hostVars,
   lib,
+  inputs,
   ...
 }: let
   username = hostVars.username;
@@ -26,7 +27,7 @@ in {
       ../../modules/programs/cli/dev-tools.nix
 
       ../../modules/programs/editor/zeditor
-      ../../modules/programs/editor/libreoffice
+      # ../../modules/programs/editor/libreoffice
 
       ../../modules/programs/media/imv
       ../../modules/programs/media/mpv
@@ -37,6 +38,8 @@ in {
 
       ../../modules/programs/desktop-apps.nix
 
+      ../../modules/interface/interface.nix
+      ../../modules/interface/theme.nix
       ../../modules/interface/desktop/hyprland
     ]
     ++ lib.optional (hostVars.games or false)
@@ -57,8 +60,8 @@ in {
   xdg.enable = true;
 
   gtk.enable = true;
-  gtk.gtk3.extraConfig."gtk-font-name" = "Noto Sans 16";
-  gtk.gtk4.extraConfig."gtk-font-name" = "Noto Sans 16";
+  # gtk.gtk3.extraConfig."gtk-font-name" = "Noto Sans 16";
+  # gtk.gtk4.extraConfig."gtk-font-name" = "Noto Sans 16";
 
   home.sessionVariables = {
     EDITOR = editor;

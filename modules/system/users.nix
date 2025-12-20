@@ -10,8 +10,6 @@
     then pkgs.fish
     else pkgs.bashInteractive;
 in {
-  programs.dconf.enable = true;
-
   users.mutableUsers = true;
   users.users.${username} = {
     isNormalUser = true;
@@ -33,6 +31,7 @@ in {
     shell = shellPkg;
     ignoreShellProgramCheck = true;
   };
+  programs.dconf.enable = true;
 
   nix.settings.trusted-users = ["root" username];
 }

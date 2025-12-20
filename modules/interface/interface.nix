@@ -3,6 +3,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }: {
   # Required packages for the interface and themes
@@ -13,25 +14,17 @@
     bibata-cursors
   ];
 
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk";
-    style.name = "kvantum";
-  };
+  # qt = {
+  #   enable = true;
+  #   platformTheme.name = "gtk";
+  #   style.name = "kvantum";
+  # };
   gtk = {
     enable = true;
     gtk2.force = true;
     iconTheme = {
-      # package = pkgs.adwaita-icon-theme;
-      # name = "Adwaita";
-      package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
-    };
-    gtk3.extraConfig = {
-      "gtk-application-prefer-dark-theme" = "1";
-    };
-    gtk4.extraConfig = {
-      "gtk-application-prefer-dark-theme" = "1";
+      package = pkgs.papirus-icon-theme;
     };
   };
 
@@ -39,13 +32,5 @@
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
     };
-  };
-
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    package = lib.mkDefault pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = lib.mkDefault 24;
   };
 }

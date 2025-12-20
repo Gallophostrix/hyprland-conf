@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
@@ -9,7 +8,7 @@
 
       # Normal Fonts
       noto-fonts
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ];
     fontconfig = {
       enable = true;
@@ -29,7 +28,7 @@
           "Noto Serif"
           "DejaVu Serif" # Default
         ];
-        emoji = [ "Noto Color Emoji" ];
+        emoji = ["Noto Color Emoji"];
       };
     };
   };
