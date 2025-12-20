@@ -27,7 +27,7 @@ in {
       ../../modules/programs/cli/dev-tools.nix
 
       ../../modules/programs/editor/zeditor
-      ../../modules/programs/editor/libreoffice
+      # ../../modules/programs/editor/libreoffice
 
       ../../modules/programs/media/imv
       ../../modules/programs/media/mpv

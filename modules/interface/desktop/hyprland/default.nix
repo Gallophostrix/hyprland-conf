@@ -45,6 +45,7 @@
   };
 
   home.packages = with pkgs; [
+    aubio
     hyprpicker
     cliphist
     wf-recorder
@@ -52,6 +53,7 @@
     slurp
     libnotify
     brightnessctl
+    ddcutil
     networkmanagerapplet
     pamixer
     pavucontrol

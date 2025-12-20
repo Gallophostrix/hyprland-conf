@@ -1,5 +1,5 @@
 {lib, ...}: {
-  fileSystems."/mnt/work" = lib.mkForce {
+  fileSystems."/mnt/work" = {
     device = "/dev/disk/by-uuid/306E-2455";
     fsType = "vfat";
     options = [
@@ -9,6 +9,9 @@
       "x-gvfs-show" # Show in file explorer
       "x-systemd.mount-timeout=5" # Timout for error
       "X-mount.mkdir" # Make dir if it doesn't exist
+      "uid=1000"
+      "gid=100"
+      "umask=002"
     ];
   };
 }

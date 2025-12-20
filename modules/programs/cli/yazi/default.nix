@@ -67,6 +67,13 @@
             for = "unix";
           }
         ];
+        office = [
+          {
+            run = "com.collabora.Office \"$0\"";
+            block = true;
+            for = "unix";
+          }
+        ];
       };
       open = {
         prepend_rules = [
@@ -105,6 +112,22 @@
           {
             name = "*.txt";
             use = ["editor" "nano"];
+          }
+          {
+            name = "*.docx";
+            use = "office";
+          }
+          {
+            name = "*.doc";
+            use = "office";
+          }
+          {
+            name = "*.xlsx";
+            use = "office";
+          }
+          {
+            name = "*.xls";
+            use = "office";
           }
         ];
       };

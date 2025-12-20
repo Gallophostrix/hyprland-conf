@@ -22,6 +22,10 @@
   gtk = {
     enable = true;
     gtk2.force = true;
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
   };
 
   dconf.settings = {

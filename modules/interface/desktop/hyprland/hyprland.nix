@@ -60,7 +60,7 @@ in {
 
       # ---- XWayland ----
 
-      # xwayland.force_zero_scaling = true;
+      xwayland.force_zero_scaling = true;
 
       # ---- Ecosystem ----
       ecosystem = {
@@ -314,12 +314,12 @@ in {
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        # Go to workspace 6 and 7 with mouse side buttons
-        "$mainMod, mouse:276, workspace, 5"
+        # Go to workspace 1 and 6 with mouse side buttons
+        "$mainMod, mouse:276, workspace, 1"
         "$mainMod, mouse:275, workspace, 6"
-        "$mainMod SHIFT, mouse:276, movetoworkspace, 5"
+        "$mainMod SHIFT, mouse:276, movetoworkspace, 1"
         "$mainMod SHIFT, mouse:275, movetoworkspace, 6"
-        "$mainMod CTRL, mouse:276, movetoworkspacesilent, 5"
+        "$mainMod CTRL, mouse:276, movetoworkspacesilent, 1"
         "$mainMod CTRL, mouse:275, movetoworkspacesilent, 6"
 
         # Applications/Programs
@@ -402,24 +402,24 @@ in {
       };
 
       windowrulev2 = [
-        # --- TILING ---
-        "tile, title:^(.*Godot.*)$"
+        # --- FORCE TILING ---
+        # "tile, title:^(.*Godot.*)$"
 
         # --- OPACITY ---
-        "opacity 0.80 0.80, class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
+        "opacity 0.80 0.70, class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
         "opacity 0.80 0.80, class:^(nvim-wrapper)$"
         "opacity 0.90 0.90, class:^(Emacs)$"
         "opacity 0.90 0.90, class:^(gcr-prompter)$" # keyring prompt
         "opacity 0.90 0.90, title:^(Hyprland Polkit Agent)$" # polkit prompt
-        "opacity 1.00 1.00, class:^(firefox)$"
-        "opacity 0.90 0.90, class:^(Brave-browser)$"
+        "opacity 0.95 0.85, class:^(brave-browser|Brave-browser)$"
         "opacity 0.80 0.80, class:^(org.gnome.Nautilus|thunar)$"
         "opacity 0.80 0.80, class:^(Steam|steam|steamwebhelper)$"
-        "opacity 0.80 0.80, class:^(VSCodium|codium-url-handler|code|code-url-handler)$"
+        "opacity 0.90 0.90, class:^(Zed|dev.zed.Zed|coda-qt)$"
         "opacity 0.80 0.80, class:^(tuiFileManager|org.kde.dolphin|org.kde.ark|nwg-look|qt5ct|qt6ct|yad)$"
         "opacity 0.90 0.90, class:^(com.github.rafostar.Clapper)$" # Clapper-Gtk
         "opacity 0.80 0.80, class:^(com.github.tchx84.Flatseal|hu.kramo.Cartridges|com.obsproject.Studio|gnome-boxes)$"
         "opacity 0.90 0.90, class:^(discord|WebCord)$" # Discord/Electron
+        "opacity 0.90 0.70, class:^(spotify)$"
         "opacity 0.80 0.80, class:^(app.drey.Warp|net.davidotek.pupgui2|Signal|io.gitlab.theevilskeleton.Upscaler)$"
         "opacity 0.80 0.70, class:^(pavucontrol|org.pulseaudio.pavucontrol|blueman-manager|.blueman-manager-wrapped|nm-applet|nm-connection-editor|org.kde.polkit-kde-authentication-agent-1)$"
 
@@ -427,6 +427,7 @@ in {
         "content game, tag:games"
         "tag +games, content:game"
         "tag +games, class:^(steam_app.*|steam_app_\\d+|gamescope|Waydroid|osu!)$"
+        "monitor HDMI-A-1, tag:games"
 
         # --- FULLSCREEN behavior for 'games' & 'video' ---
         "syncfullscreen, tag:games"
@@ -442,8 +443,16 @@ in {
         "noshadow, tag:video"
         "noanim, tag:video"
 
-        # --- General floats ---
+        # --- Floats ---
         "float, class:^(qt5ct|nwg-look|org.kde.ark|Signal|com.github.rafostar.Clapper|app.drey.Warp|net.davidotek.pupgui2|eog|io.gitlab.theevilskeleton.Upscaler|yad|pavucontrol|blueman-manager|.blueman-manager-wrapped|nm-applet|nm-connection-editor|org.kde.polkit-kde-authentication-agent-1)$"
+
+        # --- Special windows ---
+        "float,class:^(spotify)$"
+        "size 830 875,class:^(spotify)$"
+        "move 10 55,class:^(spotify)$"
+        "float,class:^(Alacritty)$,title:^(Cava)$"
+        "size 1000 500,class:^(Alacritty)$,title:^(Cava)$"
+        "move 880 675,class:^(Alacritty)$,title:^(Cava)$"
       ];
 
       # ---- Lauchers ----
@@ -454,11 +463,17 @@ in {
         # --- WS1 ---
 
         # --- WS2 ---
-        "[workspace 2 silent] ${browser}"
 
-        # --- WS3
+        # --- WS3 ---
         "[workspace 3 silent] spotify"
         "[workspace 3 silent] alacritty -t Cava -e cava"
+
+        # --- WS4 ---
+
+        # --- WS5 ---
+
+        # --- WS6 ---
+        "[workspace 6 silent] ${browser}"
 
         #"[workspace special silent] ${browser} --private-window"
         #"[workspace special silent] ${terminal}"
@@ -483,23 +498,24 @@ in {
 
         # My Monitors
         "eDP-1,2560x1600@60,auto,1.3333334"
-        "desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1"
-        "desc:BNQ BenQ EL2870U PCK00489SL0,preferred,0x0,2"
-        "desc:BNQ BenQ xl2420t 99D06760SL0,preferred,1920x-420,1,transform,1" # 5 for fipped
+        "desc:AOC CU34G4Z 1H0R5HA001666,3440x1440@240,auto,1.3333334"
+        # "desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1"
+        # "desc:BNQ BenQ EL2870U PCK00489SL0,preferred,0x0,2"
+        # "desc:BNQ BenQ xl2420t 99D06760SL0,preferred,1920x-420,1,transform,1" # 5 for fipped
       ];
 
       workspace = [
         # Binds workspaces to my monitors (find desc with: hyprctl monitors)
-        "1,monitor:desc:BNQ BenQ EL2870U PCK00489SL0,default:true"
-        "2,monitor:desc:BNQ BenQ EL2870U PCK00489SL0"
-        "3,monitor:desc:BNQ BenQ EL2870U PCK00489SL0"
-        "4,monitor:desc:BNQ BenQ EL2870U PCK00489SL0"
-        "5,monitor:desc:BNQ BenQ EW277HDR 99J01861SL0,default:true"
-        "6,monitor:desc:BNQ BenQ EW277HDR 99J01861SL0"
-        "7,monitor:desc:BNQ BenQ EW277HDR 99J01861SL0"
-        "8,monitor:desc:BNQ BenQ xl2420t 99D06760SL0,default:true"
-        "9,monitor:desc:BNQ BenQ xl2420t 99D06760SL0"
-        "10,monitor:desc:BNQ BenQ EL2870U PCK00489SL0"
+        "1,monitor:eDP-1,default:true"
+        "2,monitor:eDP-1"
+        "3,monitor:eDP-1"
+        "4,monitor:eDP-1"
+        "5,monitor:eDP-1"
+        "6,monitor:desc:AOC CU34G4Z 1H0R5HA001666,default:true"
+        "7,monitor:desc:AOC CU34G4Z 1H0R5HA001666"
+        "8,monitor:desc:AOC CU34G4Z 1H0R5HA001666"
+        "9,monitor:desc:AOC CU34G4Z 1H0R5HA001666"
+        "10,monitor:desc:AOC CU34G4Z 1H0R5HA001666"
       ];
     };
   };

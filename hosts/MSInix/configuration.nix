@@ -13,7 +13,7 @@
 
       ../../modules/system
       ../../modules/scripts
-      ../../modules/programs/misc/tlp
+      ../../modules/programs/misc/cpufreq
     ]
     ++ lib.optional (hostVars.games or false)
     ../../modules/system/hardware/gaming.nix;

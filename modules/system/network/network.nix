@@ -23,4 +23,6 @@
       ];
     };
   };
+
+  systemd.services.NetworkManager-wait-online.enable = true; # network-online reached when NetworkManager is ready
 }

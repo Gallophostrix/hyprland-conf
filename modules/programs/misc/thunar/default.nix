@@ -1,21 +1,30 @@
-# Check
 {
   pkgs,
   lib,
   ...
-}: {
-  # Install Thunar and its plugins at user level
-  home.packages = with pkgs; [
-    xfce.thunar
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
-    xfce.thunar-media-tags-plugin
-
-    # Archive backends and GUI
-    file-roller # or xarchiver / engrampa
-    p7zip
-    zip
+}: let
+  thunarPlugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+    thunar-media-tags-plugin
   ];
+in {
+  # Core file manager + plugins
+  home.packages = with pkgs;
+    [
+      xfce.thunar
+    ]
+    ++ thunarPlugins
+    ++ [
+      # Archive GUI + backends
+      file-roller # or xarchiver / engrampa
+
+      # Optional but very useful for Thunar
+      gvfs # trash, smb://, mtp, etc.
+    ];
+
+  # Thumbnails in Thunar (covers, photos, etc.)
+  # services.tumbler.enable = true;
 
   # Optionnel : associer file-roller aux archives (MIME)
   xdg.mimeApps.enable = true;

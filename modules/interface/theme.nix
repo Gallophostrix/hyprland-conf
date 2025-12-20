@@ -13,12 +13,15 @@
       swaync.enable = true;
       waybar = {
         enable = true;
-        addCss = true;
+        addCss = false;
       };
 
       alacritty.enable = true;
       bat.enable = true;
-      cava.enable = true;
+      cava = {
+        enable = true;
+        rainbow.enable = true;
+      };
       fzf.enable = true;
       lazygit.enable = true;
       mpv.enable = true;

@@ -1,11 +1,9 @@
 {
   hostVars,
   pkgs,
-  config,
   ...
 }: let
   inherit (hostVars) clock24h;
-  themeCurrent = "${config.home.homeDirectory}/.config/theme-current";
 in {
   programs.waybar = {
     enable = true;
@@ -13,6 +11,7 @@ in {
       enable = false;
       target = "graphical-session.target";
     };
+    style = builtins.readFile ./base.css;
     settings = [
       {
         layer = "top";
@@ -359,9 +358,4 @@ in {
       }
     ];
   };
-  xdg.configFile."waybar/base.css".source = ./base.css;
-  xdg.configFile."waybar/style.css".text = ''
-    @import url("${themeCurrent}/interface/waybar/colors.css");
-    @import url("${config.xdg.configHome}/waybar/base.css");
-  '';
 }

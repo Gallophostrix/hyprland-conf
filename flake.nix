@@ -26,10 +26,10 @@
 
     nur.url = "github:nix-community/NUR";
 
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # caelestia-shell = {
+    #   url = "github:your-repo/caelestia-shell-nixos";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # thunderbird-catppuccin = {
     #   url = "github:catppuccin/thunderbird";

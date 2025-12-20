@@ -8,5 +8,6 @@
     bitwarden-desktop
     github-desktop
     obsidian
+    sparrow
   ];
 }
