@@ -1,22 +1,31 @@
 {...}: {
   stylix = {
     targets = {
-      gtk.enable = true;
-      qt.enable = true;
+      # Quickshell defined
+      noctalia-shell.enable = false;
+      gtk.enable = false;
+      qt.enable = false;
       sway.enable = true;
 
+      alacritty.enable = false;
+      swaync.enable = false;
+      yazi.enable = false;
+      zed.enable = true;
+
+      # Self defined
+      fish.enable = false;
+
+      # Unused
+      waybar.enable = false;
+      opencode.enable = false;
+
+      # Stylix defined
       hyprland.enable = true;
       hyprlock = {
         enable = false;
         useWallpaper = true;
       };
-      swaync.enable = true;
-      waybar = {
-        enable = true;
-        addCss = false;
-      };
 
-      alacritty.enable = true;
       bat.enable = true;
       cava = {
         enable = true;
@@ -26,16 +35,11 @@
       lazygit.enable = true;
       mpv.enable = true;
       rofi.enable = true;
-      yazi.enable = true;
 
       anki.enable = true;
       obsidian.enable = true;
       spicetify.enable = true;
-      zed.enable = true;
       zathura.enable = true;
-
-      opencode.enable = false;
-      fish.enable = false;
     };
   };
 }

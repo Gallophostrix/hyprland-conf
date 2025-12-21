@@ -26,11 +26,6 @@
 
     nur.url = "github:nix-community/NUR";
 
-    # caelestia-shell = {
-    #   url = "github:your-repo/caelestia-shell-nixos";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     # thunderbird-catppuccin = {
     #   url = "github:catppuccin/thunderbird";
     #   flake = false;
@@ -44,6 +39,11 @@
     yazi-flavors = {
       url = "github:yazi-rs/flavors";
       flake = false;
+    };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -102,6 +102,10 @@
             home-manager.extraSpecialArgs = {
               inherit self inputs host hostVars overlays;
             };
+
+            home-manager.sharedModules = [
+              inputs.noctalia.homeModules.default
+            ];
 
             # Bind your Home-Manager root config (aggregates your HM modules)
             home-manager.users.${hostVars.username} = import ./hosts/${host}/home-config.nix;

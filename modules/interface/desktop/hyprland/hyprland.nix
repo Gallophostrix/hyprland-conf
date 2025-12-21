@@ -218,8 +218,8 @@ in {
 
         # Functional keybinds
 
-        ",XF86MonBrightnessDown,exec,brightnessctl set 2%-"
-        ",XF86MonBrightnessUp,exec,brightnessctl set +2%"
+        ",XF86MonBrightnessDown,exec,noctalia-shell ipc call brightness decrease"
+        ",XF86MonBrightnessUp,exec,noctalia-shell ipc call brightness increase"
         ",XF86AudioLowerVolume,exec,pamixer -d 2"
         ",XF86AudioRaiseVolume,exec,pamixer -i 2"
       ];
@@ -238,9 +238,9 @@ in {
         "$mainMod, W, togglefloating" # toggle the window on focus to float
         "$mainMod SHIFT, G, togglegroup" # toggle the window on focus to float
         "$mainMod, F, fullscreen" # toggle the window on focus to fullscreen
-        "$mainMod, L, exec, hyprlock" # lock screen
-        "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
-        "$CONTROL, ESCAPE, exec, pkill waybar || waybar" # toggle waybar
+        "$mainMod, L, exec, noctalia-shell ipc call lockScreen lock" # lock screen
+        "$mainMod, backspace, exec, noctalia-shell ipc call sessionMenu toggle" # logout menu
+        "$CONTROL, ESCAPE, exec, noctalia-shell ipc call bar toggle" # toggle noctalia-shell
 
         # Switch between windows in a floating workspace
         "$mainMod, tab, cyclenext"
@@ -334,15 +334,16 @@ in {
         "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
         "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
 
-        "$mainMod, A, exec, launcher drun" # launch desktop applications
-        "$mainMod, SPACE, exec, launcher drun" # launch desktop applications
-        "$mainMod SHIFT, W, exec, launcher wallpaper" # launch wallpaper switcher
-        "$mainMod, E, exec, launcher emoji" # launch emoji picker
+        "$mainMod, A, exec, noctalia-shell ipc call launcher toggle" # Launcher
+        "$mainMod, SPACE, exec, noctalia-shell ipc call controlCenter toggle" # Control center
+        "$mainMod SHIFT, W, exec, noctalia-shell ipc call wallpaper toggle" # Wallpaper switcher
+        "$mainMod SHIFT, C, exec, noctalia-shell ipc call launcher calculator" # Calculator
+        "$mainMod, E, exec, noctalia-shell ipc call launcher emoji" # Emoji picker
         "$mainMod, G, exec, launcher games" # game launcher
         # "$mainMod, tab, exec, launcher window" # switch between desktop applications
         # "$mainMod, R, exec, launcher file" # brrwse system files
         "$mainMod ALT, K, exec, ${./scripts/keyboardswitch.sh}" # change keyboard layout
-        "$mainMod, less, exec, swaync-client -t -sw" # swayNC panel
+        "$mainMod, less, exec, noctalia-shell ipc call notifications toggleHistory" # notification panel
         "$mainMod CTRL, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
         "$mainMod, V, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
         "$mainMod SHIFT, M, exec, ${./scripts/rofimusic.sh}" # online music
@@ -371,11 +372,6 @@ in {
         ",XF86AudioPause,exec,playerctl play-pause" # Play/Pause media
         ",xf86AudioNext,exec,playerctl next" # go to next media
         ",xf86AudioPrev,exec,playerctl previous" # go to previous media
-
-        # ",xf86AudioNext,exec,${./scripts/MediaCtrl.sh} next" # go to next media
-        # ",xf86AudioPrev,exec,${./scripts/MediaCtrl.sh} previous" # go to previous media
-        # ",XF86AudioPlay,exec,${./scripts/MediaCtrl.sh} play-pause" # go to next media
-        # ",XF86AudioPause,exec,${./scripts/MediaCtrl.sh} play-pause" # go to next media
 
         # Rebuild NixOS with a KeyBind
         "$mainMod, U, exec, $term -e rebuild"
@@ -480,16 +476,17 @@ in {
 
         "sleep 1; hyprctl dispatch workspace 1"
 
+        # Session visuals
         "${lib.getExe wallpaper}"
-        "pkill -x waybar 2>/dev/null; sleep 0.2; waybar"
-        "swaync"
-        "nm-applet --indicator"
+        "noctalia-shell"
+
+        # Clipboard history
         "wl-clipboard-history -t"
-        "${getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch cliphist store --no-newline" # clipboard store text data
-        "${getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store" # clipboard store image data
-        "rm '$XDG_CACHE_HOME/cliphist/db'" # Clear clipboard
-        "${./scripts/batterynotify.sh}" # battery notification
-        # "${./scripts/autowaybar.sh}" # uncomment packages at the top
+        "${getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch cliphist store --no-newline"
+        "${getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store"
+
+        # Battery alerts
+        "${./scripts/batterynotify.sh}"
       ];
 
       monitor = [

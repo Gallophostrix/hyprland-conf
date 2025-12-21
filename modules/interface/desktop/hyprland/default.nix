@@ -6,14 +6,10 @@
 }: {
   imports = [
     ./hyprland.nix
+    ./noctalia.nix
     ./programs/rofi
-    ./programs/waybar
-    # ./programs/dunst
-    ./programs/swaync
-    ./programs/wlogout
     ./programs/hyprlock
     ./programs/hypridle
-    ./programs/hyprsunset
     ./programs/hyprcursor
   ];
   systemd.user.services.hyprpolkitagent = {
@@ -45,24 +41,32 @@
   };
 
   home.packages = with pkgs; [
-    aubio
-    hyprpicker
+    # quickshell dependencies
+    quickshell
+    gpu-screen-recorder
+    brightnessctl
+
+    ddcutil
+
     cliphist
+    matugen
+    wlsunset
+
+    # GTK theming
+    nwg-look
+    adw-gtk3
+
+    hyprpicker
     wf-recorder
     grimblast
     slurp
-    libnotify
-    brightnessctl
-    ddcutil
-    networkmanagerapplet
     pamixer
     pavucontrol
     playerctl
     hyprshot
     wtype
-    wl-clipboard
+    # wl-clipboard
     yad
-    # socat # for and autowaybar.sh
   ];
 
   xdg.configFile."hypr/icons" = {

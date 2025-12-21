@@ -43,6 +43,7 @@
         bind \ca beginning-of-line
         bind \ce end-of-line
 
+        set -g fish_greeting
         set -g fish_autosuggestion yes
         set -g fish_history_size 100000
         if not set -q fish_history

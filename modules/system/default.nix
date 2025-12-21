@@ -9,6 +9,7 @@
     ./flatpak.nix
     # ./fonts.nix
     ./interface.nix
+    ./monitoring.nix
     ./sddm.nix
     ./security.nix
     ./system.nix
