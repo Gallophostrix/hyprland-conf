@@ -20,7 +20,7 @@
         # Locking session
         {
           timeout = 300; # 5 Minutes
-          on-timeout = "loginctl lock-session";
+          on-timeout = "noctalia-shell ipc call lockScreen lock";
         }
         /*
         {

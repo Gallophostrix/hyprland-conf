@@ -39,7 +39,7 @@
         schedulingMode = "false";
         manualSunrise = "06:30";
         manualSunset = "22:30";
-        matugenSchemeType = "content";
+        matugenSchemeType = "scheme-content";
         generateTemplatesForPredefined = true; # check
       };
       templates = {
@@ -47,7 +47,7 @@
         gtk = false;
         qt = false;
         kcolorscheme = false;
-        alacritty = true;
+        alacritty = false;
         kitty = false;
         ghostty = false;
         foot = false;
@@ -65,8 +65,8 @@
         emacs = false;
         niri = false;
         mango = false;
-        zed = false;
-        enableUserTemplates = false;
+        zed = true;
+        enableUserTemplates = true;
       };
       wallpaper = {
         enabled = true;
@@ -407,7 +407,18 @@
         criticalColor = "";
       };
     };
-    # this may also be a string or a path to a JSON file,
-    # but in this case must include *all* settings.
+    user-templates = ''
+      [config]
+
+      # Theme Alacritty terminal
+      [templates.alacritty]
+      input_path = "~/nixcfg/modules/interface/desktop/hyprland/noctalia-templates/alacritty.toml"
+      output_path = "~/.config/alacritty/alacritty.toml"
+
+      # Theme Hyprland compositor
+      [templates.hyprland]
+      input_path = "~/nixcfg/modules/interface/desktop/hyprland/noctalia-templates/hyprland.conf"
+      output_path = "~/.config/hypr/hyprland.conf"
+    '';
   };
 }

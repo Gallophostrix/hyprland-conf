@@ -10,7 +10,7 @@
       alacritty.enable = false;
       swaync.enable = false;
       yazi.enable = false;
-      zed.enable = true;
+      zed.enable = false;
 
       # Self defined
       fish.enable = false;
@@ -20,7 +20,7 @@
       opencode.enable = false;
 
       # Stylix defined
-      hyprland.enable = true;
+      hyprland.enable = false;
       hyprlock = {
         enable = false;
         useWallpaper = true;

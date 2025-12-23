@@ -29,6 +29,17 @@
       base_keymap = "VSCode";
       load_direnv = "shell_hook";
 
+      theme = {
+        mode = "dark";
+        light = "Noctalia Light";
+        dark = "Noctalia Dark";
+      };
+      icon_theme = {
+        mode = "dark";
+        light = "Catppuccin Latte";
+        dark = "Catppuccin Mocha";
+      };
+
       telemetry = {
         diagnostics = true;
         metrics = true;

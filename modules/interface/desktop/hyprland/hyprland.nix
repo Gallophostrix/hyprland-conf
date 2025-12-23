@@ -48,10 +48,7 @@ in {
         "MOZ_ENABLE_WAYLAND,1"
         "QT_QPA_PLATFORM,wayland;xcb"
         "QT_QPA_PLATFORMTHEME,qt6ct"
-        # "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-        # "QT_AUTO_SCREEN_SCALE_FACTOR,1"
 
-        # "WLR_RENDERER_ALLOW_SOFTWARE,1"
         "LIBVA_DRIVER_NAME,iHD"
         "__GLX_VENDOR_LIBRARY_NAME,mesa"
 
@@ -73,7 +70,7 @@ in {
       input = {
         kb_layout = "${kbdLayout},ru";
         kb_variant = "${kbdVariant},";
-        repeat_delay = 212; # or 212
+        repeat_delay = 212;
         repeat_rate = 35;
         numlock_by_default = true;
 
@@ -92,9 +89,9 @@ in {
       general = {
         gaps_in = 4;
         gaps_out = 9;
-        # border_size = 2;
-        # "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-        # "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+        border_size = 2; ###
+        "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg"; ###
+        "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg"; ###
         resize_on_border = true;
         layout = "dwindle"; # dwindle or master
         # allow_tearing = true; # Allow tearing for games (use immediate window rules for specific games or all titles)
@@ -104,25 +101,18 @@ in {
         "3, horizontal, workspace"
       ];
 
-      # group = {
-      #   "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-      #   "col.border_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-      #   "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
-      #   "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
-      # };
+      group = {
+        ###
+        "col.border_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        "col.border_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+        "col.border_locked_active" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
+        "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
+      }; ###
 
       layerrule = [
         "blur, rofi"
         "ignorezero, rofi"
         "ignorealpha 0.7, rofi"
-
-        "blur, swaync-control-center"
-        "blur, swaync-notification-window"
-        "ignorezero, swaync-control-center"
-        "ignorezero, swaync-notification-window"
-        "ignorealpha 0.7, swaync-control-center"
-        # "ignorealpha 0.8, swaync-notification-window"
-        # "dimaround, swaync-control-center"
       ];
 
       decoration = {

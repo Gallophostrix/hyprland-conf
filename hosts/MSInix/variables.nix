@@ -7,7 +7,7 @@
   browser = "brave";
   tuiFileManager = "yazi";
   sddmTheme = "pixel_sakura";
-  defaultWallpaper = "kurzgesagt.webp"; # to change wallpaper: SUPER + SHIFT + W
+  defaultWallpaper = "evening-sky.webp"; # to change wallpaper: SUPER + SHIFT + W
   hyprlockWallpaper = "evening-sky.webp"; # See modules/interface/wallpapers for options
   shell = "fish";
   games = true; # Whether to enable the gaming module
