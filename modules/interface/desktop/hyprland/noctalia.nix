@@ -36,11 +36,10 @@
         useWallpaperColors = true;
         predefinedScheme = "Noctalia (default)";
         darkMode = true;
-        schedulingMode = "false";
+        schedulingMode = "off";
         manualSunrise = "06:30";
         manualSunset = "22:30";
-        matugenSchemeType = "scheme-content";
-        generateTemplatesForPredefined = true; # check
+        generationMethod = "M3-Content";
       };
       templates = {
         # check
@@ -58,13 +57,15 @@
         vicinae = false;
         walker = false;
         code = false;
-        spicetify = false;
+        spicetify = false; ###
         telegram = false;
         cava = false;
         yazi = true;
         emacs = false;
+        hyprland = false;
         niri = false;
         mango = false;
+        zathura = true;
         zed = true;
         enableUserTemplates = true;
       };
@@ -78,7 +79,8 @@
         setWallpaperOnAllMonitors = false;
         fillMode = "crop";
         fillColor = "#000000";
-        randomEnabled = false;
+        automationEnabled = false;
+        wallpaperChangeMode = "random";
         randomIntervalSec = 300;
         transitionDuration = 1500;
         transitionType = "random";
@@ -95,6 +97,7 @@
         wallhavenResolutionMode = "atleast";
         wallhavenResolutionWidth = "";
         wallhavenResolutionHeight = "";
+        sortOrder = "name";
       };
       bar = {
         position = "top";
@@ -418,7 +421,7 @@
       # Theme Hyprland compositor
       [templates.hyprland]
       input_path = "~/nixcfg/modules/interface/desktop/hyprland/noctalia-templates/hyprland.conf"
-      output_path = "~/.config/hypr/hyprland.conf"
+      output_path = "~/.config/hypr/hyprland-noctalia.conf"
     '';
   };
 }

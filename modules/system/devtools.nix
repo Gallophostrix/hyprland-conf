@@ -21,7 +21,6 @@
     lm_sensors # get hardware stats
     nix-prefetch-scripts # Find Hashes/Revisions of Nix Packages
     usbutils # get usb device info
-    # uwsm # Universal Wayland Session Manager from TTY
     git
     gh
 

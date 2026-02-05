@@ -7,7 +7,7 @@
     ./network/wireguard.nix
     ./devtools.nix
     ./flatpak.nix
-    # ./fonts.nix
+    ./fonts.nix
     ./interface.nix
     ./monitoring.nix
     ./sddm.nix
