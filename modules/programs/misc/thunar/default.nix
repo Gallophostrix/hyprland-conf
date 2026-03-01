@@ -3,30 +3,21 @@
   lib,
   ...
 }: let
-  thunarPlugins = with pkgs.xfce; [
+  thunarPlugins = with pkgs; [
     thunar-archive-plugin
     thunar-volman
     thunar-media-tags-plugin
   ];
 in {
-  # Core file manager + plugins
   home.packages = with pkgs;
     [
-      xfce.thunar
+      thunar
     ]
     ++ thunarPlugins
     ++ [
-      # Archive GUI + backends
-      file-roller # or xarchiver / engrampa
-
-      # Optional but very useful for Thunar
-      gvfs # trash, smb://, mtp, etc.
+      file-roller
     ];
 
-  # Thumbnails in Thunar (covers, photos, etc.)
-  # services.tumbler.enable = true;
-
-  # Optionnel : associer file-roller aux archives (MIME)
   xdg.mimeApps.enable = true;
   xdg.mimeApps.defaultApplications = {
     "application/zip" = ["org.gnome.FileRoller.desktop"];

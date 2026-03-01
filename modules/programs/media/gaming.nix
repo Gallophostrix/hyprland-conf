@@ -1,10 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    steam-run
-    gamescope
-    wineWowPackages.staging
+    # steam-run
     protontricks
-    protonup-qt
     vkbasalt
   ];
 
