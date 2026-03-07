@@ -1,24 +1,15 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    # steam-run
     protontricks
-    vkbasalt
   ];
 
   programs.mangohud = {
     enable = true;
-    enableSessionWide = true;
-
-    settingsPerApplication = {
-      mpv = {no_display = true;};
-    };
 
     settings = {
       no_display = true;
-      fps_limit = [60 0 144 165 240];
+      fps_limit = [60 0 240];
       fps_limit_method = "late";
-      vsync = 2;
-      gl_vsync = 1;
 
       toggle_hud = "Shift_R+F12";
       toggle_fps_limit = "Shift_R+F1";

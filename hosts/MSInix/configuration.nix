@@ -1,7 +1,6 @@
 {
   lib,
   hostVars,
-  inputs,
   ...
 }: {
   imports =

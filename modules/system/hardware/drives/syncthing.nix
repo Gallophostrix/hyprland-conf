@@ -1,8 +1,4 @@
-{
-  host,
-  hostVars,
-  ...
-}: {
+{hostVars, ...}: {
   services.syncthing = {
     enable = true;
     user = "${hostVars.username}";

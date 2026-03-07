@@ -1,11 +1,4 @@
-{
-  host,
-  pkgs,
-  config,
-  lib,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   gtk = {
     enable = true;
     theme = {

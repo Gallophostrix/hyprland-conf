@@ -2,7 +2,6 @@
   pkgs,
   hostVars,
   overlays,
-  inputs,
   ...
 }: {
   programs = {

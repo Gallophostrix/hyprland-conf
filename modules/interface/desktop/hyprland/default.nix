@@ -1,13 +1,7 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hyprland.nix
     ./noctalia.nix
-    ./programs/hypridle
     ./programs/cursor
   ];
   systemd.user.services.hyprpolkitagent = {

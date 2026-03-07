@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{...}: {
   programs.noctalia-shell = {
     enable = true;
     settings = {
@@ -20,10 +16,14 @@
         lockOnSuspend = true;
         showSessionButtonsOnLockScreen = true;
         showHibernateOnLockScreen = false;
+        enableLockScreenMediaControls = true;
         enableShadows = true;
         shadowDirection = "bottom_right";
+        autoStartAuth = true;
         clockStyle = "custom";
         clockFormat = "hh:mm";
+        passwordChars = true;
+        lockScreenBlur = 0.2;
       };
       ui = {
         fontDefault = "DejaVu Sans";
@@ -64,6 +64,7 @@
         pywalfox = false;
         qt = true;
         spicetify = true;
+        steam = true;
         sway = true;
         telegram = false;
         vicinae = false;
@@ -81,7 +82,7 @@
         directory = "/home/mik/nixcfg/modules/interface/wallpapers";
         monitorDirectories = [];
         enableMultiMonitorDirectories = true;
-        recursiveSearch = true;
+        viewMode = "recursive";
         setWallpaperOnAllMonitors = true;
         fillMode = "crop";
         fillColor = "#000000";
@@ -173,6 +174,7 @@
               alwaysShowPercentage = false;
               id = "Battery";
               warningThreshold = 30;
+              showPowerProfiles = true;
             }
             {
               id = "NotificationHistory";
@@ -251,8 +253,12 @@
           }
         ];
       };
+      appLauncher = {
+        enableClipboardHistory = true;
+      };
       notifications = {
         enabled = true;
+        enavleMarkdown = true;
         monitors = [];
         location = "top_right";
         overlayLayer = true;
@@ -262,6 +268,9 @@
         normalUrgencyDuration = 8;
         criticalUrgencyDuration = 15;
         enableKeyboardLayoutToast = true;
+        saveToHistory = {
+          low = false;
+        };
         sounds = {
           enabled = false;
           volume = 0.5;
@@ -269,7 +278,7 @@
           criticalSoundFile = "";
           normalSoundFile = "";
           lowSoundFile = "";
-          excludedApps = "discord,firefox,chrome,chromium,edge,brave";
+          excludedApps = "brave";
         };
       };
       osd = {
@@ -317,7 +326,19 @@
             action = "shutdown";
             enabled = true;
           }
+
+          {
+            action = "rebootToUefi";
+            enabled = false;
+          }
         ];
+      };
+      idle = {
+        enabled = true;
+        screenOffTimeout = 600;
+        lockTimeout = 360;
+        suspendTimeout = 0;
+        fadeDuration = 10;
       };
       audio = {
         volumeStep = 2;
@@ -346,7 +367,6 @@
         wifiEnabled = true;
       };
       location = {
-        monthBeforeDay = false;
         name = "Metz, France";
         weatherEnabled = true;
         weatherShowEffects = true;

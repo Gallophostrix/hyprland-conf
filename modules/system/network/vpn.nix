@@ -1,9 +1,4 @@
-{
-  pkgs,
-  hostVars,
-  config,
-  ...
-}: {
+{config, ...}: {
   services.tailscale = {
     enable = true;
     useRoutingFeatures = "client";

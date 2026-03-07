@@ -1,9 +1,6 @@
 {
-  config,
-  pkgs,
   hostVars,
   lib,
-  inputs,
   ...
 }: let
   username = hostVars.username;
@@ -34,6 +31,7 @@ in {
       ../../modules/programs/media/zathura
 
       ../../modules/programs/misc/thunar
+      ../../modules/programs/misc/keepassxc
 
       ../../modules/programs/desktop-apps.nix
 
@@ -44,7 +42,7 @@ in {
     ../../modules/programs/media/gaming.nix;
 
   gpuOffload = {
-    apps = ["steam" "mpv"];
+    apps = ["mpv"];
     vaapiApps = ["mpv"]; # launch with VA-API NVIDIA automatically
     addAliasNvo = true; # 'nvo' shortcut
   };
@@ -55,11 +53,12 @@ in {
     stateVersion = "26.05";
   };
 
-  xdg.enable = true;
+  xdg = {
+    enable = true;
+    autostart.enable = true;
+  };
 
   gtk.enable = true;
-  # gtk.gtk3.extraConfig."gtk-font-name" = "Noto Sans 16";
-  # gtk.gtk4.extraConfig."gtk-font-name" = "Noto Sans 16";
 
   home.sessionVariables = {
     EDITOR = editor;

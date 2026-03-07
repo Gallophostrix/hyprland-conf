@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: let
+{pkgs, ...}: let
   thunarPlugins = with pkgs; [
     thunar-archive-plugin
     thunar-volman

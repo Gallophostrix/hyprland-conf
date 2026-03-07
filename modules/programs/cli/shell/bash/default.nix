@@ -1,8 +1,4 @@
-{
-  self,
-  pkgs,
-  ...
-}: {
+{self, ...}: {
   imports = [
     ../packages.nix
   ];

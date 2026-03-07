@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   hostVars,
   ...
@@ -12,7 +11,6 @@
       ./network/ssh.nix
       ./devtools.nix
       ./flatpak.nix
-      ./fonts.nix
       ./interface.nix
       ./monitoring.nix
       ./sddm.nix

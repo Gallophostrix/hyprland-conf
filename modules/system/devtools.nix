@@ -1,5 +1,4 @@
 {
-  host,
   hostVars,
   pkgs,
   ...
