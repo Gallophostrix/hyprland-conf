@@ -1,10 +1,4 @@
-{
-  lib,
-  pkgs,
-  config,
-  hostVars,
-  ...
-}: let
+{hostVars, ...}: let
   inherit
     (hostVars)
     browser
@@ -13,24 +7,23 @@
     editor
     kbdLayout
     kbdVariant
-    defaultWallpaper
-    ;
-
-  inherit
-    (lib)
-    getExe
-    getExe'
     ;
 in {
   wayland.windowManager.hyprland = {
     enable = true;
-    plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
-      # inputs.hyprsysteminfo.packages.${pkgs.system}.default
-    ];
     systemd = {
       enable = true;
       variables = ["--all"];
+    };
+    settings = {
+      "$mainMod" = "SUPER";
+      "$term" = terminal;
+      "$editor" = editor;
+      "$fileManager" = "${terminal} --class 'tuiFileManager' -e ${tuiFileManager}";
+      "$browser" = browser;
+      "$CONTROL" = "CTRL";
+      "$kbdLayout" = kbdLayout;
+      "$kbdVariant" = kbdVariant;
     };
     extraConfig = ''
       source = ~/.config/hypr/hyprland-noctalia.conf

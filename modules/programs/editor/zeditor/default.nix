@@ -13,6 +13,7 @@
       "markdownlint"
       "sql"
       "dockerfile"
+      "git-firefly"
       "catppuccin-icons"
     ];
 

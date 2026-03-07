@@ -3,10 +3,6 @@
     zoxide.enable = true; # better cd
     bat.enable = true; # better cat
     fzf.enable = true;
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
   };
 
   home.packages = with pkgs; [

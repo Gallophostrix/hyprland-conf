@@ -22,7 +22,7 @@
   clock24h = true; # 24H or 12H clock in waybar
   locale = "fr_FR.UTF-8"; # System locale
   timezone = "Europe/Paris"; # Your timezone
-  kbdLayout = "fr"; # Keyboard layout
+  kbdLayout = "fr,ru"; # Keyboard layout
   kbdVariant = ""; # Keyboard variant (can be empty)
   consoleKeymap = "fr"; # TTY keymap
 }
