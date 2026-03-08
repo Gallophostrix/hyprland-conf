@@ -21,6 +21,7 @@
     (importScript ./rollback.nix)
     (importScript ./extract.nix)
     (importScript ./driverinfo.nix)
+    (importScript ./noctalia-restart.nix)
     # add more here
   ];
 in {

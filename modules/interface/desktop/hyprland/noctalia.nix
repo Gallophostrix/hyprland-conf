@@ -12,10 +12,11 @@
         animationSpeed = 1;
         animationDisabled = false;
         compactLockScreen = false;
-        lockScreenAnimation = "true";
+        lockScreenAnimations = true;
         lockOnSuspend = true;
         showSessionButtonsOnLockScreen = true;
         showHibernateOnLockScreen = false;
+        enableLockScreenCountdown = true;
         enableLockScreenMediaControls = true;
         enableShadows = true;
         shadowDirection = "bottom_right";
@@ -23,7 +24,10 @@
         clockStyle = "custom";
         clockFormat = "hh:mm";
         passwordChars = true;
+        enableBlurBehind = true;
+        dimmerOpacity = 0.2;
         lockScreenBlur = 0.2;
+        telemetryEnabled = false;
       };
       ui = {
         fontDefault = "DejaVu Sans";
@@ -45,36 +49,37 @@
         generationMethod = "content";
       };
       templates = {
-        alacritty = false;
-        btop = false;
-        cava = true;
-        discord = false;
-        emacs = false;
-        foot = false;
-        fuzzel = false;
-        ghostty = false;
-        gtk = true;
-        helix = false;
-        hyprland = false;
-        hyprtoolkit = false;
-        kcolorscheme = false;
-        kitty = false;
-        mango = false;
-        niri = false;
-        pywalfox = false;
-        qt = true;
-        spicetify = true;
-        steam = true;
-        sway = true;
-        telegram = false;
-        vicinae = false;
-        vscode = false;
-        walker = false;
-        wezterm = false;
-        yazi = true;
-        zathura = true;
-        zed = true;
         enableUserTheming = true;
+        activeTemplates = [
+          {
+            id = "cava";
+            enabled = true;
+          }
+          {
+            id = "gtk";
+            enabled = true;
+          }
+          {
+            id = "qt";
+            enabled = true;
+          }
+          {
+            id = "spicetify";
+            enabled = true;
+          }
+          {
+            id = "yazi";
+            enabled = true;
+          }
+          {
+            id = "zathura";
+            enabled = true;
+          }
+          {
+            id = "zed";
+            enabled = true;
+          }
+        ];
       };
       wallpaper = {
         enabled = true;
@@ -112,8 +117,8 @@
         density = "default";
         showCapsule = false;
         floating = true;
-        marginVertical = 0.25;
-        marginHorizontal = 0.25;
+        marginVertical = 5;
+        marginHorizontal = 5;
         widgets = {
           left = [
             {
@@ -139,45 +144,51 @@
           ];
           center = [
             {
+              id = "Clock";
               formatHorizontal = "HH:mm";
               formatVertical = "HH mm";
-              id = "Clock";
-              useMonospacedFont = false;
-              usePrimaryColor = true;
+              tooltipFormat = "HH:mm ddd, MMM dd";
             }
           ];
           right = [
             {
               id = "SystemMonitor";
+              compactMode = true;
               showCpuUsage = true;
               showCpuTemp = true;
               showGpuTemp = true;
               showMemoryUsage = true;
               showMemoryAsPercent = true;
+              useMonospaceFont = true;
             }
             {
-              id = "WiFi";
+              id = "Network";
+              displayMode = "onhover";
             }
-            {
-              id = "VPN";
-            }
+            {id = "plugin:tailscale";}
             {
               id = "Bluetooth";
+              displayMode = "onhover";
             }
             {
               id = "Volume";
+              displayMode = "onhover";
+              middleClickCommand = "pwvucontrol || pavucontrol";
             }
             {
               id = "Brightness";
+              displayMode = "onhover";
             }
             {
-              alwaysShowPercentage = false;
               id = "Battery";
-              warningThreshold = 30;
+              displayMode = "graphic-clean";
+              hideIfNotDetected = true;
               showPowerProfiles = true;
             }
             {
               id = "NotificationHistory";
+              showUnreadBadge = true;
+              unreadBadgeColor = "primary";
             }
           ];
         };
@@ -197,12 +208,35 @@
         deadOpacity = 0.6;
         animationSpeed = 1;
       };
+      desktopWidgets = {
+        enabled = true;
+        overviewEnabled = true;
+        monitorWidgets = [
+          {
+            name = "eDP-1";
+            widgets = [
+              {
+                id = "AudioVisualizer";
+                showBackground = true;
+                roundedCorners = true;
+                width = 900;
+                height = 320;
+                x = 920;
+                y = 800;
+                visualizerType = "mirrored";
+                hideWhenIdle = false;
+                colorName = "primary";
+              }
+            ];
+          }
+        ];
+      };
       controlCenter = {
         position = "close_to_bar_button";
         shortcuts = {
           left = [
             {
-              id = "WiFi";
+              id = "Network";
             }
             {
               id = "Bluetooth";
@@ -255,10 +289,11 @@
       };
       appLauncher = {
         enableClipboardHistory = true;
+        terminalCommand = "alacritty -e";
       };
       notifications = {
         enabled = true;
-        enavleMarkdown = true;
+        enableMarkdown = true;
         monitors = [];
         location = "top_right";
         overlayLayer = true;
@@ -270,6 +305,8 @@
         enableKeyboardLayoutToast = true;
         saveToHistory = {
           low = false;
+          normal = true;
+          critical = true;
         };
         sounds = {
           enabled = false;
@@ -301,6 +338,7 @@
         position = "center";
         showHeader = true;
         largeButtonsStyle = true;
+        showKeybinds = false;
         powerOptions = [
           {
             action = "lock";
@@ -326,7 +364,6 @@
             action = "shutdown";
             enabled = true;
           }
-
           {
             action = "rebootToUefi";
             enabled = false;
@@ -343,11 +380,10 @@
       audio = {
         volumeStep = 2;
         volumeOverdrive = false;
-        cavaFrameRate = 30;
+        spectrumFrameRate = 30;
         visualizerType = "linear";
         mprisBlacklist = [];
         preferredPlayer = "spotify";
-        externalMixer = "pwvucontrol || pavucontrol";
       };
       brightness = {
         brightnessStep = 2;
@@ -409,14 +445,8 @@
         memCriticalThreshold = 90;
         diskWarningThreshold = 80;
         diskCriticalThreshold = 90;
-        cpuPollingInterval = 3000;
-        tempPollingInterval = 3000;
-        gpuPollingInterval = 3000;
-        enableNvidiaGpu = true;
-        memPollingInterval = 3000;
-        diskPollingInterval = 3000;
-        networkPollingInterval = 3000;
-        useCustomColors = false; # check
+        enableDgpuMonitoring = true;
+        useCustomColors = false;
         warningColor = "";
         criticalColor = "";
       };
@@ -444,6 +474,10 @@
       ];
       states = {
         keybind-cheatsheet = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        tailscale = {
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };
