@@ -17,6 +17,8 @@
     };
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
     age.sshKeyPaths = ["/home/mik/.ssh/id_ed25519"];
