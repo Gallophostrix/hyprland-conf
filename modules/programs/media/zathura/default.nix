@@ -2,13 +2,11 @@
   programs.zathura = {
     enable = true;
     options = {
-      # --- Zathura (document) ---
       recolor = true;
       recolor-keephue = true;
       window-title-basename = true;
       guioptions = "none";
       font = "JetBrainsMono Nerd Font 15";
-      sandbox = "none";
       adjust-open = "width";
       zoom-center = true;
       scroll-page-aware = true;
@@ -23,24 +21,7 @@
 
     extraConfig = ''
       " ---------- Colors ----------
-      set default-bg                "#1e1e2e"
-      set default-fg                "#cdd6f4"
-      set statusbar-bg              "#1e1e2e"
-      set statusbar-fg              "#cdd6f4"
-      set inputbar-bg               "#1e1e2e"
-      set inputbar-fg               "#cdd6f4"
-      set completion-bg             "#1e1e2e"
-      set completion-fg             "#cdd6f4"
-      set completion-group-bg       "#181825"
-      set completion-group-fg       "#89b4fa"
-      set completion-highlight-bg   "#89b4fa"
-      set completion-highlight-fg   "#1e1e2e"
-      set notification-bg           "#1e1e2e"
-      set notification-fg           "#cdd6f4"
-      set notification-warning-bg   "#fab387"
-      set notification-warning-fg   "#1e1e2e"
-      set notification-error-bg     "#f38ba8"
-      set notification-error-fg     "#1e1e2e"
+      include noctaliarc
 
       " ---------- Keybinds ----------
       " Movements (Vim)
@@ -67,7 +48,7 @@
       map s feedkeys /
       map n search forward
       map N search backward
-      map <Esc> nohl_search
+      map <Esc> nohlsearch
 
       " Pages-per-row toggle → `p`
       map p toggle_page_mode
@@ -94,10 +75,13 @@
       map : focus_inputbar
 
       " Go to
-      map g feedkeys :goto\
+      map g feedkeys ":goto "
 
       " Open a file
       map o file_chooser
     '';
   };
+  home.packages = with pkgs; [
+    pdfarranger
+  ];
 }

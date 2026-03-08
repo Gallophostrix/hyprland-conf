@@ -31,7 +31,6 @@ in {
       ../../modules/programs/media/zathura
 
       ../../modules/programs/misc/thunar
-      ../../modules/programs/misc/keepassxc
 
       ../../modules/programs/desktop-apps.nix
 
@@ -56,6 +55,19 @@ in {
   xdg = {
     enable = true;
     autostart.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "org.pwmt.zathura.desktop";
+        "image/png" = "imv.desktop";
+        "image/jpeg" = "imv.desktop";
+        "image/gif" = "imv.desktop";
+        "image/webp" = "imv.desktop";
+        "video/mp4" = "mpv.desktop";
+        "video/webm" = "mpv.desktop";
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "com.collabora.Office.desktop";
+      };
+    };
   };
 
   gtk.enable = true;

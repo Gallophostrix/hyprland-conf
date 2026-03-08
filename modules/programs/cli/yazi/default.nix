@@ -61,62 +61,85 @@
           }
         ];
       };
-      open = {
-        prepend_rules = [
-          {
-            name = "*.pdf";
-            use = "pdf";
-          }
-          {
-            name = "*.png";
-            use = "picture";
-          }
-          {
-            name = "*.jpg";
-            use = "picture";
-          }
-          {
-            name = "*.jpeg";
-            use = "picture";
-          }
-          {
-            name = "*.gif";
-            use = "picture";
-          }
-          {
-            name = "*.webp";
-            use = "picture";
-          }
-          {
-            name = "*.mp4";
-            use = "video";
-          }
-          {
-            name = "*.webm";
-            use = "video";
-          }
-          {
-            name = "*.txt";
-            use = ["editor" "nano"];
-          }
-          {
-            name = "*.docx";
-            use = "office";
-          }
-          {
-            name = "*.doc";
-            use = "office";
-          }
-          {
-            name = "*.xlsx";
-            use = "office";
-          }
-          {
-            name = "*.xls";
-            use = "office";
-          }
-        ];
-      };
+      open.prepend_rules = [
+        # --- PDF ---
+        {
+          mime = "application/pdf";
+          use = "pdf";
+        }
+        {
+          name = "*.pdf";
+          use = "pdf";
+        }
+
+        # --- Images ---
+        {
+          mime = "image/*";
+          use = "picture";
+        }
+        {
+          name = "*.png";
+          use = "picture";
+        }
+        {
+          name = "*.jpg";
+          use = "picture";
+        }
+        {
+          name = "*.jpeg";
+          use = "picture";
+        }
+        {
+          name = "*.gif";
+          use = "picture";
+        }
+        {
+          name = "*.webp";
+          use = "picture";
+        }
+
+        # --- Vidéo ---
+        {
+          mime = "video/*";
+          use = "video";
+        }
+        {
+          name = "*.mp4";
+          use = "video";
+        }
+        {
+          name = "*.webm";
+          use = "video";
+        }
+
+        # --- Texte ---
+        {
+          mime = "text/*";
+          use = ["editor" "nano"];
+        }
+        {
+          name = "*.txt";
+          use = ["editor" "nano"];
+        }
+
+        # --- Office ---
+        {
+          name = "*.docx";
+          use = "office";
+        }
+        {
+          name = "*.doc";
+          use = "office";
+        }
+        {
+          name = "*.xlsx";
+          use = "office";
+        }
+        {
+          name = "*.xls";
+          use = "office";
+        }
+      ];
       keymap = {
         mgr.prepend_keymap = [
           {
@@ -140,11 +163,6 @@
             run = "find --smart";
           }
         ];
-      };
-      theme = {
-        mgr = {
-          border_symbol = " ";
-        };
       };
     };
   };
