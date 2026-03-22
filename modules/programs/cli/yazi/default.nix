@@ -1,8 +1,7 @@
 {...}: {
   programs.yazi = {
     enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
     settings = {
       mgr = {
         sort_by = "natural";
@@ -22,42 +21,36 @@
           {
             run = "zathura \"$@\"";
             block = true;
-            for = "unix";
           }
         ];
         picture = [
           {
             run = "sh -lc 'cd \"$(dirname \"$0\")\" && exec imv .'";
             block = true;
-            for = "unix";
           }
         ];
         video = [
           {
             run = "sh -lc 'cd \"$(dirname \"$0\")\" && exec mpv --loop .'";
             block = true;
-            for = "unix";
           }
         ];
         editor = [
           {
             run = "$EDITOR \"$0\"";
             block = true;
-            for = "unix";
           }
         ];
         nano = [
           {
             run = "nano \"$0\"";
             block = true;
-            for = "unix";
           }
         ];
         office = [
           {
             run = "com.collabora.Office \"$0\"";
             block = true;
-            for = "unix";
           }
         ];
       };
@@ -140,30 +133,34 @@
           use = "office";
         }
       ];
-      keymap = {
-        mgr.prepend_keymap = [
-          {
-            on = ["e"];
-            run = "open";
-          }
-          {
-            on = ["<S-e>"];
-            run = "open --interactive";
-          }
-          {
-            on = ["d"];
-            run = "remove --force";
-          }
-          {
-            on = ["r"];
-            run = "rename --force";
-          }
-          {
-            on = ["f"];
-            run = "find --smart";
-          }
-        ];
+      flavor = {
+        dark = "noctalia";
+        light = "noctalia";
       };
+    };
+    keymap = {
+      mgr.prepend_keymap = [
+        {
+          on = ["e"];
+          run = "open";
+        }
+        {
+          on = ["<S-e>"];
+          run = "open --interactive";
+        }
+        {
+          on = ["d"];
+          run = "remove --force";
+        }
+        {
+          on = ["r"];
+          run = "rename --force";
+        }
+        {
+          on = ["f"];
+          run = "find --smart";
+        }
+      ];
     };
   };
 }

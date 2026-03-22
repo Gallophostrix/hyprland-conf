@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  hostVars,
   ...
 }: {
   programs.zed-editor = {
@@ -74,7 +75,7 @@
         blinking = "off";
         copy_on_select = false;
         working_directory = "current_project_directory";
-        env.TERM = "alacritty";
+        env.TERM = hostVars.terminal;
       };
 
       load_direnv = "shell_hook";

@@ -2,7 +2,7 @@
   # User Configuration
   username = "mik"; # Your username
   desktop = "hyprland";
-  terminal = "alacritty";
+  terminal = "ghostty";
   editor = "zeditor";
   browser = "brave";
   tuiFileManager = "yazi";

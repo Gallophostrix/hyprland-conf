@@ -52,7 +52,11 @@
         enableUserTheming = true;
         activeTemplates = [
           {
-            id = "cava";
+            id = "alacritty";
+            enabled = false;
+          }
+          {
+            id = "ghostty";
             enabled = true;
           }
           {
@@ -69,7 +73,7 @@
           }
           {
             id = "yazi";
-            enabled = true;
+            enabled = false;
           }
           {
             id = "zathura";
@@ -289,7 +293,7 @@
       };
       appLauncher = {
         enableClipboardHistory = true;
-        terminalCommand = "alacritty -e";
+        terminalCommand = "ghostty -e";
       };
       notifications = {
         enabled = true;
@@ -453,11 +457,6 @@
     };
     user-templates = ''
       [config]
-
-      # Theme Alacritty terminal
-      [templates.alacritty]
-      input_path = "~/nixcfg/modules/interface/desktop/hyprland/noctalia-templates/alacritty.toml"
-      output_path = "~/.config/alacritty/alacritty-noctalia.toml"
 
       # Theme Hyprland compositor
       [templates.hyprland]

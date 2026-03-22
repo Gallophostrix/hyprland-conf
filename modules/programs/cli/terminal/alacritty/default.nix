@@ -27,7 +27,7 @@
         };
       };
       general.import = [
-        "~/.config/alacritty/alacritty-noctalia.toml"
+        "~/.config/alacritty/themes/noctalia.toml"
       ];
     };
   };
