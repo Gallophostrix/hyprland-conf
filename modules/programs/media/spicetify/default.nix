@@ -10,26 +10,19 @@ in {
 
   programs.spicetify = {
     enable = true;
-    spotifyPackage = pkgs.spotify;
-    windowManagerPatch = false;
 
     enabledExtensions = with spicePkgs.extensions; [
       adblock
-      shuffle # shuffle+ (special characters are sanitized out of ext names)
-      keyboardShortcut # vimium-like navigation
+      beautifulLyrics
+      betterGenres
       copyLyrics # copy lyrics with selection
-      beautiful-lyrics
-      # autoVolume
-      # showQueueDuration
-      # fullAppDisplay
-      # hidePodcasts
+      shuffle # shuffle+ (special characters are sanitized out of ext names)
     ];
     enabledCustomApps = with spicePkgs.apps; [
-      #   reddit
-      #   lyricsPlus
       marketplace
-      #   localFiles
       #   ncsVisualizer
     ];
+
+    wayland = true;
   };
 }
