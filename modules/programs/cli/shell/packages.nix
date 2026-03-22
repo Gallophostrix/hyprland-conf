@@ -17,6 +17,6 @@
     unzip # .zip handling
     zip
 
-    microfetch # system info
+    fastfetch # system info
   ];
 }

@@ -6,7 +6,7 @@
       mgr = {
         sort_by = "natural";
         sort_dir_first = true;
-        linemode = "size"; # or size, permissions, owner, mtime
+        linemode = "size";
         show_hidden = true;
         show_symlink = true;
         ratio = [
@@ -19,37 +19,37 @@
       opener = {
         pdf = [
           {
-            run = "zathura \"$@\"";
+            run = "zathura %s";
             block = true;
           }
         ];
         picture = [
           {
-            run = "sh -lc 'cd \"$(dirname \"$0\")\" && exec imv .'";
+            run = "imv %d1";
             block = true;
           }
         ];
         video = [
           {
-            run = "sh -lc 'cd \"$(dirname \"$0\")\" && exec mpv --loop .'";
+            run = "mpv --loop %s";
             block = true;
           }
         ];
         editor = [
           {
-            run = "$EDITOR \"$0\"";
+            run = "$EDITOR %s";
             block = true;
           }
         ];
         nano = [
           {
-            run = "nano \"$0\"";
+            run = "nano %s";
             block = true;
           }
         ];
         office = [
           {
-            run = "com.collabora.Office \"$0\"";
+            run = "com.collabora.Office %s";
             block = true;
           }
         ];
@@ -60,34 +60,10 @@
           mime = "application/pdf";
           use = "pdf";
         }
-        {
-          name = "*.pdf";
-          use = "pdf";
-        }
 
         # --- Images ---
         {
           mime = "image/*";
-          use = "picture";
-        }
-        {
-          name = "*.png";
-          use = "picture";
-        }
-        {
-          name = "*.jpg";
-          use = "picture";
-        }
-        {
-          name = "*.jpeg";
-          use = "picture";
-        }
-        {
-          name = "*.gif";
-          use = "picture";
-        }
-        {
-          name = "*.webp";
           use = "picture";
         }
 
@@ -96,22 +72,10 @@
           mime = "video/*";
           use = "video";
         }
-        {
-          name = "*.mp4";
-          use = "video";
-        }
-        {
-          name = "*.webm";
-          use = "video";
-        }
 
         # --- Texte ---
         {
           mime = "text/*";
-          use = ["editor" "nano"];
-        }
-        {
-          name = "*.txt";
           use = ["editor" "nano"];
         }
 
@@ -133,17 +97,9 @@
           use = "office";
         }
       ];
-      flavor = {
-        dark = "noctalia";
-        light = "noctalia";
-      };
     };
     keymap = {
       mgr.prepend_keymap = [
-        {
-          on = ["e"];
-          run = "open";
-        }
         {
           on = ["<S-e>"];
           run = "open --interactive";
@@ -151,14 +107,6 @@
         {
           on = ["d"];
           run = "remove --force";
-        }
-        {
-          on = ["r"];
-          run = "rename --force";
-        }
-        {
-          on = ["f"];
-          run = "find --smart";
         }
       ];
     };
