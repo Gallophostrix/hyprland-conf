@@ -23,7 +23,7 @@ in {
 
       ../../modules/programs/editor/zeditor
 
-      ../../modules/programs/media/freetube
+      # ../../modules/programs/media/freetube
       ../../modules/programs/media/imv
       ../../modules/programs/media/mpv
       ../../modules/programs/media/spicetify
