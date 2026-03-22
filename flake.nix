@@ -23,6 +23,8 @@
 
     nur.url = "github:nix-community/NUR";
 
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+
     # home-manager modules
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
@@ -96,10 +98,7 @@
 
           # Apply overlays to nixpkgs (if any)
           ({lib, ...}: {
-            nixpkgs.overlays =
-              (lib.optionals (builtins.isList overlays) overlays)
-              ++ (lib.optionals (overlays ? additions) [overlays.additions])
-              ++ (lib.optionals (overlays ? modifications) [overlays.modifications]);
+            nixpkgs.overlays = builtins.attrValues overlays;
           })
         ];
       };

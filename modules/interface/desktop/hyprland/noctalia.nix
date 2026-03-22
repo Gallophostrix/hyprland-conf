@@ -72,6 +72,10 @@
             enabled = true;
           }
           {
+            id = "steam";
+            enabled = true;
+          }
+          {
             id = "yazi";
             enabled = false;
           }

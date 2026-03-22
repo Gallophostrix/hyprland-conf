@@ -14,4 +14,6 @@
   modifications = final: prev: {
     # discord = prev.discord.overrideAttrs (old: { ... });
   };
+
+  millennium = inputs.millennium.overlays.default;
 }

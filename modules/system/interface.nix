@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   # WM packages
   programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = true;
+
   # XDG Portals
   xdg.portal = {
     enable = true;
@@ -14,8 +16,9 @@
     configPackages = [pkgs.hyprland];
   };
 
-  # Yazi icons
+  # Icons and foreign characters
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
+    noto-fonts-cjk-sans
   ];
 }
