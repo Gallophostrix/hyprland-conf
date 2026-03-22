@@ -18,6 +18,7 @@ in {
       "input"
       "networkmanager"
       "video"
+      "i2c"
       "audio"
       "docker"
       "libvirtd"

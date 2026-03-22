@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   hardware = {
+    i2c.enable = true;
     sane = {
       enable = true;
       extraBackends = [pkgs.sane-airscan];
@@ -31,4 +32,6 @@
     gvfs.enable = true; # For Mounting USB & More
     udisks2.enable = true; # For Mounting USB & More
   };
+
+  environment.systemPackages = [pkgs.ddcutil];
 }
