@@ -15,7 +15,6 @@ in {
 
       ../../modules/programs/browser/${browser}
 
-      ../../modules/programs/cli/cava
       ../../modules/programs/cli/direnv
       ../../modules/programs/cli/shell/${shell}
       ../../modules/programs/cli/terminal/${terminal}
