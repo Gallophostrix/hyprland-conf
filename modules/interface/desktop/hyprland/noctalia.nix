@@ -457,7 +457,7 @@
       # Theme Alacritty terminal
       [templates.alacritty]
       input_path = "~/nixcfg/modules/interface/desktop/hyprland/noctalia-templates/alacritty.toml"
-      output_path = "~/.config/alacritty/alacritty.toml"
+      output_path = "~/.config/alacritty/alacritty-noctalia.toml"
 
       # Theme Hyprland compositor
       [templates.hyprland]
