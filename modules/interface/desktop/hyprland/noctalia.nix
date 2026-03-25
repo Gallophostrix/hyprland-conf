@@ -103,7 +103,13 @@
         wallpaperChangeMode = "random";
         randomIntervalSec = 300;
         transitionDuration = 1500;
-        transitionType = "random";
+        transitionType = [
+          "fade"
+          "disc"
+          "stripes"
+          "wipe"
+          "honeycomb"
+        ];
         transitionEdgeSmoothness = 0.05;
         panelPosition = "follow_bar";
         hideWallpaperFilenames = false;
@@ -431,10 +437,6 @@
           {
             enabled = true;
             id = "calendar-month-card";
-          }
-          {
-            enabled = true;
-            id = "timer-card";
           }
           {
             enabled = true;

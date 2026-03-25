@@ -4,6 +4,6 @@
   programs.steam = {
     enable = true;
     package = pkgs.millennium-steam;
-    extraCompatPackages = [ pkgs.proton-ge-bin ];
+    extraCompatPackages = [pkgs.proton-ge-bin];
   };
 }
