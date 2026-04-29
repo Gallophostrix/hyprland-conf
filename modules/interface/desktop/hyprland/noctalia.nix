@@ -24,12 +24,29 @@
         clockStyle = "custom";
         clockFormat = "hh:mm";
         passwordChars = true;
+        allowPanelsOnScreenWithoutBar = true;
+        allowPasswordWithFprintd = false;
+        forceBlackScreenCorners = false;
+        lockScreenCountdownDuration = 10000;
+        lockScreenMonitors = [];
+        lockScreenTint = 0;
+        reverseScroll = false;
+        shadowOffsetX = 2;
+        shadowOffsetY = 3;
+        showChangelogOnStartup = true;
+        showScreenCorners = false;
         enableBlurBehind = true;
         dimmerOpacity = 0.2;
         lockScreenBlur = 0.2;
         telemetryEnabled = false;
+        language = "";
+        smoothScrollEnabled = true;
       };
       ui = {
+        boxBorderEnabled = false;
+        scrollbarAlwaysVisible = true;
+        settingsPanelSideBarCardStyle = false;
+        translucentWidgets = false;
         fontDefault = "DejaVu Sans";
         fontFixed = "JetBrainsMono Nerd Font";
         fontDefaultScale = 1;
@@ -42,11 +59,13 @@
       colorSchemes = {
         useWallpaperColors = true;
         predefinedScheme = "Noctalia (default)";
+        monitorForColors = "";
         darkMode = true;
         schedulingMode = "off";
         manualSunrise = "06:30";
         manualSunset = "22:30";
         generationMethod = "content";
+        syncGsettings = true;
       };
       templates = {
         enableUserTheming = true;
@@ -124,13 +143,14 @@
         wallhavenResolutionWidth = "";
         wallhavenResolutionHeight = "";
         sortOrder = "name";
+        linkLightAndDarkWallpapers = true;
       };
       bar = {
         position = "top";
         monitors = [];
         density = "default";
         showCapsule = false;
-        floating = true;
+        barType = "floating";
         marginVertical = 5;
         marginHorizontal = 5;
         widgets = {
@@ -138,12 +158,33 @@
             {
               id = "ControlCenter";
               useDistroLogo = true;
+              colorizeDistroLogo = false;
+              colorizeSystemIcon = "none";
+              colorizeSystemText = "none";
+              customIconPath = "";
+              enableColorization = false;
+              icon = "noctalia";
             }
             {
-              hideUnoccupied = false;
               id = "Workspace";
               labelMode = "index";
               followFocusedScreen = true;
+              hideUnoccupied = false;
+              characterCount = 2;
+              colorizeIcons = false;
+              emptyColor = "secondary";
+              enableScrollWheel = true;
+              focusedColor = "primary";
+              fontWeight = "bold";
+              groupedBorderOpacity = 1;
+              iconScale = 0.8;
+              occupiedColor = "secondary";
+              pillSize = 0.6;
+              showApplications = false;
+              showApplicationsHover = false;
+              showBadge = true;
+              showLabelsOnlyWhenOccupied = true;
+              unfocusedIconsOpacity = 1;
             }
             {
               id = "MediaMini";
@@ -154,14 +195,34 @@
               visualizerType = "linear";
               showProgressRing = true;
               maxWidth = 150;
+              compactMode = false;
+              hideMode = "hidden";
+              panelShowAlbumArt = true;
+              scrollingMode = "hover";
+              textColor = "none";
+              useFixedWidth = false;
             }
           ];
           center = [
+            {
+              id = "plugin:screen-recorder";
+            }
             {
               id = "Clock";
               formatHorizontal = "HH:mm";
               formatVertical = "HH mm";
               tooltipFormat = "HH:mm ddd, MMM dd";
+              clockColor = "none";
+              useCustomFont = false;
+              customFont = "";
+            }
+            {
+              id = "NotificationHistory";
+              showUnreadBadge = true;
+              unreadBadgeColor = "primary";
+              hideWhenZero = false;
+              hideWhenZeroUnread = false;
+              iconColor = "none";
             }
           ];
           right = [
@@ -174,36 +235,56 @@
               showMemoryUsage = true;
               showMemoryAsPercent = true;
               useMonospaceFont = true;
+              diskPath = "/";
+              iconColor = "none";
+              showCpuCores = false;
+              showCpuFreq = false;
+              showDiskAvailable = false;
+              showDiskUsage = false;
+              showDiskUsageAsPercent = false;
+              showLoadAverage = false;
+              showNetworkStats = false;
+              showSwapUsage = false;
+              textColor = "none";
+              usePadding = false;
             }
             {
               id = "Network";
               displayMode = "onhover";
+              iconColor = "none";
+              textColor = "none";
             }
             {id = "plugin:tailscale";}
             {
               id = "Bluetooth";
               displayMode = "onhover";
+              iconColor = "none";
+              textColor = "none";
             }
             {
               id = "Volume";
               displayMode = "onhover";
               middleClickCommand = "pwvucontrol || pavucontrol";
+              iconColor = "none";
+              textColor = "none";
             }
             {
               id = "Brightness";
               displayMode = "onhover";
+              applyToAllMonitors = false;
+              iconColor = "none";
+              textColor = "none";
             }
             {
               id = "Battery";
               displayMode = "graphic-clean";
               hideIfNotDetected = true;
               showPowerProfiles = true;
+              deviceNativePath = "__default__";
+              hideIfIdle = false;
+              showNoctaliaPerformance = false;
             }
-            {
-              id = "NotificationHistory";
-              showUnreadBadge = true;
-              unreadBadgeColor = "primary";
-            }
+            {id = "plugin:usb-drive-manager";}
           ];
         };
       };
@@ -304,11 +385,38 @@
       appLauncher = {
         enableClipboardHistory = true;
         terminalCommand = "ghostty -e";
+        autoPasteClipboard = false;
+        clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store";
+        clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store";
+        clipboardWrapText = true;
+        customLaunchPrefix = "";
+        customLaunchPrefixEnabled = false;
+        density = "default";
+        enableClipPreview = true;
+        enableClipboardChips = true;
+        enableClipboardSmartIcons = true;
+        enableSessionSearch = true;
+        enableSettingsSearch = true;
+        enableWindowsSearch = true;
+        iconMode = "tabler";
+        ignoreMouseInput = false;
+        overviewLayer = false;
+        pinnedApps = [];
+        position = "center";
+        screenshotAnnotationTool = "";
+        showCategories = true;
+        showIconBackground = false;
+        sortByMostUsed = true;
+        viewMode = "list";
       };
       notifications = {
         enabled = true;
         enableMarkdown = true;
         monitors = [];
+        clearDismissed = true;
+        density = "default";
+        enableBatteryToast = true;
+        enableMediaToast = false;
         location = "top_right";
         overlayLayer = true;
         backgroundOpacity = 1;
@@ -394,7 +502,10 @@
       audio = {
         volumeStep = 2;
         volumeOverdrive = false;
+        volumeFeedback = false;
+        volumeFeedbackSoundFile = "";
         spectrumFrameRate = 30;
+        spectrumMirrored = true;
         visualizerType = "linear";
         mprisBlacklist = [];
         preferredPlayer = "spotify";
@@ -414,7 +525,14 @@
         manualSunset = "22:30";
       };
       network = {
-        wifiEnabled = true;
+        bluetoothAutoConnect = true;
+        bluetoothDetailsViewMode = "grid";
+        bluetoothHideUnnamedDevices = false;
+        bluetoothRssiPollIntervalMs = 60000;
+        bluetoothRssiPollingEnabled = false;
+        disableDiscoverability = false;
+        networkPanelView = "wifi";
+        wifiDetailsViewMode = "grid";
       };
       location = {
         name = "Metz, France";
@@ -460,6 +578,26 @@
         warningColor = "";
         criticalColor = "";
       };
+      noctaliaPerformance = {
+        disableDesktopWidgets = true;
+        disableWallpaper = true;
+      };
+      plugins = {
+        autoUpdate = false;
+        notifyUpdates = true;
+      };
+      hooks = {
+        enabled = false;
+        colorGeneration = "";
+        darkModeChange = "";
+        performanceModeDisabled = "";
+        performanceModeEnabled = "";
+        screenLock = "";
+        screenUnlock = "";
+        session = "";
+        startup = "";
+        wallpaperChange = "";
+      };
     };
     user-templates = ''
       [config]
@@ -483,6 +621,14 @@
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };
         tailscale = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        screen-recorder = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
+        usb-drive-manager = {
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };
