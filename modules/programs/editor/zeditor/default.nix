@@ -106,18 +106,31 @@
       {
         context = "Editor && vim_mode == normal && !VimWaiting && !menu";
         bindings = {
+          # Navigation (pane)
           "ctrl-h" = "workspace::ActivatePaneLeft";
           "ctrl-l" = "workspace::ActivatePaneRight";
           "ctrl-k" = "workspace::ActivatePaneUp";
           "ctrl-j" = "workspace::ActivatePaneDown";
+
+          # Tabs / buffers
           "shift-h" = "pane::ActivatePreviousItem";
           "shift-l" = "pane::ActivateNextItem";
           "shift-q" = "pane::CloseActiveItem";
-          "space space" = "file_finder::Toggle";
-          "space /" = "pane::DeploySearch";
-          "ctrl-s" = "workspace::Save";
-          "space p" = "workspace::ToggleLeftDock";
+
+          # Files / search
+          "ctrl-p" = "file_finder::Toggle";
+          "ctrl-f" = "pane::DeploySearch";
+
+          # UI
+          "ctrl-b" = "workspace::ToggleLeftDock";
           "ctrl-t" = "terminal_panel::ToggleFocus";
+
+          # Save
+          "ctrl-s" = "workspace::Save";
+
+          # Vim extras
+          "s" = ["vim::PushSneak" {}];
+          "S" = ["vim::PushSneakBackward" {}];
         };
       }
       {
@@ -125,12 +138,6 @@
         bindings = {
           "j j" = "vim::NormalBefore";
           "j k" = "vim::NormalBefore";
-        };
-      }
-      {
-        context = "Workspace";
-        bindings = {
-          "ctrl-t" = "terminal_panel::ToggleFocus";
         };
       }
       {
@@ -153,22 +160,25 @@
           "q" = "workspace::ToggleLeftDock";
         };
       }
-      {
-        context = "vim_mode == normal || vim_mode == visual";
-        bindings = {
-          "s" = ["vim::PushSneak" {}];
-          "S" = ["vim::PushSneakBackward" {}];
-        };
-      }
     ];
   };
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks."*" = {
-      hashKnownHosts = true;
-      serverAliveInterval = 60;
-      serverAliveCountMax = 3;
+
+    matchBlocks = {
+      "github.com" = {
+        user = "git";
+        identityFile = "/home/mik/.ssh/id_ed25519_github";
+        identitiesOnly = true;
+
+        serverAliveInterval = 60;
+        serverAliveCountMax = 3;
+      };
+
+      "*" = {
+        hashKnownHosts = true;
+      };
     };
   };
 }

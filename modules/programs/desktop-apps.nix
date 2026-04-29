@@ -3,7 +3,6 @@
     anki
     bitwarden-desktop
     freetube
-    github-desktop
     obsidian
     sparrow
   ];

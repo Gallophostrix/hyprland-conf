@@ -13,6 +13,4 @@
   };
 
   networking.nftables.enable = true;
-
-  systemd.services.NetworkManager-wait-online.enable = true;
 }

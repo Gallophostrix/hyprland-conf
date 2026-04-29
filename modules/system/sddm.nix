@@ -23,7 +23,10 @@ in {
       enableHidpi = true;
       package = lib.mkForce pkgs.kdePackages.sddm;
       extraPackages = with pkgs.qt6; [qtwayland qtmultimedia];
-      settings.Theme.CursorTheme = "Bibata-Modern-Classic";
+      settings = {
+        Theme.CursorTheme = "Bibata-Modern-Classic";
+        General.DefaultSession = "hyprland.desktop";
+      };
       theme = "sddm-astronaut-theme";
     };
   };
