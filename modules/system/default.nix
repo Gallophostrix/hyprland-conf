@@ -17,7 +17,7 @@
       ./security.nix
       ./system.nix
       ./users.nix
-      # ./virtualisation.nix   bug 2026-03-06
+      ./virtualisation.nix
     ]
     ++ lib.optional (hostVars.vpn or false)
     ./network/vpn.nix;
