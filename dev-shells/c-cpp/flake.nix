@@ -1,7 +1,7 @@
 {
   description = "A Nix-flake-based C/C++ development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   outputs = inputs: let
     supportedSystems = [
@@ -41,7 +41,7 @@
                 vcpkg-tool
               ]
               ++ (
-                if system == "aarch64-darwin"
+                if pkgs.stdenv.hostPlatform.system == "aarch64-darwin"
                 then []
                 else [gdb]
               );
